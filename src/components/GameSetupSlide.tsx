@@ -105,7 +105,7 @@ const makeCardBlobs = (seed: string, familyIndex: number): CardBlob[] => {
   return BLOB_LANES.map(([yMin, yMax], i) => ({
     x: 50 + (rand() - 0.5) * 26, // mostly centered
     y: yMin + rand() * (yMax - yMin),
-    size: 26 + rand() * 18, // diameter, % of card width
+    size: 31 + rand() * 22, // diameter, % of card width
     hue: hues[i],
   }));
 };
