@@ -586,6 +586,14 @@ export function QuizApp() {
           background: 'hsl(0 0% 0% / 0.25)',
         }}
       />
+      {/* Three soft accent dots — rosa, turquoise, neon green — floating over the grading. */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background: 'var(--quiz-page-dots)',
+        }}
+      />
       <div
         aria-hidden
         className="absolute inset-0"
