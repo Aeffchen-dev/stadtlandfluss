@@ -289,16 +289,17 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
   const hintDone = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<number | null>(null);
-  const [trackWidth, setTrackWidth] = useState(300);
   // Card travel distance. The card is drawn at 80% of its slot size (cards
   // scaled down 20%); neighbours render at 90% of that (0.9 × 0.8 = 0.72,
   // half-width 0.36 × card width). Gap and peek are coupled through the
   // slot inset, so the inset is derived per width: the gap is 36px and the
   // side cards peek 40% less than with the previous 48px inset / 24px gap
-  // (peek was 0.1 × trackWidth + 14.4px, now 60% of that).
+  // (peek was screenPad + 0.1 × trackWidth + 14.4px, now 60% of that).
   const CARD_SCALE = 0.8;
   const CARD_GAP = 36;
-  const slotInset = Math.max(0, (44.64 - 0.04 * trackWidth) / 0.8);
+  const screenPad = Math.max(0, (window.innerWidth - trackWidth) / 2);
+  const peekBefore = screenPad + 0.1 * trackWidth + 14.4;
+  const slotInset = Math.max(0, (0.6 * peekBefore - screenPad - 0.1 * trackWidth + CARD_GAP) / 0.8);
   const spacing = (trackWidth / 2 - slotInset) * CARD_SCALE + CARD_GAP + 0.45 * CARD_SCALE * (trackWidth - 2 * slotInset);
 
   useEffect(() => {
