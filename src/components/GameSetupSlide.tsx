@@ -74,8 +74,8 @@ const FAMILY_BLOB_HUES = [
   ['338 85% 74%', '318 65% 75%', '290 55% 72%', '300 50% 46%', '345 90% 84%'],
   // Land: turquoise tones + darker turquoise + lighter aqua accents
   ['186 80% 62%', '174 80% 62%', '198 70% 64%', '182 70% 42%', '180 85% 80%'],
-  // Fluss: red / yellow tones + darker mustard + lighter gold accents
-  ['0 85% 64%', '48 90% 60%', '20 85% 62%', '42 75% 42%', '40 95% 80%'],
+  // Fluss: red & yellow alternating in the main lanes, deep red + gold accents
+  ['0 85% 64%', '48 90% 60%', '357 82% 66%', '0 70% 44%', '48 95% 76%'],
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
 // progressively quieter (0.4 × 0.85, 0.4 × 0.75 for their core alpha).
@@ -413,10 +413,10 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           wordBreak: 'normal',
           // Polished frosted glass card (reference look).
           color: 'hsl(0 0% 100% / 0.95)',
-          background: 'linear-gradient(165deg, hsl(0 0% 100% / 0.021), hsl(0 0% 100% / 0.009) 45%, hsl(0 0% 100% / 0.004))',
+          background: 'linear-gradient(165deg, hsl(0 0% 0% / 0.028), hsl(0 0% 0% / 0.013) 45%, hsl(0 0% 0% / 0.006))',
           backdropFilter: 'blur(48px) saturate(1.6)',
           WebkitBackdropFilter: 'blur(48px) saturate(1.6)',
-          boxShadow: 'inset 0 1px 1px hsl(0 0% 100% / 0.22), inset 0 -1px 1px hsl(0 0% 100% / 0.04), 0 0 8px 8px hsl(0 0% 0% / 0.04)',
+          boxShadow: 'inset 0 1px 1px hsl(0 0% 0% / 0.26), inset 0 -1px 1px hsl(0 0% 0% / 0.06), 0 0 8px 8px hsl(0 0% 0% / 0.04)',
           transform: `translateX(${position * spacing + offset}px) scale(${scale}) rotate(${leanRotation}deg)`,
           opacity: 1,
           transition,
@@ -455,14 +455,14 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           style={{
             borderRadius: 'inherit',
             padding: '1px',
-            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.33), hsl(0 0% 100% / 0.05) 38%, hsl(0 0% 100% / 0.025) 62%, hsl(0 0% 100% / 0.14))',
+            background: 'linear-gradient(155deg, hsl(0 0% 0% / 0.36), hsl(0 0% 0% / 0.07) 38%, hsl(0 0% 0% / 0.04) 62%, hsl(0 0% 0% / 0.18))',
             WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
             WebkitMaskComposite: 'xor',
             maskComposite: 'exclude',
           }}
         />
         {/* Soft specular sheen so the glass reads deeper. */}
-        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ borderRadius: 'inherit', background: 'radial-gradient(120% 60% at 30% 0%, hsl(0 0% 100% / 0.06), transparent 62%)' }} />
+        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ borderRadius: 'inherit', background: 'radial-gradient(120% 60% at 30% 0%, hsl(0 0% 0% / 0.09), transparent 62%)' }} />
         {/* Extra card grain: a faint texture pass, kept subtle so the surface reads as clean glass. */}
         <div
           aria-hidden
