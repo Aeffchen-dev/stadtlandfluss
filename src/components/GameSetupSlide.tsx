@@ -130,7 +130,7 @@ const makeCardBlobs = (seed: string, familyIndex: number): CardBlob[] => {
     const y = yMin + rand() * (yMax - yMin);
     const size = 31 + rand() * 22;
     placed.push({ x, yW: y * ASPECT, r: size / 2 });
-    blobs.push({ x, y, size, hue: hues[i] });
+    blobs.push({ x, y, size, hue: hues[i], alphaScale: FAMILY_MAIN_STYLES[familyIndex]?.[i]?.alpha });
   });
 
   // The darker and lighter accent tones each land fully at random, retrying
