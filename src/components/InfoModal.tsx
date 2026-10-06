@@ -12,13 +12,13 @@ export function InfoModal({ open, onOpenChange }: InfoModalProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogPortal>
         <DialogOverlay />
-        <DialogContent className="relative flex h-[100svh] w-screen max-w-none flex-col overflow-hidden border-0 p-4 text-foreground data-[state=closed]:animate-none data-[state=open]:animate-none [&>button]:hidden" style={{ background: 'hsl(30 5% 12%)' }}>
+        <DialogContent className="relative flex h-[100svh] w-screen max-w-none flex-col overflow-hidden border-0 p-4 text-foreground data-[state=closed]:animate-none data-[state=open]:animate-none [&>button]:hidden" style={{ background: 'hsl(0 0% 12%)' }}>
           {/* Grain layer over the near-black modal background */}
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0"
             style={{
-              backgroundImage: 'var(--quiz-page-grain)',
+              backgroundImage: 'var(--quiz-neutral-grain)',
               backgroundSize: '150px 150px',
               mixBlendMode: 'soft-light',
               opacity: 0.9,
