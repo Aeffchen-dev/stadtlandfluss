@@ -557,7 +557,7 @@ export function QuizApp() {
         left: 0
       }}
     >
-      {/* Photo backdrop blends as luminosity into the oxblood base, so it adds depth without fighting the hue. */}
+      {/* Photo backdrop blends as color into the oxblood base, so its hues bleed through while lightness comes from the base. */}
       <div
         aria-hidden
         className="absolute inset-0"
@@ -574,7 +574,7 @@ export function QuizApp() {
           backgroundPosition: 'center',
           filter: 'blur(28px) saturate(1.05)',
           transform: 'scale(1.15)',
-          mixBlendMode: 'luminosity',
+          mixBlendMode: 'color',
           opacity: 0.45,
         }}
       />
