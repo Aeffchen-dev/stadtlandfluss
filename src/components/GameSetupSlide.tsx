@@ -421,7 +421,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
         aria-hidden={!isCurrent}
       >
         {/* Gradient blobs: each slider's own color story (rosa/lila,
-            turquoise, lime/grasgrün, plus one darker accent tone) pooled as
+            turquoise, red/yellow, plus one darker accent tone) pooled as
             soft, subtle round glows near the top of the card, random per
             category (seeded by name), kept mostly centered and
             non-overlapping. Strength scales with the slider family. */}
