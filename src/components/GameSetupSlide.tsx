@@ -71,7 +71,7 @@ const FAMILY_GRAINS = [
 // lighter accent tone each land fully at random, allowed to overlap slightly.
 const FAMILY_BLOB_HUES = [
   // Stadt: rosa / lila tones + darker plum + lighter rosa accents
-  ['338 88% 78%', '318 75% 79%', '290 48% 73%', '300 50% 46%', '345 90% 84%'],
+  ['338 95% 84%', '318 75% 79%', '298 42% 70%', '300 50% 46%', '345 90% 84%'],
   // Land: muted green-blues with a juicy green (drawn larger), a deep vivid blue
   // and a dark green-blue lila accent
   ['178 85% 85%', '160 85% 55%', '158 60% 42%', '150 85% 52%', '178 95% 50%', '215 68% 46%'],
