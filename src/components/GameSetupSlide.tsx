@@ -94,7 +94,7 @@ const FAMILY_MAIN_STYLES: Array<Array<{ alpha?: number } | undefined>> = [
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
 // progressively quieter (0.4 × 0.85, 0.4 × 0.75 for their core alpha).
-const FAMILY_BLOB_ALPHA = [0.39, 0.105, 0.289];
+const FAMILY_BLOB_ALPHA = [0.312, 0.084, 0.231];
 const BLOB_LANES: Array<[number, number]> = [[9, 17], [28, 38], [47, 57]]; // y-% of card height
 
 interface CardBlob {
@@ -431,7 +431,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           wordBreak: 'normal',
           // Polished frosted glass card (reference look).
           color: 'hsl(0 0% 100%)',
-          background: 'linear-gradient(hsl(0 0% 0% / 0.2), hsl(0 0% 0% / 0.2)), linear-gradient(165deg, hsl(0 0% 100% / 0.102), hsl(0 0% 100% / 0.066) 45%, hsl(0 0% 100% / 0.04))',
+          background: 'linear-gradient(hsl(0 0% 0% / 0.2), hsl(0 0% 0% / 0.2)), linear-gradient(165deg, hsl(0 0% 100% / 0.082), hsl(0 0% 100% / 0.053) 45%, hsl(0 0% 100% / 0.032))',
           backdropFilter: 'blur(64px) saturate(1.6)',
           WebkitBackdropFilter: 'blur(64px) saturate(1.6)',
           boxShadow: 'inset 0 1px 1px hsl(0 0% 100% / 0.38), inset 0 -1px 1px hsl(0 0% 100% / 0.14), 0 0 5px 5px hsl(0 0% 0% / 0.024)',
@@ -477,7 +477,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           style={{
             borderRadius: 'inherit',
             padding: '1px',
-            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.067), hsl(0 0% 100% / 0.012) 38%, hsl(0 0% 100% / 0.009) 62%, hsl(0 0% 100% / 0.03))',
+            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.054), hsl(0 0% 100% / 0.0096) 38%, hsl(0 0% 100% / 0.0072) 62%, hsl(0 0% 100% / 0.024))',
             WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
             WebkitMaskComposite: 'xor',
             maskComposite: 'exclude',
