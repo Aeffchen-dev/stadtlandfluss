@@ -74,7 +74,7 @@ const FAMILY_BLOB_HUES = [
   ['338 95% 84%', '318 75% 79%', '298 42% 70%', '300 50% 46%', '345 90% 84%'],
   // Land: muted green-blues with a juicy green (drawn larger), a deep vivid blue
   // and a dark green-blue lila accent
-  ['178 85% 85%', '158 100% 72%', '158 60% 42%', '148 100% 56%', '178 95% 50%', '235 85% 25%'],
+  ['178 85% 85%', '158 100% 72%', '158 60% 42%', '148 100% 56%', '178 95% 50%', '224 95% 28%'],
   // Fluss: dark lila & vivid red-orange in the main lanes, deeper orange + soft bright yellow (larger, quiet) accents
   ['285 52% 76%', '8 95% 62%', '281 72% 68%', '28 100% 72%', '55 92% 85%'],
 ];
@@ -84,7 +84,7 @@ const FAMILY_BLOB_HUES = [
 // lane blobs the same way.
 const FAMILY_ACCENT_STYLES: Array<Array<{ size?: number; alpha?: number }>> = [
   [{}, {}, {}],
-  [{ size: 1.35, alpha: 1.5 }, {}, { size: 5.7, alpha: 1.7 }], // Land: juicy green larger + more visible, blue-lila as a huge dark bg glow
+  [{ size: 1.35, alpha: 1.5 }, {}, { size: 5.7, alpha: 1.0 }], // Land: juicy green larger + more visible, blue-lila as a huge quiet bg glow
   [{}, { size: 0.6, alpha: 0.55 }, {}], // Fluss: bright yellow bigger and quieter
 ];
 const FAMILY_MAIN_STYLES: Array<Array<{ alpha?: number } | undefined>> = [
