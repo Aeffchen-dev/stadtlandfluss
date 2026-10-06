@@ -63,6 +63,38 @@ const FAMILY_GRAINS = [
   makeGrain(30, 23, 48), // dark plum
 ];
 
+// Gradient blobs at the top of each card: the same rosa / turquoise / neon
+// green accents that float over the page, pooled as soft color glows. Each
+// card seeds its own PRNG from the category name, so sizes and positions are
+// random per card but stable across re-renders. The three blobs live in
+// separate vertical bands near the top and hug the horizontal center, so
+// they never overlap each other.
+const BLOB_COLORS = ['hsl(336 90% 72%)', 'hsl(172 85% 60%)', 'hsl(96 95% 62%)'];
+const BLOB_BANDS: Array<[number, number]> = [[14, 24], [36, 46], [58, 66]];
+
+const makeCardBlobs = (seed: string) => {
+  let h = 2166136261;
+  for (let i = 0; i < seed.length; i += 1) {
+    h ^= seed.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  const rand = () => {
+    h = Math.imul(h ^ (h >>> 15), 2246822507);
+    h = Math.imul(h ^ (h >>> 13), 3266489909);
+    h ^= h >>> 16;
+    return (h >>> 0) / 4294967296;
+  };
+  return BLOB_BANDS
+    .map(([yMin, yMax], i) => {
+      const rx = 16 + rand() * 14; // horizontal radius, % of the blob layer width
+      const ry = 6 + rand() * 4; // vertical radius, % of the blob layer height
+      const x = 50 + (rand() - 0.5) * 28; // mostly centered
+      const y = yMin + rand() * (yMax - yMin);
+      return `radial-gradient(ellipse ${rx.toFixed(1)}% ${ry.toFixed(1)}% at ${x.toFixed(1)}% ${y.toFixed(1)}%, ${BLOB_COLORS[i]} / 0.20, transparent 72%)`;
+    })
+    .join(', ');
+};
+
 // Etched satin rim: a 1px inner border in each family's own hue, sitting just
 // inside the neutral white rim for a color-etched edge.
 const FAMILY_RIMS = [
