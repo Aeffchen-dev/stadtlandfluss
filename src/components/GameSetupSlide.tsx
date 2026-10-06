@@ -283,11 +283,12 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
   const containerRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<number | null>(null);
   const [trackWidth, setTrackWidth] = useState(300);
-  // Card travel distance. Neighbour cards render at 90% scale (half-width
-  // 0.45 × card width); this spacing places their inner edge exactly 28px
-  // inside the viewport (a 28px sliver peeks in), 24px away from the active
-  // card — the same gap as the vertical spacing between the three sliders.
-  const spacing = (trackWidth / 2 - 48) + 24 + 0.45 * (trackWidth - 96);
+  // Card travel distance. The card is drawn at 80% of its slot size (cards
+  // scaled down 20%); neighbours render at 90% of that (0.9 × 0.8 = 0.72
+  // half-width 0.36 × card width), so this spacing keeps their inner edge
+  // 28px inside the viewport and the 24px gap to the active card intact.
+  const CARD_SCALE = 0.8;
+  const spacing = (trackWidth / 2 - 48) * CARD_SCALE + 24 + 0.45 * CARD_SCALE * (trackWidth - 96);
 
   useEffect(() => {
     const measure = () => {
@@ -392,7 +393,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
     // Active card fills the space between the two neighbour slivers (40px
     // slivers, 16px gaps); it shrinks to the neighbour size (0.9) as it
     // travels to the side.
-    const scale = 1 - distanceFromCenter * 0.1;
+    const scale = (1 - distanceFromCenter * 0.1) * CARD_SCALE;
     // Rotation is a pure function of the card's visible position (clamped to
     // the side slots): side cards lean inwards, the lean fades smoothly to
     // zero as a card travels to the center. Because it depends only on the
@@ -423,7 +424,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           overflowWrap: 'break-word',
           wordBreak: 'normal',
           // Polished frosted glass card (reference look).
-          color: 'hsl(0 0% 100% / 0.95)',
+          color: 'hsl(0 0% 100%)',
           background: 'linear-gradient(165deg, hsl(0 0% 0% / 0.010), hsl(0 0% 0% / 0.005) 45%, hsl(0 0% 0% / 0.002))',
           backdropFilter: 'blur(64px) saturate(1.6)',
           WebkitBackdropFilter: 'blur(64px) saturate(1.6)',
@@ -470,7 +471,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           style={{
             borderRadius: 'inherit',
             padding: '1px',
-            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.07), hsl(0 0% 100% / 0.012) 38%, hsl(0 0% 100% / 0.008) 62%, hsl(0 0% 100% / 0.032))',
+            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.049), hsl(0 0% 100% / 0.0084) 38%, hsl(0 0% 100% / 0.0056) 62%, hsl(0 0% 100% / 0.0224))',
             WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
             WebkitMaskComposite: 'xor',
             maskComposite: 'exclude',
@@ -498,7 +499,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
               <span className="relative block w-full px-6" style={{ minWidth: 0, overflowWrap: 'break-word', transform: `rotate(${itemRotation}deg)` }}>
                 {showFake && (
                   <span className="pointer-events-none flex items-center justify-center">
-                    <span style={{ opacity: 0.6 }}>Ergänze…</span>
+                    <span style={{ opacity: 0.7 }}>Ergänze…</span>
                     <span className="ml-1 inline-block h-[0.9em] w-[2px] bg-current" style={{ animation: 'slf-caret-blink 1s step-end infinite' }} />
                   </span>
                 )}
@@ -512,7 +513,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
                   onFocus={() => setFocusedCustom(customIndex)}
                   onBlur={() => setFocusedCustom(null)}
                   onKeyDown={(event) => { if (event.key === 'Enter') (event.target as HTMLInputElement).blur(); }}
-                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} ${showFake ? 'absolute inset-0 opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:text-current placeholder:opacity-[0.6]`}
+                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} ${showFake ? 'absolute inset-0 opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:text-current placeholder:opacity-[0.7]`}
                   style={{ caretColor: 'currentColor', fontSize: 'inherit', lineHeight: 'inherit', color: 'inherit' }}
                 />
               </span>
