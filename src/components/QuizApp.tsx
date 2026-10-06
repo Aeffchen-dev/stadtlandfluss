@@ -587,6 +587,15 @@ export function QuizApp() {
           background: 'hsl(0 0% 0% / 0.25)',
         }}
       />
+      {/* Vignette — darker toward the edges, clear in the middle. */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(120% 90% at 50% 42%, transparent 45%, hsl(0 0% 0% / 0.22) 78%, hsl(0 0% 0% / 0.45) 100%)',
+        }}
+      />
       <div
         aria-hidden
         className="absolute inset-0"
