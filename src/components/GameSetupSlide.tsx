@@ -530,12 +530,28 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
           ? (() => {
             const value = customs[customIndex] ?? '';
             const showFake = !value && focusedCustom !== customIndex;
+            // Once text is typed, render it with the shared row layout so
+            // long words break (e.g. "Männername") — an input alone would
+            // keep everything on one line. The input stays on top, invisible,
+            // so editing and the caret behaviour keep working.
+            const built = value.trim() ? buildCardRows(value) : null;
+            const rowPool = [-1.2, 0.6, 1, -0.6, 1.2, -0.8];
             return (
               <span className="relative block w-full px-6" style={{ minWidth: 0, overflowWrap: 'break-word', transform: `rotate(${itemRotation}deg)` }}>
                 {showFake && (
                   <span className="pointer-events-none flex items-center justify-center">
                     <span className="normal-case" style={{ opacity: 0.22, borderBottom: '1.5px dashed currentColor', paddingBottom: '2px' }}>Kategorie hinzufügen…</span>
                     <span className="ml-1 inline-block h-[0.9em] w-[2px] bg-current" style={{ animation: 'slf-caret-blink 1s step-end infinite' }} />
+                  </span>
+                )}
+                {built && (
+                  <span className="block">
+                    {built.rows.map((row, rowIndex) => (
+                      <span key={row.key} className={`block ${row.className}`} style={{ transform: `rotate(${rowPool[(built.seed + rowIndex) % rowPool.length]}deg)` }}>
+                        {row.text}
+                        {row.hyphen && <span style={{ opacity: 1, fontWeight: 400, fontFamily: "'Geist', sans-serif" }}>-</span>}
+                      </span>
+                    ))}
                   </span>
                 )}
                 <input
@@ -548,7 +564,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
                   onFocus={() => setFocusedCustom(customIndex)}
                   onBlur={() => setFocusedCustom(null)}
                   onKeyDown={(event) => { if (event.key === 'Enter') (event.target as HTMLInputElement).blur(); }}
-                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} ${showFake ? 'absolute inset-0 opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:normal-case placeholder:text-current placeholder:opacity-[0.22] placeholder:underline placeholder:decoration-dashed placeholder:decoration-1 placeholder:underline-offset-4`}
+                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} ${built ? 'absolute inset-0 opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:normal-case placeholder:text-current placeholder:opacity-[0.22] placeholder:underline placeholder:decoration-dashed placeholder:decoration-1 placeholder:underline-offset-4`}
                   style={{ caretColor: 'currentColor', fontSize: 'inherit', lineHeight: 'inherit', color: 'inherit' }}
                 />
               </span>
