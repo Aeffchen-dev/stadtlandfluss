@@ -452,7 +452,11 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
               aspectRatio: '1',
               borderRadius: '50%',
               transform: 'translate(-50%, -50%)',
-              background: `radial-gradient(circle, hsl(${blob.hue} / ${(FAMILY_BLOB_ALPHA[familyIndex] ?? 0.4).toFixed(3)}), hsl(${blob.hue} / ${(FAMILY_BLOB_ALPHA[familyIndex] * 0.325).toFixed(3)}) 55%, transparent 75%)`,
+              background: (() => {
+                const base = FAMILY_BLOB_ALPHA[familyIndex] ?? 0.4;
+                const core = Math.min(base * (blob.alphaScale ?? 1), 1);
+                return `radial-gradient(circle, hsl(${blob.hue} / ${core.toFixed(3)}), hsl(${blob.hue} / ${(core * 0.325).toFixed(3)}) 55%, transparent 75%)`;
+              })(),
               filter: 'blur(12px)',
               mixBlendMode: 'screen',
             }}
