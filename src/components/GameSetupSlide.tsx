@@ -83,7 +83,7 @@ const FAMILY_BLOB_HUES = [
 // accent blobs (dark, light, extra).
 const FAMILY_ACCENT_STYLES: Array<Array<{ size?: number; alpha?: number }>> = [
   [{}, {}, {}, {}],
-  [{ size: 1.35 }, {}, {}, {}], // Land: juicy green drawn larger
+  [{ size: 1.35 }, {}, {}, { size: 1.9, alpha: 1.7 }], // Land: juicy green larger, dark red-lila as a big bg glow
   [{}, { size: 0.6, alpha: 0.55 }, {}, {}], // Fluss: bright yellow bigger and quieter
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
