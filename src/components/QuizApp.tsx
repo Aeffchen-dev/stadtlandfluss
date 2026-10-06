@@ -577,7 +577,7 @@ export function QuizApp() {
           filter: 'blur(28px) saturate(1.05) brightness(0.45)',
           transform: 'scale(1.15)',
           mixBlendMode: 'soft-light',
-          opacity: 0.8,
+          opacity: 1,
         }}
       />
       <div
