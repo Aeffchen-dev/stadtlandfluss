@@ -539,11 +539,11 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
             return (
               <span className="relative block w-full px-6" style={{ minWidth: 0, overflowWrap: 'break-word', transform: `rotate(${itemRotation}deg)` }}>
                 {showFake && (
-                  <span className="pointer-events-none block">
+                  <span className="pointer-events-none block" style={{ lineHeight: 1.1 }}>
                     {['Eigene', 'Kategorie'].map((word, wordIndex) => (
                       <span key={word} className="block" style={{ transform: `rotate(${rowPool[wordIndex % rowPool.length]}deg)` }}>
-                        <span style={{ opacity: 0.22, borderBottom: '1.5px dashed currentColor', paddingBottom: '2px' }}>{word}</span>
-                        {wordIndex === 1 && Math.abs(position) <= 1 && <span className="ml-1 inline-block h-[0.9em] w-[2px] bg-current" style={{ animation: 'slf-caret-blink 1s step-end infinite' }} />}
+                        <span style={{ opacity: 0.22 }}>{word}</span>
+                        {wordIndex === 1 && Math.abs(position) <= 1 && <span className="inline-block h-[0.9em] w-[2px] bg-current" style={{ animation: 'slf-caret-blink 1s step-end infinite' }} />}
                       </span>
                     ))}
                   </span>
@@ -568,7 +568,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
                   onFocus={() => setFocusedCustom(customIndex)}
                   onBlur={() => setFocusedCustom(null)}
                   onKeyDown={(event) => { if (event.key === 'Enter') (event.target as HTMLInputElement).blur(); }}
-                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} ${built ? 'absolute inset-0 opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:text-current placeholder:opacity-[0.22] placeholder:underline placeholder:decoration-dashed placeholder:decoration-1 placeholder:underline-offset-4`}
+                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} ${built ? 'absolute inset-0 opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:text-current placeholder:opacity-[0.22]`}
                   style={{ caretColor: 'currentColor', fontSize: 'inherit', lineHeight: 'inherit', color: 'inherit' }}
                 />
               </span>
