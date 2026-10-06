@@ -521,9 +521,9 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
           style={{
             borderRadius: 'inherit',
             backgroundImage: FAMILY_GRAINS[familyIndex] ?? FAMILY_GRAINS[0],
-            backgroundSize: '90px 90px',
+            backgroundSize: '70px 70px',
             mixBlendMode: 'overlay',
-            opacity: 0.53,
+            opacity: 0.78,
           }}
         />
         {customIndex !== null
