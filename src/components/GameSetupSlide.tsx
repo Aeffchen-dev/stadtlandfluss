@@ -283,10 +283,10 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
   const timeoutRef = useRef<number | null>(null);
   const [trackWidth, setTrackWidth] = useState(300);
   // Card travel distance. Neighbour cards render at 90% scale (half-width
-  // 0.45 × card width); this spacing places their inner edge exactly 40px
-  // inside the viewport (a 40px sliver peeks in), 36px away from the active
+  // 0.45 × card width); this spacing places their inner edge exactly 28px
+  // inside the viewport (a 28px sliver peeks in), 24px away from the active
   // card — the same gap as the vertical spacing between the three sliders.
-  const spacing = (trackWidth / 2 - 48) + 36 + 0.45 * (trackWidth - 96);
+  const spacing = (trackWidth / 2 - 48) + 24 + 0.45 * (trackWidth - 96);
 
   useEffect(() => {
     const measure = () => {
@@ -708,7 +708,7 @@ export function GameSetupSlide({
           <span className="font-rauschen text-[19px] uppercase [animation:slf-title-arrive_500ms_cubic-bezier(0.34,1.56,0.64,1)_160ms_both]" style={{ rotate: '2deg', translate: '14px 4px', marginTop: '0px' }}>Fluss</span>
         </h2>
       </div>
-      <div className="flex min-h-0 flex-1 flex-col gap-9">
+      <div className="flex min-h-0 flex-1 flex-col gap-6">
         <CategorySlider items={columns[0]} familyIndex={0} label="Stadt" hint="next" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
         <CategorySlider items={columns[1]} familyIndex={1} label="Land" hint="prev" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
         <CategorySlider items={columns[2]} familyIndex={2} label="Fluss" hint="next" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
