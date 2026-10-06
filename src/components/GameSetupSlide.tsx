@@ -500,7 +500,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
           WebkitBackdropFilter: 'blur(64px) saturate(1.6)',
           boxShadow: 'inset 0 1px 1px hsl(0 0% 100% / 0.38), inset 0 -1px 1px hsl(0 0% 100% / 0.14), 0 0 5px 5px hsl(0 0% 0% / 0.024)',
           transform: `translateX(${position * spacing + offset}px) scale(${scale}) rotate(${leanRotation}deg)`,
-          '--slf-card-opacity': inactiveCards.has(cardKey) ? 0.7 : 1,
+          '--slf-card-opacity': inactiveCards.has(cardKey) ? 0.25 : 1,
           opacity: 'var(--slf-card-opacity, 1)',
           transition,
           animation: [hintAnimation, 'slf-card-in 450ms ease-out both'].filter(Boolean).join(', '),
@@ -579,7 +579,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
                     {['Eigene', 'Kategorie…'].map((word, wordIndex) => (
                       <span key={word} className="block" style={{ transform: `rotate(${rowPool[wordIndex % rowPool.length]}deg)` }}>
                         {/* Placeholder ink: white at 50% opacity, light enough to read as placeholder text on the dark card. */}
-                        <span style={{ color: 'hsl(0 0% 100% / 0.5)' }}>{word}</span>
+                        <span style={{ color: 'hsl(0 0% 100% / 0.25)' }}>{word}</span>
                         {wordIndex === 1 && Math.abs(position) <= 1 && <span className="inline-block h-[0.9em] w-[2px] bg-current" style={{ animation: 'slf-caret-blink 1s step-end infinite' }} />}
                       </span>
                     ))}
@@ -605,7 +605,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
                   onFocus={() => setFocusedCustom(customIndex)}
                   onBlur={() => setFocusedCustom(null)}
                   onKeyDown={(event) => { if (event.key === 'Enter') (event.target as HTMLInputElement).blur(); }}
-                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} absolute inset-0 ${built || showFake ? 'opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:text-[hsl(0_0%_100%/0.5)]`}
+                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} absolute inset-0 ${built || showFake ? 'opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:text-[hsl(0_0%_100%/0.25)]`}
                   style={{ caretColor: 'currentColor', fontSize: 'inherit', lineHeight: 'inherit', color: 'inherit' }}
                 />
               </span>
