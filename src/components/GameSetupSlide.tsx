@@ -695,7 +695,7 @@ export function GameSetupSlide({
 
   return (
     <div
-      className="mx-auto flex h-[calc(100%-8px)] max-h-[calc(100%-8px)] w-full max-w-[500px] select-none flex-col gap-8"
+      className="mx-auto flex h-[calc(100%-8px)] max-h-[calc(100%-8px)] w-full max-w-[500px] select-none flex-col gap-9"
       style={{ touchAction: 'none' }}
     >
       <div className="relative flex shrink-0 flex-col items-center gap-[10px] overflow-visible rounded-[8px] px-2 pt-2 pb-2 text-quiz-setup-ink">
