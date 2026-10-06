@@ -243,8 +243,8 @@ All colors MUST be HSL.
 /* Stringer Font Definition */
 @font-face {
   font-family: 'Stringer';
-  src: url('/assets/Stringer-Thin-Web.woff2') format('woff2'),
-       url('/assets/Stringer-Thin-Web.woff') format('woff');
+  src: url('./assets/fonts/Stringer-Thin-Web.woff2') format('woff2'),
+       url('./assets/fonts/Stringer-Thin-Web.woff') format('woff');
   font-weight: 100;
   font-style: normal;
   font-display: swap;
@@ -253,8 +253,8 @@ All colors MUST be HSL.
 /* Rauschen B Font Definition */
 @font-face {
   font-family: 'Rauschen';
-  src: url('/assets/Rauschen-BSemibold.woff2') format('woff2'),
-       url('/assets/Rauschen-BSemibold.woff') format('woff');
+  src: url('./assets/fonts/Rauschen-BSemibold.woff2') format('woff2'),
+       url('./assets/fonts/Rauschen-BSemibold.woff') format('woff');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -263,7 +263,7 @@ All colors MUST be HSL.
 /* Kokoro Font Definition */
 @font-face {
   font-family: 'Kokoro';
-  src: url('/fonts/kokoro-bolditalic-webfont.woff2') format('woff2');
+  src: url('./assets/fonts/kokoro-bolditalic-webfont.woff2') format('woff2');
   font-weight: bold;
   font-style: italic;
   font-display: swap;
@@ -272,8 +272,8 @@ All colors MUST be HSL.
 /* Factor A Font Definition */
 @font-face {
   font-family: 'FactorA';
-  src: url('/assets/FactorA-Bold.woff2') format('woff2'),
-       url('/assets/FactorA-Bold.woff') format('woff');
+  src: url('./assets/fonts/FactorA-Bold.woff2') format('woff2'),
+       url('./assets/fonts/FactorA-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -282,8 +282,8 @@ All colors MUST be HSL.
 /* Factor A Bold Italic Font Definition */
 @font-face {
   font-family: 'FactorA';
-  src: url('/FactorA-BoldItalic.woff2') format('woff2'),
-       url('/FactorA-BoldItalic.woff') format('woff');
+  src: url('./assets/fonts/FactorA-BoldItalic.woff2') format('woff2'),
+       url('./assets/fonts/FactorA-BoldItalic.woff') format('woff');
   font-weight: bold;
   font-style: italic;
   font-display: swap;
