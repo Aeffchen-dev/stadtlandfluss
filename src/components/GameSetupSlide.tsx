@@ -233,10 +233,9 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
   const [trackWidth, setTrackWidth] = useState(300);
   // Card travel distance. Neighbour cards render at 90% scale (half-width
   // 0.45 × card width); this spacing places their inner edge exactly 40px
-  // inside the viewport (a 40px sliver peeks in), 20px away from the active
-  // card (which sits 48px from the container edge, 60px from the screen
-  // edge — the 8px accounts for the outer px-2 padding).
-  const spacing = (trackWidth / 2 - 48) + 20 + 0.45 * (trackWidth - 96);
+  // inside the viewport (a 40px sliver peeks in), 36px away from the active
+  // card — the same gap as the vertical spacing between the three sliders.
+  const spacing = (trackWidth / 2 - 48) + 36 + 0.45 * (trackWidth - 96);
 
   useEffect(() => {
     const measure = () => {
@@ -622,10 +621,10 @@ export function GameSetupSlide({
 
   return (
     <div
-      className="mx-auto flex h-[calc(100%-8px)] max-h-[calc(100%-8px)] w-full max-w-[500px] select-none flex-col gap-12"
+      className="mx-auto flex h-[calc(100%-8px)] max-h-[calc(100%-8px)] w-full max-w-[500px] select-none flex-col gap-8"
       style={{ touchAction: 'none' }}
     >
-      <div className="relative flex shrink-0 flex-col items-center gap-[10px] overflow-visible rounded-[8px] px-2 pt-4 pb-2 text-quiz-setup-ink">
+      <div className="relative flex shrink-0 flex-col items-center gap-[10px] overflow-visible rounded-[8px] px-2 pt-2 pb-2 text-quiz-setup-ink">
         <Button
           type="button"
           variant="ghost"
@@ -661,7 +660,7 @@ export function GameSetupSlide({
         type="button"
         variant="ghost"
         onClick={isRolling ? undefined : rollLetter}
-        className="relative h-auto shrink-0 rounded-[8px] bg-transparent px-2 pt-4 pb-6 text-quiz-setup-ink [-webkit-tap-highlight-color:transparent] hover:bg-transparent hover:text-quiz-setup-ink focus-visible:ring-0 focus-visible:ring-offset-0"
+        className="relative h-auto shrink-0 rounded-[8px] bg-transparent px-2 pt-3 pb-3 text-quiz-setup-ink [-webkit-tap-highlight-color:transparent] hover:bg-transparent hover:text-quiz-setup-ink focus-visible:ring-0 focus-visible:ring-offset-0"
         aria-label="Zufälligen Buchstaben wählen"
       >
         <span className="relative flex w-full items-center justify-center">
