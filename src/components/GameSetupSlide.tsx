@@ -90,7 +90,7 @@ const makeCardBlobs = (seed: string) => {
       const ry = 6 + rand() * 4; // vertical radius, % of the blob layer height
       const x = 50 + (rand() - 0.5) * 28; // mostly centered
       const y = yMin + rand() * (yMax - yMin);
-      return `radial-gradient(ellipse ${rx.toFixed(1)}% ${ry.toFixed(1)}% at ${x.toFixed(1)}% ${y.toFixed(1)}%, ${BLOB_COLORS[i]} / 0.20, transparent 72%)`;
+      return `radial-gradient(ellipse ${rx.toFixed(1)}% ${ry.toFixed(1)}% at ${x.toFixed(1)}% ${y.toFixed(1)}%, hsl(${BLOB_COLORS[i]} / 0.20), transparent 72%)`;
     })
     .join(', ');
 };
