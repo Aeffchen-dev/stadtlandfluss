@@ -461,8 +461,15 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
       <div
         key={cardKey}
         data-custom={customIndex !== null || undefined}
-        className="pointer-events-none absolute inset-y-0 flex items-center justify-center overflow-hidden text-center font-rauschen text-[22.5px] uppercase leading-none"
+        className="pointer-events-auto absolute inset-y-0 flex items-center justify-center overflow-hidden text-center font-rauschen text-[22.5px] uppercase leading-none"
         lang="de"
+        onClick={(event) => {
+          // Swipes end with a click event too — only treat a real tap as
+          // the inactive-toggle. The custom input handles its own clicks.
+          if (dragMoved.current || customIndex !== null && event.target instanceof HTMLInputElement) return;
+          event.stopPropagation();
+          toggleCardActive(cardKey);
+        }}
         style={{
           left: slotInset,
           right: slotInset,
