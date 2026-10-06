@@ -83,7 +83,7 @@ const FAMILY_BLOB_HUES = [
 const FAMILY_ACCENT_STYLES: Array<Array<{ size?: number; alpha?: number }>> = [
   [{}, {}, {}],
   [{ size: 1.35 }, {}, {}],
-  [{}, { size: 0.5, alpha: 2.4 }, {}], // Fluss: neon yellow small but super vivid
+  [{}, { size: 0.35, alpha: 1.4 }, {}], // Fluss: neon yellow small and quiet
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
 // progressively quieter (0.4 × 0.85, 0.4 × 0.75 for their core alpha).
