@@ -305,6 +305,9 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
   // True once a drag actually moved the track; a mouseup/touchend after real
   // movement still fires a click event, which must not count as a card click.
   const dragMoved = useRef(false);
+  // True while the press that produced the current click started on a custom
+  // card's input (typing intent) — such clicks must not toggle the card.
+  const pressOnInput = useRef(false);
   const [offset, setOffset] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   // Cards dimmed by a click (inactive state, 70% opacity), keyed by card
