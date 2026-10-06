@@ -6,7 +6,7 @@ import { hyphenateGerman, splitLongGerman } from '@/lib/hyphenate';
 
 const SPREADSHEET_ID = '1zuaMoA4jYBJGKa17xaarqBohnkRUijitywLKiHNERmM';
 const SHEET_NAME = 'Tabellenblatt1';
-import { useLanguage, useTranslatedCategories } from '@/lib/i18n';
+import { useLanguage, useTranslatedCategories, type Lang } from '@/lib/i18n';
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 // How often each letter is drawn: letters with many German words come up
@@ -282,12 +282,18 @@ const CUSTOM_PREFIX = '\u0000custom:';
  *  "Männername") because they would otherwise sit on one overflowing line;
  *  multi-word texts already span 2-3 lines, so only noticeably longer words
  *  break there (from 14 letters). */
-const buildCardRows = (text: string): { rows: { key: string; className: string; text: string; hyphen?: boolean }[]; seed: number } => {
+const buildCardRows = (text: string, lang: Lang = 'de'): { rows: { key: string; className: string; text: string; hyphen?: boolean }[]; seed: number } => {
   const words = text.trim().split(/(?:,\s*|\s+)/).filter(Boolean);
   const seed = text.trim().split('').reduce((hash, char) => ((hash * 31) + char.charCodeAt(0)) % 97, 7);
   const rows: { key: string; className: string; text: string; hyphen?: boolean }[] = [];
   words.forEach((word, wordIndex) => {
     const fontClass = word === '&' || (words.length === 3 && wordIndex === 1) ? 'font-stringer' : 'font-rauschen';
+    // The hyphenation patterns are German — English category names
+    // ("Literature", "Characteristic") stay unbroken on one line.
+    if (lang === 'en') {
+      rows.push({ key: String(wordIndex), className: fontClass, text: word });
+      return;
+    }
     const halves = splitLongGerman(word, words.length === 1 ? 10 : 14);
     if (halves) {
       rows.push({ key: `${wordIndex}-a`, className: fontClass, text: halves[0], hyphen: true });
@@ -302,7 +308,7 @@ const buildCardRows = (text: string): { rows: { key: string; className: string; 
 };
 
 function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, onRotateDrag, onRotateCommit }: CategorySliderProps) {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const storageKey = `slf-slide-${familyIndex}`;
   const [index, setIndex] = useState(() => {
     const saved = Number(window.localStorage.getItem(storageKey));
@@ -486,7 +492,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
         key={cardKey}
         data-custom={customIndex !== null || undefined}
         className="pointer-events-auto absolute inset-y-0 flex items-center justify-center overflow-hidden text-center font-rauschen text-[22.5px] uppercase leading-none"
-        lang="de"
+        lang={lang === 'en' ? 'en' : 'de'}
         onMouseDown={(event) => {
           // Tapping the custom input collapses the placeholder block, so the
           // mouseup (and the click) lands on the card itself — remember the
@@ -589,7 +595,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
             // long words break (e.g. "Männername") — an input alone would
             // keep everything on one line. The input stays on top, invisible,
             // so editing and the caret behaviour keep working.
-            const built = value.trim() ? buildCardRows(value) : null;
+            const built = value.trim() ? buildCardRows(value, lang) : null;
             const rowPool = [-1.2, 0.6, 1, -0.6, 1.2, -0.8];
             return (
               <span className="relative block w-full px-6" style={{ minWidth: 0, overflowWrap: 'break-word', transform: `rotate(${itemRotation}deg)` }}>
@@ -633,7 +639,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
           : (() => {
               // Each text row gets its own slight rotation, seeded by the
               // category name (like the blobs), echoing the tilted title.
-              const { rows, seed } = buildCardRows(item);
+              const { rows, seed } = buildCardRows(item, lang);
               const rowPool = [-1.2, 0.6, 1, -0.6, 1.2, -0.8];
               return (
                 <span className="block px-6" style={{ minWidth: 0, maxWidth: '100%', overflowWrap: 'break-word', transform: `rotate(${itemRotation}deg)` }}>
@@ -834,15 +840,15 @@ export function GameSetupSlide({
         >
           <img src={filterIcon} alt="" className="h-5 w-5 invert" />
         </Button>
-        <h2 className="flex w-full flex-col items-start text-left leading-[0.8] mt-2" aria-label="Stadt Land Fluss">
-          <span style={{ rotate: '-3deg', translate: '-4px 0' }} className="font-rauschen text-[18px] uppercase [animation:slf-title-arrive_500ms_cubic-bezier(0.34,1.56,0.64,1)_both]">Stadt</span>
-          <span style={{ rotate: '0deg', translate: '30px 0', marginTop: '2px' }} className="relative z-10 font-stringer text-[19.8px] leading-none [animation:slf-title-arrive_500ms_cubic-bezier(0.34,1.56,0.64,1)_80ms_both]">L<svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-px inline-block align-middle" style={{ width: '0.72em', height: '0.72em', transform: `translateY(-0.06em) rotate(${smileyBase + smileyProgress * 360}deg)`, transition: smileyDragging ? 'none' : 'transform 250ms ease-out' }} aria-hidden="true">
+        <h2 className="flex w-full flex-col items-start text-left leading-[0.8] mt-2" aria-label={lang === 'en' ? 'City Country River' : 'Stadt Land Fluss'}>
+          <span style={{ rotate: '-3deg', translate: '-4px 0' }} className="font-rauschen text-[18px] uppercase [animation:slf-title-arrive_500ms_cubic-bezier(0.34,1.56,0.64,1)_both]">{lang === 'en' ? 'City' : 'Stadt'}</span>
+          <span style={{ rotate: '0deg', translate: '30px 0', marginTop: '2px' }} className="relative z-10 font-stringer text-[19.8px] leading-none [animation:slf-title-arrive_500ms_cubic-bezier(0.34,1.56,0.64,1)_80ms_both]">{lang === 'en' ? 'C' : 'L'}<svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-px inline-block align-middle" style={{ width: '0.72em', height: '0.72em', transform: `translateY(-0.06em) rotate(${smileyBase + smileyProgress * 360}deg)`, transition: smileyDragging ? 'none' : 'transform 250ms ease-out' }} aria-hidden="true">
             <circle cx="9" cy="9" r="9" fill="#FFFF33" />
             <circle cx="6" cy="7" r="1" fill="black" />
             <circle cx="12" cy="7" r="1" fill="black" />
             <path d="M 6 11 Q 9 13 12 11" stroke="black" strokeWidth="1" fill="none" strokeLinecap="round" />
-          </svg>nd</span>
-          <span className="font-rauschen text-[18px] uppercase [animation:slf-title-arrive_500ms_cubic-bezier(0.34,1.56,0.64,1)_160ms_both]" style={{ rotate: '2deg', translate: '14px 4px', marginTop: '2px' }}>Fluss</span>
+          </svg>{lang === 'en' ? 'untry' : 'nd'}</span>
+          <span className="font-rauschen text-[18px] uppercase [animation:slf-title-arrive_500ms_cubic-bezier(0.34,1.56,0.64,1)_160ms_both]" style={{ rotate: '2deg', translate: '14px 4px', marginTop: '2px' }}>{lang === 'en' ? 'River' : 'Fluss'}</span>
         </h2>
       </div>
       <div className="flex min-h-0 flex-1 flex-col gap-0">
