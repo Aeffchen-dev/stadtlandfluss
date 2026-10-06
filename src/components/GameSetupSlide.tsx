@@ -337,7 +337,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           wordBreak: 'normal',
           // Polished frosted glass card (reference look).
           color: 'hsl(0 0% 100% / 0.95)',
-          background: 'linear-gradient(165deg, hsl(0 0% 100% / 0.10), hsl(0 0% 100% / 0.045) 45%, hsl(0 0% 100% / 0.025))',
+          background: 'linear-gradient(165deg, hsl(0 0% 100% / 0.055), hsl(0 0% 100% / 0.025) 45%, hsl(0 0% 100% / 0.012))',
           backdropFilter: 'blur(48px) saturate(1.6)',
           WebkitBackdropFilter: 'blur(48px) saturate(1.6)',
           boxShadow: 'inset 0 1px 1px hsl(0 0% 100% / 0.22), inset 0 -1px 1px hsl(0 0% 100% / 0.04), 0 0 8px 8px hsl(0 0% 0% / 0.04)',
@@ -363,8 +363,8 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           }}
         />
         {/* Soft specular sheen so the glass reads deeper. */}
-        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ borderRadius: 'inherit', background: 'radial-gradient(120% 60% at 30% 0%, hsl(0 0% 100% / 0.10), transparent 62%)' }} />
-        {/* Extra card grain: a coarser, stronger noise pass than the page film, so the glass surface itself reads grainy. */}
+        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ borderRadius: 'inherit', background: 'radial-gradient(120% 60% at 30% 0%, hsl(0 0% 100% / 0.06), transparent 62%)' }} />
+        {/* Extra card grain: a faint texture pass, kept subtle so the surface reads as clean glass. */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
@@ -373,7 +373,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
             backgroundImage: 'var(--quiz-card-grain)',
             backgroundSize: '90px 90px',
             mixBlendMode: 'soft-light',
-            opacity: 0.3,
+            opacity: 0.12,
           }}
         />
         {customIndex !== null
