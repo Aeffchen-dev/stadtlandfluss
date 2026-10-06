@@ -621,10 +621,10 @@ export function GameSetupSlide({
 
   return (
     <div
-      className="mx-auto flex h-[calc(100%-8px)] max-h-[calc(100%-8px)] w-full max-w-[500px] select-none flex-col gap-12"
+      className="mx-auto flex h-[calc(100%-8px)] max-h-[calc(100%-8px)] w-full max-w-[500px] select-none flex-col gap-8"
       style={{ touchAction: 'none' }}
     >
-      <div className="relative flex shrink-0 flex-col items-center gap-[10px] overflow-visible rounded-[8px] px-2 pt-4 pb-2 text-quiz-setup-ink">
+      <div className="relative flex shrink-0 flex-col items-center gap-[10px] overflow-visible rounded-[8px] px-2 pt-2 pb-2 text-quiz-setup-ink">
         <Button
           type="button"
           variant="ghost"
@@ -660,7 +660,7 @@ export function GameSetupSlide({
         type="button"
         variant="ghost"
         onClick={isRolling ? undefined : rollLetter}
-        className="relative h-auto shrink-0 rounded-[8px] bg-transparent px-2 pt-4 pb-6 text-quiz-setup-ink [-webkit-tap-highlight-color:transparent] hover:bg-transparent hover:text-quiz-setup-ink focus-visible:ring-0 focus-visible:ring-offset-0"
+        className="relative h-auto shrink-0 rounded-[8px] bg-transparent px-2 pt-3 pb-3 text-quiz-setup-ink [-webkit-tap-highlight-color:transparent] hover:bg-transparent hover:text-quiz-setup-ink focus-visible:ring-0 focus-visible:ring-offset-0"
         aria-label="Zufälligen Buchstaben wählen"
       >
         <span className="relative flex w-full items-center justify-center">
