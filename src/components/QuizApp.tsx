@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { QuizCard } from './QuizCard';
 import { GameSetupSlide } from './GameSetupSlide';
 import { InfoModal } from './InfoModal';
-import pageBg from '@/assets/page-bg-hand.jpg';
+import pageBgAsset from '@/assets/page-bg-fluid.jpeg.asset.json';
+const pageBg = pageBgAsset.url;
 
 interface Question {
   question: string;
