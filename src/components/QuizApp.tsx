@@ -557,14 +557,7 @@ export function QuizApp() {
         left: 0
       }}
     >
-      {/* Photo backdrop blends as color into the oxblood base, so its hues bleed through while lightness comes from the base. */}
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          background: 'var(--quiz-page-background)',
-        }}
-      />
+      {/* Photo backdrop blends as overlay into the oxblood base, adding contrast and photo texture. */}
       <div
         aria-hidden
         className="absolute inset-0"
@@ -574,8 +567,8 @@ export function QuizApp() {
           backgroundPosition: 'center',
           filter: 'blur(28px) saturate(1.05)',
           transform: 'scale(1.15)',
-          mixBlendMode: 'color',
-          opacity: 0.45,
+          mixBlendMode: 'overlay',
+          opacity: 0.6,
         }}
       />
       <div
