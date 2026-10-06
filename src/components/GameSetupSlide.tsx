@@ -74,7 +74,7 @@ const FAMILY_BLOB_HUES = [
   ['338 95% 84%', '318 75% 79%', '298 42% 70%', '300 50% 46%', '345 90% 84%'],
   // Land: muted green-blues with a juicy green (drawn larger), a deep vivid blue
   // and a dark green-blue lila accent
-  ['178 85% 85%', '158 100% 72%', '158 60% 42%', '148 100% 56%', '178 95% 50%', '224 95% 28%'],
+  ['178 85% 85%', '158 100% 78%', '158 60% 42%', '148 100% 56%', '178 95% 50%', '224 95% 28%'],
   // Fluss: dark lila & vivid red-orange in the main lanes, deeper orange + soft bright yellow (larger, quiet) accents
   ['285 52% 76%', '8 95% 62%', '281 72% 68%', '28 100% 72%', '55 92% 85%'],
 ];
@@ -89,7 +89,7 @@ const FAMILY_ACCENT_STYLES: Array<Array<{ size?: number; alpha?: number }>> = [
 ];
 const FAMILY_MAIN_STYLES: Array<Array<{ alpha?: number } | undefined>> = [
   [undefined, undefined, undefined],
-  [undefined, { alpha: 1.7 }, undefined], // Land: mint glow more visible
+  [undefined, { alpha: 3.0 }, undefined], // Land: mint glow much more vivid
   [undefined, undefined, undefined],
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
