@@ -477,14 +477,14 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           style={{
             borderRadius: 'inherit',
             padding: '1px',
-            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.11), hsl(0 0% 100% / 0.02) 38%, hsl(0 0% 100% / 0.014) 62%, hsl(0 0% 100% / 0.05))',
+            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.155), hsl(0 0% 100% / 0.028) 38%, hsl(0 0% 100% / 0.02) 62%, hsl(0 0% 100% / 0.07))',
             WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
             WebkitMaskComposite: 'xor',
             maskComposite: 'exclude',
           }}
         />
         {/* Soft specular sheen so the glass reads deeper. */}
-        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ borderRadius: 'inherit', background: 'radial-gradient(120% 60% at 30% 0%, hsl(0 0% 100% / 0.11), transparent 62%)' }} />
+        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ borderRadius: 'inherit', background: 'radial-gradient(120% 60% at 30% 0%, hsl(0 0% 100% / 0.15), transparent 62%)' }} />
         {/* Extra card grain: a dark speckle tinted to the family's own hue, so the texture reads colored instead of black. */}
         <div
           aria-hidden
