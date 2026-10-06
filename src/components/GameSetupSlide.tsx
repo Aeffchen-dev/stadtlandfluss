@@ -70,14 +70,17 @@ const FAMILY_GRAINS = [
 // stacked lanes near the top and hug the horizontal center, so their cores
 // never overlap each other.
 const FAMILY_BLOB_HUES = [
-  // Stadt: rosa / lila tones
-  ['338 85% 74%', '318 65% 75%', '290 55% 72%'],
-  // Land: turquoise tones
-  ['186 80% 62%', '174 80% 62%', '198 70% 64%'],
-  // Fluss: lime / grasgrün tones
-  ['92 80% 62%', '108 62% 55%', '125 55% 55%'],
+  // Stadt: rosa / lila tones + one darker plum accent
+  ['338 85% 74%', '318 65% 75%', '290 55% 72%', '300 50% 46%'],
+  // Land: turquoise tones + one darker turquoise accent
+  ['186 80% 62%', '174 80% 62%', '198 70% 64%', '182 70% 42%'],
+  // Fluss: lime / grasgrün tones + one darker olive accent
+  ['92 80% 62%', '108 62% 55%', '125 55% 55%', '76 50% 40%'],
 ];
-const BLOB_LANES: Array<[number, number]> = [[9, 17], [28, 38], [47, 57]]; // y-% of card height
+// Per-slider blob strength: the first slider reads strongest, the others sit
+// progressively quieter (0.4 × 0.85, 0.4 × 0.75 for their core alpha).
+const FAMILY_BLOB_ALPHA = [0.55, 0.34, 0.3];
+const BLOB_LANES: Array<[number, number]> = [[9, 17], [28, 38], [47, 57], [62, 72]]; // y-% of card height
 
 interface CardBlob {
   x: number; // % of card width
@@ -102,7 +105,7 @@ const makeCardBlobs = (seed: string, familyIndex: number): CardBlob[] => {
   return BLOB_LANES.map(([yMin, yMax], i) => ({
     x: 50 + (rand() - 0.5) * 26, // mostly centered
     y: yMin + rand() * (yMax - yMin),
-    size: 26 + rand() * 18, // diameter, % of card width
+    size: 31 + rand() * 22, // diameter, % of card width
     hue: hues[i],
   }));
 };
@@ -393,9 +396,10 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
         aria-hidden={!isCurrent}
       >
         {/* Gradient blobs: each slider's own color story (rosa/lila,
-            turquoise, lime/grasgrün) pooled as soft, subtle round glows near
-            the top of the card, random per category (seeded by name), kept
-            mostly centered and non-overlapping. */}
+            turquoise, lime/grasgrün, plus one darker accent tone) pooled as
+            soft, subtle round glows near the top of the card, random per
+            category (seeded by name), kept mostly centered and
+            non-overlapping. Strength scales with the slider family. */}
         {makeCardBlobs(item, familyIndex).map((blob, blobIndex) => (
           <div
             key={blobIndex}
@@ -408,7 +412,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
               aspectRatio: '1',
               borderRadius: '50%',
               transform: 'translate(-50%, -50%)',
-              background: `radial-gradient(circle, hsl(${blob.hue} / 0.4), hsl(${blob.hue} / 0.13) 55%, transparent 75%)`,
+              background: `radial-gradient(circle, hsl(${blob.hue} / ${(FAMILY_BLOB_ALPHA[familyIndex] ?? 0.4).toFixed(3)}), hsl(${blob.hue} / ${(FAMILY_BLOB_ALPHA[familyIndex] * 0.325).toFixed(3)}) 55%, transparent 75%)`,
               filter: 'blur(12px)',
               mixBlendMode: 'screen',
             }}
