@@ -722,7 +722,7 @@ export function GameSetupSlide({
             <circle cx="12" cy="7" r="1" fill="black" />
             <path d="M 6 11 Q 9 13 12 11" stroke="black" strokeWidth="1" fill="none" strokeLinecap="round" />
           </svg>nd</span>
-          <span className="font-rauschen text-[19px] uppercase [animation:slf-title-arrive_500ms_cubic-bezier(0.34,1.56,0.64,1)_160ms_both]" style={{ rotate: '2deg', translate: '14px 4px', marginTop: '0px' }}>Fluss</span>
+          <span className="font-rauschen text-[20px] uppercase [animation:slf-title-arrive_500ms_cubic-bezier(0.34,1.56,0.64,1)_160ms_both]" style={{ rotate: '2deg', translate: '14px 4px', marginTop: '0px' }}>Fluss</span>
         </h2>
       </div>
       <div className="flex min-h-0 flex-1 flex-col gap-0">
