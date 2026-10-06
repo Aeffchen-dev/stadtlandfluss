@@ -574,7 +574,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
               <span className="relative block w-full px-6" style={{ minWidth: 0, overflowWrap: 'break-word', transform: `rotate(${itemRotation}deg)` }}>
                 {showFake && (
                   <span className="pointer-events-none block" style={{ lineHeight: 1.1 }}>
-                    {['Eigene', 'Kategorie'].map((word, wordIndex) => (
+                    {['Eigene', 'Kategorie…'].map((word, wordIndex) => (
                       <span key={word} className="block" style={{ transform: `rotate(${rowPool[wordIndex % rowPool.length]}deg)` }}>
                         {/* Placeholder ink: white at 50% opacity, light enough to read as placeholder text on the dark card. */}
                         <span style={{ color: 'hsl(0 0% 100% / 0.5)' }}>{word}</span>
@@ -597,7 +597,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
                   type="text"
                   value={value}
                   tabIndex={isCurrent ? 0 : -1}
-                  placeholder={showFake ? '' : 'Eigene Kategorie'}
+                  placeholder={showFake ? '' : 'Eigene Kategorie…'}
                   aria-label={`${label}: eigene Kategorie`}
                   onChange={(event) => updateCustom(customIndex, event.target.value)}
                   onFocus={() => setFocusedCustom(customIndex)}
