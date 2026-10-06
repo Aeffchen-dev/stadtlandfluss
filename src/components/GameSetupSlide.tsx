@@ -335,65 +335,30 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           WebkitHyphens: 'manual',
           overflowWrap: 'break-word',
           wordBreak: 'normal',
-          // Card color: full-strength gradient fields, no outline, no wash —
-          color: 'hsl(0 0% 100% / 0.92)',
-          background: 'hsl(0 0% 0% / 0.1)',
-          backdropFilter: 'blur(20px) saturate(1.1) brightness(0.9)',
-          WebkitBackdropFilter: 'blur(20px) saturate(1.1) brightness(0.9)',
-          // Glassy rim outline around the card edge.
-          border: '1.5px solid hsl(0 0% 100% / 0.08)',
-          // Hue rim + faint top inner highlight, plus a soft family-colored
-          // bloom (0 0 8px 8px at 4%) that melts the card into the
-          // background like the reference.
-          boxShadow: `inset 0 0 0 1px ${FAMILY_RIMS[familyIndex]}, inset 0 1.5px 0 hsl(0 0% 100% / 0.06), 0 0 8px 8px ${FAMILY_GLOWS[familyIndex]}`,
+          // Clean frosted glass card with thin light rim (reference look).
+          color: 'hsl(0 0% 100% / 0.95)',
+          background: 'linear-gradient(180deg, hsl(0 0% 100% / 0.14), hsl(0 0% 100% / 0.06))',
+          backdropFilter: 'blur(16px) saturate(1.2)',
+          WebkitBackdropFilter: 'blur(16px) saturate(1.2)',
+          border: '1px solid hsl(0 0% 100% / 0.28)',
+          boxShadow: 'inset 0 1px 0 hsl(0 0% 100% / 0.18), 0 8px 24px -12px hsl(0 0% 0% / 0.25)',
           transform: `translateX(${position * spacing + offset}px) scale(${scale}) rotate(${leanRotation}deg)`,
           opacity: 1,
           transition,
-          // Fade in on first mount (after the loading ghosts) so the cards
-          // don't pop in; the hint animation runs alongside it.
           animation: [hintAnimation, 'slf-card-in 450ms ease-out both'].filter(Boolean).join(', '),
           zIndex: isCurrent ? 2 : 1,
         }}
         aria-hidden={!isCurrent}
       >
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0"
-          style={{ borderRadius: 'inherit', overflow: 'hidden' }}
-        >
-          {/* Each slider keeps one color family while the ink field shifts per card. */}
-          {/* Transparent card with soft radial color fields over the page background. */}
-          {/* The per-card rotation is baked into the gradient tokens themselves, */}
-          {/* so this layer keeps the card's exact bounds and the gradient always */}
-          {/* fits the card — no clipped blobs, no uncovered corners. */}
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              borderRadius: 'inherit',
-              background: FAMILY_GRADIENTS[familyIndex][itemIndex % 5],
-              filter: familyIndex === 0 ? 'blur(12px) saturate(1.08)' : undefined,
-            }}
-          />
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              borderRadius: 'inherit',
-              background: FAMILY_GRADIENTS[familyIndex][itemIndex % 5],
-              filter: 'saturate(1.1) contrast(1.02) brightness(0.9)',
-            }}
-          />
+        {/* Thin crosshair guide lines and circle, like the reference cards. */}
+        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ borderRadius: 'inherit' }}>
+          <div className="absolute inset-y-0 left-1/2 w-px" style={{ background: 'hsl(0 0% 100% / 0.12)' }} />
+          <div className="absolute inset-x-0 top-1/2 h-px" style={{ background: 'hsl(0 0% 100% / 0.12)' }} />
+          <div className="absolute left-1/2 top-1/2 aspect-square w-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ border: '1px solid hsl(0 0% 100% / 0.14)' }} />
+          <span className="absolute left-3 top-3 font-stringer text-[11px] normal-case" style={{ opacity: 0.8 }}>
+            {`0-${(itemIndex % 9) + 1}`}
+          </span>
         </div>
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0"
-          style={{
-            borderRadius: 'inherit',
-            background: FAMILY_GRAINS[familyIndex],
-            backgroundSize: '150px 150px',
-            mixBlendMode: 'hard-light',
-            opacity: 0.85,
-          }}
-        />
         {customIndex !== null
           ? (() => {
             const value = customs[customIndex] ?? '';

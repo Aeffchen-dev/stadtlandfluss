@@ -572,25 +572,15 @@ export function QuizApp() {
           backgroundImage: `url(${pageBg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          filter: 'blur(14px) saturate(0.9) brightness(0.88)',
-          transform: 'scale(1.12)',
+          filter: 'blur(28px) saturate(1.05)',
+          transform: 'scale(1.15)',
         }}
       />
-      {/* Dark purple colour field behind the third slider zone (bottom of viewport). */}
       <div
         aria-hidden
         className="absolute inset-0"
         style={{
-          background:
-            'radial-gradient(70% 45% at 50% 100%, hsl(270 36% 14% / 0.75), transparent 72%), linear-gradient(180deg, transparent 52%, hsl(268 30% 10% / 0.55) 100%)',
-        }}
-      />
-      {/* Darker scrim over the photo so the page reads deep. */}
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          background: 'hsl(0 0% 0% / 0.22)',
+          background: 'hsl(0 0% 0% / 0.12)',
         }}
       />
       <div
