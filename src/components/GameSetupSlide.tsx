@@ -72,8 +72,8 @@ const FAMILY_GRAINS = [
 const FAMILY_BLOB_HUES = [
   // Stadt: rosa / lila tones + darker plum + lighter rosa accents
   ['338 85% 74%', '318 65% 75%', '290 55% 72%', '300 50% 46%', '345 90% 84%'],
-  // Land: turquoise tones + darker turquoise + lighter aqua accents
-  ['186 80% 62%', '174 80% 62%', '198 70% 64%', '182 70% 42%', '180 85% 80%'],
+  // Land: turquoise tones + darker turquoise + lighter aqua + plum accents
+  ['186 80% 62%', '174 80% 62%', '198 70% 64%', '182 70% 42%', '180 85% 80%', '300 45% 58%'],
   // Fluss: red & yellow alternating in the main lanes, deep red + gold accents
   ['0 85% 64%', '48 90% 60%', '357 82% 66%', '0 70% 44%', '48 95% 76%'],
 ];
@@ -137,6 +137,7 @@ const makeCardBlobs = (seed: string, familyIndex: number): CardBlob[] => {
   };
   placeAccent(hues[3]);
   placeAccent(hues[4]);
+  placeAccent(hues[5]);
   return blobs;
 };
 
