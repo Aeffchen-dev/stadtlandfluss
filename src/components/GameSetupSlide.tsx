@@ -6,7 +6,7 @@ import { hyphenateGerman, splitLongGerman } from '@/lib/hyphenate';
 
 const SPREADSHEET_ID = '1zuaMoA4jYBJGKa17xaarqBohnkRUijitywLKiHNERmM';
 const SHEET_NAME = 'Tabellenblatt1';
-import { useLanguage, translateCategory } from '@/lib/i18n';
+import { useLanguage, useTranslatedCategories } from '@/lib/i18n';
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 // How often each letter is drawn: letters with many German words come up
@@ -710,10 +710,7 @@ export function GameSetupSlide({
 }: GameSetupSlideProps) {
   const [columns, setColumns] = useState<string[][]>([[], [], []]);
   const { t, lang } = useLanguage();
-  const translatedColumns = useMemo(
-    () => columns.map((column) => column.map((item) => translateCategory(item, lang))),
-    [columns, lang],
-  );
+  const translatedColumns = useTranslatedCategories(columns, lang);
   const [displayLetter, setDisplayLetter] = useState(() => pickWeightedLetter());
   // Smiley rotation is driven directly by the category drag: a full
   // card-width drag equals one full turn; committed turns are absorbed
