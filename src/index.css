@@ -373,3 +373,9 @@ svg[class*="lucide"] {
   100% { transform: rotate(-2deg) scale(1); opacity: 1; }
 }
 @keyframes slf-caret-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+/* Letter roll: each new letter flicks in with a small blur-and-rise */
+@keyframes slf-letter-flick {
+  0% { opacity: 0.3; transform: translateY(16%) scale(0.9); filter: blur(3px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}

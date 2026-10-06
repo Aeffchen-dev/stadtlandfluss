@@ -677,12 +677,18 @@ export function GameSetupSlide({
     if (isRolling) return;
     setIsRolling(true);
     const finalLetter = ALPHABET[Math.floor(Math.random() * ALPHABET.length)];
-    let delay = 30;
+    // Long, decelerating browse: starts fast, eases out over ~2s while
+    // flicking through ~25 letters, never repeating the previous one.
+    let delay = 25;
+    let last = displayLetter;
     const tick = () => {
-      setDisplayLetter(ALPHABET[Math.floor(Math.random() * ALPHABET.length)]);
-      delay = Math.min(delay * 1.15, 190);
+      let next = last;
+      while (next === last) next = ALPHABET[Math.floor(Math.random() * ALPHABET.length)];
+      last = next;
+      setDisplayLetter(next);
+      delay = Math.min(delay * 1.1, 200);
       rollTimeoutRef.current = window.setTimeout(() => {
-        if (delay >= 190) {
+        if (delay >= 200) {
           setDisplayLetter(finalLetter);
           setIsRolling(false);
         } else {
@@ -739,7 +745,11 @@ export function GameSetupSlide({
       >
         <span className="relative flex w-full items-center justify-center">
           <span className="absolute left-2 top-1/2 -translate-y-1/2 font-stringer text-[14px]" style={{ opacity: 0.8 }}>Mit</span>
-          <span className="font-rauschen text-[56px] uppercase leading-none">{displayLetter}</span>
+          <span
+            key={displayLetter}
+            className="font-rauschen text-[56px] uppercase leading-none"
+            style={{ animation: `slf-letter-flick ${isRolling ? 90 : 260}ms cubic-bezier(0.34, 1.4, 0.64, 1) both` }}
+          >{displayLetter}</span>
           <RefreshCw className="absolute right-2 top-1/2 -translate-y-1/2" style={{ width: 20, height: 20, opacity: 0.8 }} />
         </span>
       </Button>
