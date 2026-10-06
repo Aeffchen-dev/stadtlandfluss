@@ -708,7 +708,7 @@ export function GameSetupSlide({
           <span className="font-rauschen text-[19px] uppercase [animation:slf-title-arrive_500ms_cubic-bezier(0.34,1.56,0.64,1)_160ms_both]" style={{ rotate: '2deg', translate: '14px 4px', marginTop: '0px' }}>Fluss</span>
         </h2>
       </div>
-      <div className="flex min-h-0 flex-1 flex-col gap-9">
+      <div className="flex min-h-0 flex-1 flex-col gap-6">
         <CategorySlider items={columns[0]} familyIndex={0} label="Stadt" hint="next" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
         <CategorySlider items={columns[1]} familyIndex={1} label="Land" hint="prev" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
         <CategorySlider items={columns[2]} familyIndex={2} label="Fluss" hint="next" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
