@@ -72,10 +72,10 @@ const FAMILY_GRAINS = [
 const FAMILY_BLOB_HUES = [
   // Stadt: rosa / lila tones + darker plum + lighter rosa accents
   ['338 85% 74%', '318 65% 75%', '290 55% 72%', '300 50% 46%', '345 90% 84%'],
-  // Land: turquoise tones (one pushed to neon green) + darker turquoise + lighter aqua + dark turquoise accents
-  ['186 80% 62%', '135 95% 58%', '198 70% 64%', '182 70% 42%', '180 85% 80%', '192 60% 26%'],
-  // Fluss: terracotta & yellow alternating in the main lanes, dark terracotta + gold + light yellow accents
-  ['6 75% 58%', '48 90% 60%', '8 72% 60%', '4 65% 34%', '48 95% 76%', '55 100% 90%'],
+  // Land: turquoise tones (one pushed to neon green) + lighter aqua + dark olive green accent
+  ['186 80% 62%', '135 95% 58%', '198 70% 64%', '182 70% 42%', '180 85% 80%', '75 45% 26%'],
+  // Fluss: dark lila & yellow alternating in the main lanes (yellow kept quiet), dark lila + deeper gold accents
+  ['285 45% 55%', '48 75% 55%', '290 45% 52%', '282 40% 30%', '45 80% 58%', '48 65% 42%'],
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
 // progressively quieter (0.4 × 0.85, 0.4 × 0.75 for their core alpha).
