@@ -289,6 +289,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
   const hintDone = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<number | null>(null);
+  const [trackWidth, setTrackWidth] = useState(300);
   // Card travel distance. The card is drawn at 80% of its slot size (cards
   // scaled down 20%); neighbours render at 90% of that (0.9 × 0.8 = 0.72,
   // half-width 0.36 × card width). Gap and peek are coupled through the
