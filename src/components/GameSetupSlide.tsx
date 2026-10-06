@@ -94,7 +94,7 @@ const FAMILY_MAIN_STYLES: Array<Array<{ alpha?: number } | undefined>> = [
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
 // progressively quieter (0.4 × 0.85, 0.4 × 0.75 for their core alpha).
-const FAMILY_BLOB_ALPHA = [0.693, 0.198, 0.515];
+const FAMILY_BLOB_ALPHA = [0.832, 0.238, 0.618];
 const BLOB_LANES: Array<[number, number]> = [[9, 17], [28, 38], [47, 57]]; // y-% of card height
 
 interface CardBlob {
@@ -494,7 +494,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
             backgroundImage: FAMILY_GRAINS[familyIndex] ?? FAMILY_GRAINS[0],
             backgroundSize: '90px 90px',
             mixBlendMode: 'overlay',
-            opacity: 0.32,
+            opacity: 0.44,
           }}
         />
         {customIndex !== null
