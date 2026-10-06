@@ -8,6 +8,7 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
+    --browser-background: 0 0% 0%;
     --background: 150 8% 3%;
     --foreground: 140 28% 95%;
     --card-background: 150 26% 10%;
@@ -294,7 +295,8 @@ All colors MUST be HSL.
   }
 
   html {
-    background-color: hsl(0 0% 0%);
+    background: hsl(var(--browser-background));
+    color-scheme: dark;
     overflow: hidden;
     height: 100vh;
     height: 100svh;
@@ -304,7 +306,9 @@ All colors MUST be HSL.
 
   body {
     @apply text-foreground font-stringer tracking-tight;
-    background-color: hsl(0 0% 0%);
+    margin: 0;
+    padding: 0;
+    background: hsl(var(--browser-background));
     overflow: hidden;
     height: 100vh;
     height: 100svh;
