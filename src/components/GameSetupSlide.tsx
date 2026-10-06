@@ -566,7 +566,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
     <div
       ref={containerRef}
       className="relative flex min-h-0 flex-1 cursor-grab items-center justify-center overflow-visible text-quiz-category-text active:cursor-grabbing"
-      style={{ borderRadius: '16px', touchAction: 'pan-y' }}
+      style={{ borderRadius: '16px', touchAction: 'pan-y', ...style }}
       aria-label={label}
       onTouchStart={(event) => {
         event.stopPropagation();
