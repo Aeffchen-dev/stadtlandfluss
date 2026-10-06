@@ -506,7 +506,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
           style={{
             borderRadius: 'inherit',
             padding: '1px',
-            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.023), hsl(0 0% 100% / 0.0041) 38%, hsl(0 0% 100% / 0.0031) 62%, hsl(0 0% 100% / 0.0104))',
+            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.06), hsl(0 0% 100% / 0.002) 36%, hsl(0 0% 100% / 0.0015) 60%, hsl(0 0% 100% / 0.035))',
             WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
             WebkitMaskComposite: 'xor',
             maskComposite: 'exclude',
@@ -753,7 +753,7 @@ export function GameSetupSlide({
             <circle cx="12" cy="7" r="1" fill="black" />
             <path d="M 6 11 Q 9 13 12 11" stroke="black" strokeWidth="1" fill="none" strokeLinecap="round" />
           </svg>nd</span>
-          <span className="font-rauschen text-[18px] uppercase [animation:slf-title-arrive_500ms_cubic-bezier(0.34,1.56,0.64,1)_160ms_both]" style={{ rotate: '2deg', translate: '14px 4px', marginTop: '5px' }}>Fluss</span>
+          <span className="font-rauschen text-[18px] uppercase [animation:slf-title-arrive_500ms_cubic-bezier(0.34,1.56,0.64,1)_160ms_both]" style={{ rotate: '2deg', translate: '14px 4px', marginTop: '2px' }}>Fluss</span>
         </h2>
       </div>
       <div className="flex min-h-0 flex-1 flex-col gap-0">
