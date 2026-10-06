@@ -260,7 +260,7 @@ const parseCsv = (text: string): string[][] => {
 
 const CUSTOM_PREFIX = '\u0000custom:';
 
-function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateDrag, onRotateCommit }: CategorySliderProps) {
+function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, onRotateDrag, onRotateCommit }: CategorySliderProps) {
   const storageKey = `slf-slide-${familyIndex}`;
   const [index, setIndex] = useState(() => {
     const saved = Number(window.localStorage.getItem(storageKey));
