@@ -464,6 +464,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
         className="pointer-events-auto absolute inset-y-0 flex items-center justify-center overflow-hidden text-center font-rauschen text-[22.5px] uppercase leading-none"
         lang="de"
         onClick={(event) => {
+          console.log('SLF card click', { dragMoved: dragMoved.current, customIndex, target: (event.target as HTMLElement).tagName });
           // Swipes end with a click event too — only treat a real tap as
           // the inactive-toggle. The custom input handles its own clicks.
           if (dragMoved.current || customIndex !== null && event.target instanceof HTMLInputElement) return;
