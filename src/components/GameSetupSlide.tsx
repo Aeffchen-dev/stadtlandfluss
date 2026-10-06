@@ -582,7 +582,7 @@ export function GameSetupSlide({
           className="absolute right-1 top-1 z-10 h-9 w-9 rounded-full bg-transparent p-2 hover:bg-transparent"
           aria-label="Beschreibung öffnen"
         >
-          <img src={filterIcon} alt="" className="h-5 w-5 invert opacity-50" />
+          <img src={filterIcon} alt="" className="h-5 w-5 invert" />
         </Button>
         <h2 className="flex w-full flex-col items-start text-left leading-[0.8]" aria-label="Stadt Land Fluss">
           <span style={{ rotate: '-3deg', translate: '-4px 0' }} className="font-rauschen text-[19px] uppercase [animation:slf-title-arrive_500ms_cubic-bezier(0.34,1.56,0.64,1)_both]">Stadt</span>
@@ -608,9 +608,9 @@ export function GameSetupSlide({
         aria-label="Zufälligen Buchstaben wählen"
       >
         <span className="relative flex w-full items-center justify-center">
-          <span className="absolute left-2 top-1/2 -translate-y-1/2 font-stringer text-[14px] opacity-60">Mit</span>
+          <span className="absolute left-2 top-1/2 -translate-y-1/2 font-stringer text-[14px]">Mit</span>
           <span className="font-rauschen text-[56px] uppercase leading-none">{displayLetter}</span>
-          <RefreshCw className="absolute right-2 top-1/2 -translate-y-1/2 opacity-60" style={{ width: 20, height: 20 }} />
+          <RefreshCw className="absolute right-2 top-1/2 -translate-y-1/2" style={{ width: 20, height: 20 }} />
         </span>
       </Button>
     </div>
