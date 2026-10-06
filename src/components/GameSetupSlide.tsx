@@ -385,18 +385,27 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
         }}
         aria-hidden={!isCurrent}
       >
-        {/* Gradient blobs: soft rosa / turquoise / neon-green pools huddled
-            near the top of the card, random per category (seeded by name). */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute left-0 right-0 top-0"
-          style={{
-            height: '52%',
-            borderRadius: 'inherit',
-            backgroundImage: makeCardBlobs(item),
-            mixBlendMode: 'screen',
-          }}
-        />
+        {/* Gradient blobs: soft rosa / turquoise / neon-green glow pools
+            huddled near the top of the card, random per category (seeded by
+            name), kept mostly centered and non-overlapping. */}
+        {makeCardBlobs(item).map((blob, blobIndex) => (
+          <div
+            key={blobIndex}
+            aria-hidden
+            className="pointer-events-none absolute"
+            style={{
+              left: `${blob.x.toFixed(1)}%`,
+              top: `${blob.y.toFixed(1)}%`,
+              width: `${blob.size.toFixed(1)}%`,
+              aspectRatio: '1',
+              borderRadius: '50%',
+              transform: 'translate(-50%, -50%)',
+              background: `radial-gradient(circle, hsl(${blob.hue} / 0.30), hsl(${blob.hue} / 0.10) 55%, transparent 75%)`,
+              filter: 'blur(10px)',
+              mixBlendMode: 'screen',
+            }}
+          />
+        ))}
         {/* Gradient glass rim: a 1px beveled edge that runs bright along the top-left and relaxes toward the bottom-right. */}
         <div
           aria-hidden
