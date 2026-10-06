@@ -540,7 +540,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
               <span className="relative block w-full px-6" style={{ minWidth: 0, overflowWrap: 'break-word', transform: `rotate(${itemRotation}deg)` }}>
                 {showFake && (
                   <span className="pointer-events-none flex items-center justify-center">
-                    <span className="normal-case" style={{ opacity: 0.22, borderBottom: '1.5px dashed currentColor', paddingBottom: '2px' }}>Kategorie …</span>
+                    <span style={{ opacity: 0.22, borderBottom: '1.5px dashed currentColor', paddingBottom: '2px' }}>Kategorie …</span>
                     <span className="ml-1 inline-block h-[0.9em] w-[2px] bg-current" style={{ animation: 'slf-caret-blink 1s step-end infinite' }} />
                   </span>
                 )}
