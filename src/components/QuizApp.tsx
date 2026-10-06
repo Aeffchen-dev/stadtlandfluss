@@ -563,7 +563,7 @@ export function QuizApp() {
         className="absolute inset-0"
         style={{
           background: 'var(--quiz-page-background)',
-          opacity: 0.65,
+          opacity: 0.85,
         }}
       />
       {/* Photo backdrop blends as soft-light into the oxblood base — texture without crushing it to black. */}
@@ -574,17 +574,17 @@ export function QuizApp() {
           backgroundImage: `url(${pageBg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          filter: 'blur(28px) saturate(1.05)',
+          filter: 'blur(28px) saturate(1.05) brightness(0.45)',
           transform: 'scale(1.15)',
           mixBlendMode: 'soft-light',
-          opacity: 0.6,
+          opacity: 0.8,
         }}
       />
       <div
         aria-hidden
         className="absolute inset-0"
         style={{
-          background: 'hsl(0 0% 0% / 0.50)',
+          background: 'hsl(0 0% 0% / 0.42)',
         }}
       />
       {/* Vignette — darker toward the edges, clear in the middle. */}
