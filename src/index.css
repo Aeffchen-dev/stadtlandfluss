@@ -294,6 +294,7 @@ All colors MUST be HSL.
   }
 
   html {
+    background-color: hsl(0 0% 0%);
     overflow: hidden;
     height: 100vh;
     height: 100svh;
@@ -302,7 +303,8 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-stringer tracking-tight;
+    @apply text-foreground font-stringer tracking-tight;
+    background-color: hsl(0 0% 0%);
     overflow: hidden;
     height: 100vh;
     height: 100svh;
