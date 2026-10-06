@@ -593,7 +593,7 @@ export function QuizApp() {
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(120% 90% at 50% 42%, transparent 45%, hsl(0 0% 0% / 0.22) 78%, hsl(0 0% 0% / 0.45) 100%)',
+            'radial-gradient(120% 90% at 50% 42%, transparent 45%, hsl(0 0% 0% / 0.10) 78%, hsl(0 0% 0% / 0.24) 100%)',
         }}
       />
       <div
