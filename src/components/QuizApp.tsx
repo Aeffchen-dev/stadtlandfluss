@@ -503,46 +503,14 @@ export function QuizApp() {
     return interpolateColors(currentBg, targetBg, dragProgress);
   };
 
-  // Update theme-color meta tag for iOS Safari status bar
+  // Browser chrome stays black independently of the current card and gestures.
   useEffect(() => {
-    const colors = getCurrentColors();
-    const bgColor = slides[currentIndex]?.question?.category.toLowerCase() !== 'intro' ? colors.pageBg : '#000000';
-    
-    // Update theme-color meta tag
-    let metaThemeColor = document.querySelector('meta[name="theme-color"]');
-    if (metaThemeColor) {
-      metaThemeColor.setAttribute('content', bgColor);
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#000000');
+    for (const element of [document.documentElement, document.body]) {
+      element.style.removeProperty('background-color');
+      element.style.removeProperty('transition');
     }
-    // Also update document background to color the areas behind Safari's UI with smooth transition
-    document.body.style.transition = 'background-color 0.3s ease-out';
-    document.documentElement.style.transition = 'background-color 0.3s ease-out';
-    document.body.style.backgroundColor = bgColor;
-    document.documentElement.style.backgroundColor = bgColor;
-  }, [currentIndex, slides]);
-
-  // Update theme-color during drag and transition for smooth status bar color changes
-  useEffect(() => {
-    const updateThemeColor = () => {
-      const bgColor = getInterpolatedBgColor();
-      let metaThemeColor = document.querySelector('meta[name="theme-color"]');
-      if (metaThemeColor && bgColor) {
-        metaThemeColor.setAttribute('content', bgColor);
-      }
-      // Keep body and html backgrounds in sync while dragging
-      if (bgColor) {
-        document.body.style.transition = 'none';
-        document.documentElement.style.transition = 'none';
-        document.body.style.backgroundColor = bgColor;
-        document.documentElement.style.backgroundColor = bgColor;
-      }
-    };
-
-    if (isDragging || isTransitioning) {
-      updateThemeColor();
-      const interval = setInterval(updateThemeColor, 16); // 60fps updates
-      return () => clearInterval(interval);
-    }
-  }, [isDragging, isTransitioning, dragOffset, transitionDirection]);
+  }, []);
 
   return (
     <div 
