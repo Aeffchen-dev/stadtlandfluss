@@ -259,6 +259,28 @@ const parseCsv = (text: string): string[][] => {
 
 const CUSTOM_PREFIX = '\u0000custom:';
 
+/** Shared card text layout: one row per word, long German words broken with
+ *  a visible hyphen. Single-word texts break earlier (from 9 letters, e.g.
+ *  "Männername") because they would otherwise sit on one overflowing line;
+ *  multi-word texts already span 2-3 lines, so only noticeably longer words
+ *  break there (from 14 letters). */
+const buildCardRows = (text: string): { rows: { key: string; className: string; text: string; hyphen?: boolean }[]; seed: number } => {
+  const words = text.trim().split(/(?:,\s*|\s+)/).filter(Boolean);
+  const seed = text.trim().split('').reduce((hash, char) => ((hash * 31) + char.charCodeAt(0)) % 97, 7);
+  const rows: { key: string; className: string; text: string; hyphen?: boolean }[] = [];
+  words.forEach((word, wordIndex) => {
+    const fontClass = word === '&' || (words.length === 3 && wordIndex === 1) ? 'font-stringer' : 'font-rauschen';
+    const halves = splitLongGerman(word, words.length === 1 ? 9 : 14);
+    if (halves) {
+      rows.push({ key: `${wordIndex}-a`, className: fontClass, text: halves[0], hyphen: true });
+      rows.push({ key: `${wordIndex}-b`, className: fontClass, text: halves[1] });
+    } else {
+      rows.push({ key: String(wordIndex), className: fontClass, text: hyphenateGerman(word) });
+    }
+  });
+  return { rows, seed };
+};
+
 function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, onRotateDrag, onRotateCommit }: CategorySliderProps) {
   const storageKey = `slf-slide-${familyIndex}`;
   const [index, setIndex] = useState(() => {
@@ -418,7 +440,6 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
     const hintAnimation = hint && !hintDone.current && !isAnimating && startX.current === null
       ? `${hint === 'next' ? 'slf-hint-next' : 'slf-hint-prev'} 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 2s 1`
       : undefined;
-    const words = item.trim().split(/(?:,\s*|\s+)/).filter(Boolean);
     return (
       <div
         key={cardKey}
@@ -509,12 +530,28 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
           ? (() => {
             const value = customs[customIndex] ?? '';
             const showFake = !value && focusedCustom !== customIndex;
+            // Once text is typed, render it with the shared row layout so
+            // long words break (e.g. "Männername") — an input alone would
+            // keep everything on one line. The input stays on top, invisible,
+            // so editing and the caret behaviour keep working.
+            const built = value.trim() ? buildCardRows(value) : null;
+            const rowPool = [-1.2, 0.6, 1, -0.6, 1.2, -0.8];
             return (
               <span className="relative block w-full px-6" style={{ minWidth: 0, overflowWrap: 'break-word', transform: `rotate(${itemRotation}deg)` }}>
                 {showFake && (
                   <span className="pointer-events-none flex items-center justify-center">
                     <span className="normal-case" style={{ opacity: 0.22, borderBottom: '1.5px dashed currentColor', paddingBottom: '2px' }}>Kategorie hinzufügen…</span>
                     <span className="ml-1 inline-block h-[0.9em] w-[2px] bg-current" style={{ animation: 'slf-caret-blink 1s step-end infinite' }} />
+                  </span>
+                )}
+                {built && (
+                  <span className="block">
+                    {built.rows.map((row, rowIndex) => (
+                      <span key={row.key} className={`block ${row.className}`} style={{ transform: `rotate(${rowPool[(built.seed + rowIndex) % rowPool.length]}deg)` }}>
+                        {row.text}
+                        {row.hyphen && <span style={{ opacity: 1, fontWeight: 400, fontFamily: "'Geist', sans-serif" }}>-</span>}
+                      </span>
+                    ))}
                   </span>
                 )}
                 <input
@@ -527,7 +564,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
                   onFocus={() => setFocusedCustom(customIndex)}
                   onBlur={() => setFocusedCustom(null)}
                   onKeyDown={(event) => { if (event.key === 'Enter') (event.target as HTMLInputElement).blur(); }}
-                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} ${showFake ? 'absolute inset-0 opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:normal-case placeholder:text-current placeholder:opacity-[0.22] placeholder:underline placeholder:decoration-dashed placeholder:decoration-1 placeholder:underline-offset-4`}
+                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} ${built ? 'absolute inset-0 opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:normal-case placeholder:text-current placeholder:opacity-[0.22] placeholder:underline placeholder:decoration-dashed placeholder:decoration-1 placeholder:underline-offset-4`}
                   style={{ caretColor: 'currentColor', fontSize: 'inherit', lineHeight: 'inherit', color: 'inherit' }}
                 />
               </span>
@@ -536,21 +573,8 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
           : (() => {
               // Each text row gets its own slight rotation, seeded by the
               // category name (like the blobs), echoing the tilted title.
-              const seed = item.trim().split('').reduce((hash, char) => ((hash * 31) + char.charCodeAt(0)) % 97, 7);
+              const { rows, seed } = buildCardRows(item);
               const rowPool = [-1.2, 0.6, 1, -0.6, 1.2, -0.8];
-              const rows: { key: string; className: string; text: string; hyphen?: boolean }[] = [];
-              words.forEach((word, wordIndex) => {
-                const fontClass = word === '&' || (words.length === 3 && wordIndex === 1) ? 'font-stringer' : 'font-rauschen';
-                // Multi-word items already span 2-3 lines, so only break
-                // noticeably longer words here than on single-line cards.
-                const halves = splitLongGerman(word, 14);
-                if (halves) {
-                  rows.push({ key: `${wordIndex}-a`, className: fontClass, text: halves[0], hyphen: true });
-                  rows.push({ key: `${wordIndex}-b`, className: fontClass, text: halves[1] });
-                } else {
-                  rows.push({ key: String(wordIndex), className: fontClass, text: hyphenateGerman(word) });
-                }
-              });
               return (
                 <span className="block px-6" style={{ minWidth: 0, maxWidth: '100%', overflowWrap: 'break-word', transform: `rotate(${itemRotation}deg)` }}>
                   {rows.map((row, rowIndex) => (
