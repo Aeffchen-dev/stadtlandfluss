@@ -25,7 +25,7 @@ export function InfoModal({ open, onOpenChange }: InfoModalProps) {
             }}
           />
           <DialogDescription className="sr-only">Beschreibung des Spiels</DialogDescription>
-          <div className="flex shrink-0 items-center justify-between p-0 pb-0 pt-0">
+          <div className="relative flex shrink-0 items-center justify-between p-0 pb-0 pt-0">
             <DialogHeader className="p-0">
               <DialogTitle className="m-0 font-rauschen text-base font-semibold uppercase leading-[41px] text-foreground">
                 So funktioniert’s
@@ -42,7 +42,7 @@ export function InfoModal({ open, onOpenChange }: InfoModalProps) {
               <img src={closeIcon} alt="" className="h-6 w-6 invert" />
             </Button>
           </div>
-          <div className="flex flex-1 flex-col justify-center overflow-y-auto">
+          <div className="relative flex flex-1 flex-col justify-center overflow-y-auto">
             <div className="mx-auto w-full max-w-xl space-y-4 font-stringer text-base leading-relaxed text-foreground">
               <p>
                 Drei Kategorien, ein Buchstabe – was fällt dir ein? Spielt abwechselnd und
