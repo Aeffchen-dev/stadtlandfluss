@@ -542,8 +542,8 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
                   <span className="pointer-events-none block" style={{ lineHeight: 1.1 }}>
                     {['Eigene', 'Kategorie'].map((word, wordIndex) => (
                       <span key={word} className="block" style={{ transform: `rotate(${rowPool[wordIndex % rowPool.length]}deg)` }}>
-                        {/* Placeholder ink: neutral grey, light enough to read as placeholder text on the dark card. */}
-                        <span style={{ color: 'hsl(0 0% 72%)' }}>{word}</span>
+                        {/* Placeholder ink: white at 70% opacity, light enough to read as placeholder text on the dark card. */}
+                        <span style={{ color: 'hsl(0 0% 100% / 0.7)' }}>{word}</span>
                         {wordIndex === 1 && Math.abs(position) <= 1 && <span className="inline-block h-[0.9em] w-[2px] bg-current" style={{ animation: 'slf-caret-blink 1s step-end infinite' }} />}
                       </span>
                     ))}
@@ -569,7 +569,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
                   onFocus={() => setFocusedCustom(customIndex)}
                   onBlur={() => setFocusedCustom(null)}
                   onKeyDown={(event) => { if (event.key === 'Enter') (event.target as HTMLInputElement).blur(); }}
-                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} absolute inset-0 ${built || showFake ? 'opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:text-[hsl(0_0%_72%)]`}
+                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} absolute inset-0 ${built || showFake ? 'opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:text-[hsl(0_0%_100%/0.7)]`}
                   style={{ caretColor: 'currentColor', fontSize: 'inherit', lineHeight: 'inherit', color: 'inherit' }}
                 />
               </span>
