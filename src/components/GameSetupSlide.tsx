@@ -93,7 +93,7 @@ const FAMILY_MAIN_STYLES: Array<Array<{ alpha?: number } | undefined>> = [
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
 // progressively quieter (0.4 × 0.85, 0.4 × 0.75 for their core alpha).
-const FAMILY_BLOB_ALPHA = [0.312, 0.084, 0.231];
+const FAMILY_BLOB_ALPHA = [0.281, 0.0605, 0.208];
 const BLOB_LANES: Array<[number, number]> = [[9, 17], [28, 38], [47, 57]]; // y-% of card height
 
 interface CardBlob {
@@ -460,7 +460,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
           wordBreak: 'normal',
           // Polished frosted glass card (reference look).
           color: 'hsl(0 0% 100%)',
-          background: 'linear-gradient(hsl(0 0% 0% / 0.2), hsl(0 0% 0% / 0.2)), linear-gradient(165deg, hsl(0 0% 100% / 0.066), hsl(0 0% 100% / 0.042) 45%, hsl(0 0% 100% / 0.026))',
+          background: 'linear-gradient(hsl(0 0% 0% / 0.2), hsl(0 0% 0% / 0.2)), linear-gradient(165deg, hsl(0 0% 100% / 0.053), hsl(0 0% 100% / 0.034) 45%, hsl(0 0% 100% / 0.021))',
           backdropFilter: 'blur(64px) saturate(1.6)',
           WebkitBackdropFilter: 'blur(64px) saturate(1.6)',
           boxShadow: 'inset 0 1px 1px hsl(0 0% 100% / 0.38), inset 0 -1px 1px hsl(0 0% 100% / 0.14), 0 0 5px 5px hsl(0 0% 0% / 0.024)',
@@ -506,7 +506,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
           style={{
             borderRadius: 'inherit',
             padding: '1px',
-            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.0256), hsl(0 0% 100% / 0.0046) 38%, hsl(0 0% 100% / 0.0034) 62%, hsl(0 0% 100% / 0.0115))',
+            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.023), hsl(0 0% 100% / 0.0041) 38%, hsl(0 0% 100% / 0.0031) 62%, hsl(0 0% 100% / 0.0104))',
             WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
             WebkitMaskComposite: 'xor',
             maskComposite: 'exclude',
@@ -542,8 +542,8 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
                   <span className="pointer-events-none block" style={{ lineHeight: 1.1 }}>
                     {['Eigene', 'Kategorie'].map((word, wordIndex) => (
                       <span key={word} className="block" style={{ transform: `rotate(${rowPool[wordIndex % rowPool.length]}deg)` }}>
-                        {/* Placeholder ink: a dark take on the oxblood page background, lifted just enough to read as placeholder text. */}
-                        <span style={{ color: 'hsl(1 28% 42%)' }}>{word}</span>
+                        {/* Placeholder ink: soft beige, light enough to read as placeholder text on the dark card. */}
+                        <span style={{ color: 'hsl(40 32% 76%)' }}>{word}</span>
                         {wordIndex === 1 && Math.abs(position) <= 1 && <span className="inline-block h-[0.9em] w-[2px] bg-current" style={{ animation: 'slf-caret-blink 1s step-end infinite' }} />}
                       </span>
                     ))}
@@ -569,7 +569,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
                   onFocus={() => setFocusedCustom(customIndex)}
                   onBlur={() => setFocusedCustom(null)}
                   onKeyDown={(event) => { if (event.key === 'Enter') (event.target as HTMLInputElement).blur(); }}
-                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} absolute inset-0 ${built || showFake ? 'opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:text-[hsl(1_28%_42%)]`}
+                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} absolute inset-0 ${built || showFake ? 'opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:text-[hsl(40_32%_76%)]`}
                   style={{ caretColor: 'currentColor', fontSize: 'inherit', lineHeight: 'inherit', color: 'inherit' }}
                 />
               </span>
