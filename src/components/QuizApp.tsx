@@ -566,7 +566,7 @@ export function QuizApp() {
           opacity: 0.5,
         }}
       />
-      {/* Photo backdrop blends as overlay into the oxblood base, adding contrast and photo texture. */}
+      {/* Photo backdrop blends as soft-light into the oxblood base — texture without crushing it to black. */}
       <div
         aria-hidden
         className="absolute inset-0"
@@ -576,7 +576,7 @@ export function QuizApp() {
           backgroundPosition: 'center',
           filter: 'blur(28px) saturate(1.05)',
           transform: 'scale(1.15)',
-          mixBlendMode: 'overlay',
+          mixBlendMode: 'soft-light',
           opacity: 0.6,
         }}
       />
