@@ -169,9 +169,9 @@ const FAMILY_RIMS = [
 // look from the reference: the card color melts outward instead of a hard drop
 // shadow.
 const FAMILY_GLOWS = [
-  'hsl(145 60% 60% / 0.04)',
-  'hsl(178 60% 60% / 0.04)',
-  'hsl(300 45% 60% / 0.04)',
+'hsl(145 60% 60% / 0.032)',
+  'hsl(178 60% 60% / 0.032)',
+  'hsl(300 45% 60% / 0.032)',
 ];
 
 // Card text color: a dark 900-tone of each slider's leading color, with the
@@ -486,7 +486,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
           style={{
             borderRadius: 'inherit',
             padding: '1px',
-            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.04), hsl(0 0% 100% / 0.0072) 38%, hsl(0 0% 100% / 0.0054) 62%, hsl(0 0% 100% / 0.018))',
+            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.032), hsl(0 0% 100% / 0.0058) 38%, hsl(0 0% 100% / 0.0043) 62%, hsl(0 0% 100% / 0.0144))',
             WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
             WebkitMaskComposite: 'xor',
             maskComposite: 'exclude',
