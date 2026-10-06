@@ -74,8 +74,14 @@ const FAMILY_BLOB_HUES = [
   ['338 85% 74%', '318 65% 75%', '290 55% 72%', '300 50% 46%', '345 90% 84%'],
   // Land: muted greens with a vivid green-leaning turquoise (drawn larger) and a deep vivid blue
   ['178 85% 85%', '159 60% 48%', '150 62% 42%', '177 78% 55%', '187 85% 42%'],
-  // Fluss: dark lila & vivid orange in the main lanes, dark lila + vivid light yellow + deeper gold accents
-  ['285 45% 55%', '25 95% 58%', '281 52% 60%', '282 40% 30%', '52 95% 68%', '48 65% 42%'],
+  // Fluss: dark lila & vivid orange in the main lanes, deeper gold + super-vivid neon yellow (small) accents
+  ['285 45% 55%', '25 95% 58%', '281 52% 60%', '48 65% 42%', '58 100% 58%'],
+];
+// Per-family scale factor for each of the three accent blobs (dark, light, extra).
+const FAMILY_ACCENT_SCALES: Array<number[]> = [
+  [1, 1, 1],
+  [1.35, 1, 1],
+  [1, 0.5, 1], // Fluss: neon yellow accent drawn small
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
 // progressively quieter (0.4 × 0.85, 0.4 × 0.75 for their core alpha).
