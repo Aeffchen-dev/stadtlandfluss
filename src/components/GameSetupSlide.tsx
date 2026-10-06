@@ -677,12 +677,18 @@ export function GameSetupSlide({
     if (isRolling) return;
     setIsRolling(true);
     const finalLetter = ALPHABET[Math.floor(Math.random() * ALPHABET.length)];
-    let delay = 30;
+    // Long, decelerating browse: starts fast, eases out over ~2s while
+    // flicking through ~25 letters, never repeating the previous one.
+    let delay = 25;
+    let last = displayLetter;
     const tick = () => {
-      setDisplayLetter(ALPHABET[Math.floor(Math.random() * ALPHABET.length)]);
-      delay = Math.min(delay * 1.15, 190);
+      let next = last;
+      while (next === last) next = ALPHABET[Math.floor(Math.random() * ALPHABET.length)];
+      last = next;
+      setDisplayLetter(next);
+      delay = Math.min(delay * 1.1, 200);
       rollTimeoutRef.current = window.setTimeout(() => {
-        if (delay >= 190) {
+        if (delay >= 200) {
           setDisplayLetter(finalLetter);
           setIsRolling(false);
         } else {
