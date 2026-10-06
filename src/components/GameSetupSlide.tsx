@@ -88,7 +88,7 @@ const FAMILY_ACCENT_STYLES: Array<Array<{ size?: number; alpha?: number }>> = [
 ];
 const FAMILY_MAIN_STYLES: Array<Array<{ alpha?: number } | undefined>> = [
   [undefined, undefined, undefined],
-  [{ alpha: 1.92 }, { alpha: 2.4 }, { alpha: 1.28 }], // Land: mint + green glows much more vivid
+  [{ alpha: 1.92 }, { alpha: 3.4 }, { alpha: 2.0 }], // Land: mint + green glows much more vivid
   [undefined, undefined, undefined],
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
