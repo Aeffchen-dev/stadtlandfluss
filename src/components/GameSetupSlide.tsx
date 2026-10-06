@@ -212,6 +212,7 @@ interface GameSetupSlideProps {
 
 interface CategorySliderProps {
   items: string[];
+  style?: React.CSSProperties;
   /** Which of the three photo groups (0 = Stadt, 1 = Land, 2 = Fluss) this slider uses. */
   familyIndex: number;
   label: string;
