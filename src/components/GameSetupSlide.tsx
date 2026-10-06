@@ -514,7 +514,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
               <span className="relative block w-full px-6" style={{ minWidth: 0, overflowWrap: 'break-word', transform: `rotate(${itemRotation}deg)` }}>
                 {showFake && (
                   <span className="pointer-events-none flex items-center justify-center">
-                    <span className="italic" style={{ opacity: 0.49, borderBottom: '1.5px dashed currentColor', paddingBottom: '2px' }}>Ergänze…</span>
+                    <span className="italic" style={{ opacity: 0.22, borderBottom: '1.5px dashed currentColor', paddingBottom: '2px' }}>Deine Kategorie…</span>
                     <span className="ml-1 inline-block h-[0.9em] w-[2px] bg-current" style={{ animation: 'slf-caret-blink 1s step-end infinite' }} />
                   </span>
                 )}
@@ -522,13 +522,13 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
                   type="text"
                   value={value}
                   tabIndex={isCurrent ? 0 : -1}
-                  placeholder="Ergänze…"
+                  placeholder="Deine Kategorie…"
                   aria-label={`${label}: eigene Kategorie`}
                   onChange={(event) => updateCustom(customIndex, event.target.value)}
                   onFocus={() => setFocusedCustom(customIndex)}
                   onBlur={() => setFocusedCustom(null)}
                   onKeyDown={(event) => { if (event.key === 'Enter') (event.target as HTMLInputElement).blur(); }}
-                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} ${showFake ? 'absolute inset-0 opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:italic placeholder:text-current placeholder:opacity-[0.34] placeholder:underline placeholder:decoration-dashed placeholder:decoration-1 placeholder:underline-offset-4`}
+                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} ${showFake ? 'absolute inset-0 opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:italic placeholder:normal-case placeholder:text-current placeholder:opacity-[0.22] placeholder:underline placeholder:decoration-dashed placeholder:decoration-1 placeholder:underline-offset-4`}
                   style={{ caretColor: 'currentColor', fontSize: 'inherit', lineHeight: 'inherit', color: 'inherit' }}
                 />
               </span>
