@@ -439,6 +439,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
     // unmounting and remounting all three — remounts repaint from scratch and
     // read as a flicker at the end of the slide transition.
     const cardKey = `${item}#${itemIndex}`;
+    if (position === 0) console.log('SLF render current', item, 'inactive:', inactiveCards.has(cardKey));
     const itemRotation = ((item.split('').reduce((hash, char) => ((hash * 31) + char.charCodeAt(0)) % 97, 7) % 9) - 4) / 2;
     const distanceFromCenter = Math.min(Math.abs(position * spacing + offset) / spacing, 1);
     // Active card fills the space between the two neighbour slivers (40px
