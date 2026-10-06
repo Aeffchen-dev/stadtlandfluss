@@ -83,12 +83,12 @@ const FAMILY_BLOB_HUES = [
 // lane blobs the same way.
 const FAMILY_ACCENT_STYLES: Array<Array<{ size?: number; alpha?: number }>> = [
   [{}, {}, {}],
-  [{ size: 1.35, alpha: 2.8 }, { alpha: 1.04 }, { size: 5.7, alpha: 2.05 }], // Land: juicy green larger + more visible, blue as a big bg glow
+  [{ size: 1.35, alpha: 2.24 }, { alpha: 0.83 }, { size: 5.7, alpha: 1.64 }], // Land: juicy green larger + more visible, blue as a big bg glow
   [{}, { size: 0.6, alpha: 0.55 }, {}], // Fluss: bright yellow bigger and quieter
 ];
 const FAMILY_MAIN_STYLES: Array<Array<{ alpha?: number } | undefined>> = [
   [undefined, undefined, undefined],
-  [{ alpha: 1.54 }, { alpha: 6.4 }, { alpha: 3.2 }], // Land: mint + green glows much more vivid
+  [{ alpha: 1.23 }, { alpha: 5.12 }, { alpha: 2.56 }], // Land: mint + green glows much more vivid
   [undefined, undefined, undefined],
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
