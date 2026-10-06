@@ -69,7 +69,7 @@ const FAMILY_GRAINS = [
 // random per card but stable across re-renders. The three blobs live in
 // separate vertical bands near the top and hug the horizontal center, so
 // they never overlap each other.
-const BLOB_COLORS = ['hsl(336 90% 72%)', 'hsl(172 85% 60%)', 'hsl(96 95% 62%)'];
+const BLOB_COLORS = ['336 90% 72%', '172 85% 60%', '96 95% 62%']; // rosa, turquoise, neon green (H S L)
 const BLOB_BANDS: Array<[number, number]> = [[14, 24], [36, 46], [58, 66]];
 
 const makeCardBlobs = (seed: string) => {
