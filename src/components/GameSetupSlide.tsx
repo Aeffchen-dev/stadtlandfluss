@@ -70,14 +70,17 @@ const FAMILY_GRAINS = [
 // stacked lanes near the top and hug the horizontal center, so their cores
 // never overlap each other.
 const FAMILY_BLOB_HUES = [
-  // Stadt: rosa / lila tones
-  ['338 85% 74%', '318 65% 75%', '290 55% 72%'],
-  // Land: turquoise tones
-  ['186 80% 62%', '174 80% 62%', '198 70% 64%'],
-  // Fluss: lime / grasgrün tones
-  ['92 80% 62%', '108 62% 55%', '125 55% 55%'],
+  // Stadt: rosa / lila tones + one darker plum accent
+  ['338 85% 74%', '318 65% 75%', '290 55% 72%', '300 50% 46%'],
+  // Land: turquoise tones + one darker turquoise accent
+  ['186 80% 62%', '174 80% 62%', '198 70% 64%', '182 70% 42%'],
+  // Fluss: lime / grasgrün tones + one darker olive accent
+  ['92 80% 62%', '108 62% 55%', '125 55% 55%', '76 50% 40%'],
 ];
-const BLOB_LANES: Array<[number, number]> = [[9, 17], [28, 38], [47, 57]]; // y-% of card height
+// Per-slider blob strength: the first slider reads strongest, the others sit
+// progressively quieter (0.4 × 0.85, 0.4 × 0.75 for their core alpha).
+const FAMILY_BLOB_ALPHA = [0.55, 0.34, 0.3];
+const BLOB_LANES: Array<[number, number]> = [[9, 17], [28, 38], [47, 57], [62, 72]]; // y-% of card height
 
 interface CardBlob {
   x: number; // % of card width
