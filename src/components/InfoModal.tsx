@@ -1,6 +1,7 @@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogOverlay, DialogPortal, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import closeIcon from '@/assets/close-icon.png';
+import { useLanguage } from '@/lib/i18n';
 
 interface InfoModalProps {
   open: boolean;
@@ -8,6 +9,7 @@ interface InfoModalProps {
 }
 
 export function InfoModal({ open, onOpenChange }: InfoModalProps) {
+  const { t, lang, toggleLang } = useLanguage();
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogPortal>
@@ -24,11 +26,11 @@ export function InfoModal({ open, onOpenChange }: InfoModalProps) {
               opacity: 0.9,
             }}
           />
-          <DialogDescription className="sr-only">Beschreibung des Spiels</DialogDescription>
+          <DialogDescription className="sr-only">{t('modalDescription')}</DialogDescription>
           <div className="relative flex shrink-0 items-center justify-between p-0 pb-0 pt-0">
             <DialogHeader className="p-0">
               <DialogTitle className="m-0 font-rauschen text-base font-semibold uppercase leading-[41px] text-foreground">
-                So funktioniert’s
+                {t('howItWorks')}
               </DialogTitle>
             </DialogHeader>
             <Button
@@ -37,28 +39,32 @@ export function InfoModal({ open, onOpenChange }: InfoModalProps) {
               size="icon"
               onClick={() => onOpenChange(false)}
               className="h-[41px] w-[41px] rounded-full p-2 hover:bg-transparent focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
-              aria-label="Beschreibung schließen"
+              aria-label={t('closeDescription')}
             >
               <img src={closeIcon} alt="" className="h-6 w-6 invert" />
             </Button>
           </div>
           <div className="relative flex flex-1 flex-col justify-center overflow-y-auto">
             <div className="mx-auto w-full max-w-xl space-y-4 font-stringer text-base leading-relaxed text-foreground">
-              <p>
-                Drei Kategorien, ein Buchstabe – was fällt dir ein? Spielt abwechselnd und
-                entdeckt, welche Wörter der andere im Kopf hat.
-              </p>
+              <p>{t('intro')}</p>
               <ol className="list-decimal space-y-2 pl-5">
-                <li>Wählt durch Wischen drei Kategorien aus.</li>
-                <li>
-                  Wer beginnt, klickt auf den Buchstaben unten und findet dazu ein Wort pro
-                  Kategorie – zum Beispiel Panda, Paris und Pizza bei „P“.
-                </li>
-                <li>Dann ist der andere dran: neuen Buchstaben generieren und drei passende Wörter finden.</li>
-                <li>Nachdem ihr beide zweimal dran wart, wählt ihr neue Kategorien und spielt weiter.</li>
+                <li>{t('step1')}</li>
+                <li>{t('step2')}</li>
+                <li>{t('step3')}</li>
+                <li>{t('step4')}</li>
               </ol>
-              <p>Wenn ihr mögt, könnt ihr auch eigene Kategorien ergänzen.</p>
+              <p>{t('outro')}</p>
             </div>
+          </div>
+          <div className="relative flex shrink-0 justify-center pb-2">
+            <button
+              type="button"
+              onClick={toggleLang}
+              aria-label={t('switchLanguage')}
+              className="font-stringer text-xs text-foreground opacity-70 underline-offset-4 hover:underline"
+            >
+              {lang === 'de' ? 'English' : 'Deutsch'}
+            </button>
           </div>
         </DialogContent>
       </DialogPortal>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { House, Map as MapIcon, RefreshCw, Waves } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import filterIcon from '@/assets/filter-icon.png';
@@ -6,6 +6,8 @@ import { hyphenateGerman, splitLongGerman } from '@/lib/hyphenate';
 
 const SPREADSHEET_ID = '1zuaMoA4jYBJGKa17xaarqBohnkRUijitywLKiHNERmM';
 const SHEET_NAME = 'Tabellenblatt1';
+import { useLanguage, translateCategory } from '@/lib/i18n';
+
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 // How often each letter is drawn: letters with many German words come up
 // often, hard letters (Q, X, Y, C, J…) only rarely.
@@ -300,6 +302,7 @@ const buildCardRows = (text: string): { rows: { key: string; className: string; 
 };
 
 function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, onRotateDrag, onRotateCommit }: CategorySliderProps) {
+  const { t } = useLanguage();
   const storageKey = `slf-slide-${familyIndex}`;
   const [index, setIndex] = useState(() => {
     const saved = Number(window.localStorage.getItem(storageKey));
@@ -592,7 +595,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
               <span className="relative block w-full px-6" style={{ minWidth: 0, overflowWrap: 'break-word', transform: `rotate(${itemRotation}deg)` }}>
                 {showFake && (
                   <span className="pointer-events-none block" style={{ lineHeight: 1.1 }}>
-                    {['Eigene', 'Kategorie…'].map((word, wordIndex) => (
+                    {[t('customWord1'), t('customWord2')].map((word, wordIndex) => (
                       <span key={word} className="block" style={{ transform: `rotate(${rowPool[wordIndex % rowPool.length]}deg)` }}>
                         {/* Placeholder ink: white at 50% opacity, light enough to read as placeholder text on the dark card. */}
                         <span style={{ color: 'hsl(0 0% 100% / 0.25)' }}>{word}</span>
@@ -615,8 +618,8 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
                   type="text"
                   value={value}
                   tabIndex={isCurrent ? 0 : -1}
-                  placeholder={showFake ? '' : 'Eigene Kategorie…'}
-                  aria-label={`${label}: eigene Kategorie`}
+                  placeholder={showFake ? '' : t('customPlaceholder')}
+                  aria-label={`${label}: ${t('customAria')}`}
                   onChange={(event) => updateCustom(customIndex, event.target.value)}
                   onFocus={() => setFocusedCustom(customIndex)}
                   onBlur={() => setFocusedCustom(null)}
@@ -706,6 +709,11 @@ export function GameSetupSlide({
   onOpenInfo,
 }: GameSetupSlideProps) {
   const [columns, setColumns] = useState<string[][]>([[], [], []]);
+  const { t, lang } = useLanguage();
+  const translatedColumns = useMemo(
+    () => columns.map((column) => column.map((item) => translateCategory(item, lang))),
+    [columns, lang],
+  );
   const [displayLetter, setDisplayLetter] = useState(() => pickWeightedLetter());
   // Smiley rotation is driven directly by the category drag: a full
   // card-width drag equals one full turn; committed turns are absorbed
@@ -825,7 +833,7 @@ export function GameSetupSlide({
           onMouseDown={(event) => event.stopPropagation()}
           onTouchStart={(event) => event.stopPropagation()}
           className="absolute right-1 top-1 z-10 h-9 w-9 rounded-full bg-transparent p-2 hover:bg-transparent"
-          aria-label="Beschreibung öffnen"
+          aria-label={t('openDescription')}
         >
           <img src={filterIcon} alt="" className="h-5 w-5 invert" />
         </Button>
@@ -841,19 +849,19 @@ export function GameSetupSlide({
         </h2>
       </div>
       <div className="flex min-h-0 flex-1 flex-col gap-0">
-        <CategorySlider items={columns[0]} familyIndex={0} label="Stadt" hint="next" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
-        <CategorySlider items={columns[1]} familyIndex={1} label="Land" hint="prev" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
-        <CategorySlider items={columns[2]} familyIndex={2} label="Fluss" hint="next" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
+        <CategorySlider items={translatedColumns[0]} familyIndex={0} label="Stadt" hint="next" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
+        <CategorySlider items={translatedColumns[1]} familyIndex={1} label="Land" hint="prev" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
+        <CategorySlider items={translatedColumns[2]} familyIndex={2} label="Fluss" hint="next" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
       </div>
       <Button
         type="button"
         variant="ghost"
         onClick={isRolling ? undefined : rollLetter}
         className="relative h-auto shrink-0 rounded-[8px] bg-transparent px-2 pt-1 pb-3 text-quiz-setup-ink [-webkit-tap-highlight-color:transparent] hover:bg-transparent hover:text-quiz-setup-ink focus-visible:ring-0 focus-visible:ring-offset-0"
-        aria-label="Zufälligen Buchstaben wählen"
+        aria-label={t('rollLetter')}
       >
         <span className="relative flex w-full items-center justify-center">
-          <span className="absolute left-2 top-1/2 -translate-y-1/2 font-stringer text-[14px]" style={{ opacity: 0.8 }}>Mit</span>
+          <span className="absolute left-2 top-1/2 -translate-y-1/2 font-stringer text-[14px]" style={{ opacity: 0.8 }}>{t('with')}</span>
           <span
             key={displayLetter}
             className="font-rauschen text-[56px] uppercase leading-none"
