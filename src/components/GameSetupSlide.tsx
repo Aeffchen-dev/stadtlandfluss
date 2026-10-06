@@ -67,15 +67,15 @@ const FAMILY_GRAINS = [
 // story: rosa/lila (Stadt), turquoise (Land), red & yellow (Fluss). Each
 // card seeds its own PRNG from the category name, so sizes and positions are
 // random per card but stable across re-renders. The main blobs sit in three
-// stacked lanes near the top and hug the horizontal center; the darker accent
-// tone lands fully at random, keeping its core clear of the other blobs.
+// stacked lanes near the top and hug the horizontal center; a darker and a
+// lighter accent tone each land fully at random, allowed to overlap slightly.
 const FAMILY_BLOB_HUES = [
-  // Stadt: rosa / lila tones + one darker plum accent
-  ['338 85% 74%', '318 65% 75%', '290 55% 72%', '300 50% 46%'],
-  // Land: turquoise tones + one darker turquoise accent
-  ['186 80% 62%', '174 80% 62%', '198 70% 64%', '182 70% 42%'],
-  // Fluss: red / yellow tones + one darker mustard accent
-  ['0 85% 64%', '48 90% 60%', '20 85% 62%', '42 75% 42%'],
+  // Stadt: rosa / lila tones + darker plum + lighter rosa accents
+  ['338 85% 74%', '318 65% 75%', '290 55% 72%', '300 50% 46%', '345 90% 84%'],
+  // Land: turquoise tones + darker turquoise + lighter aqua accents
+  ['186 80% 62%', '174 80% 62%', '198 70% 64%', '182 70% 42%', '180 85% 80%'],
+  // Fluss: red / yellow tones + darker mustard + lighter gold accents
+  ['0 85% 64%', '48 90% 60%', '20 85% 62%', '42 75% 42%', '40 95% 80%'],
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
 // progressively quieter (0.4 × 0.85, 0.4 × 0.75 for their core alpha).
@@ -117,21 +117,26 @@ const makeCardBlobs = (seed: string, familyIndex: number): CardBlob[] => {
     blobs.push({ x, y, size, hue: hues[i] });
   });
 
-  // The darker accent tone lands fully at random, retrying until its core
-  // clears every already-placed blob (no overlapping cores).
-  let x = 50;
-  let y = 40;
-  const size = 31 + rand() * 22;
-  for (let attempt = 0; attempt < 40; attempt += 1) {
-    x = 14 + rand() * 72;
-    y = 6 + rand() * 74;
-    const yW = y * ASPECT;
-    const clear = placed.every(
-      (p) => Math.hypot(x - p.x, yW - p.yW) >= (size / 2 + p.r) * 0.8,
-    );
-    if (clear) break;
-  }
-  blobs.push({ x, y, size, hue: hues[3] });
+  // The darker and lighter accent tones each land fully at random, retrying
+  // until their cores sit close to the other blobs — a bit of overlap is fine.
+  const placeAccent = (hue: string): void => {
+    const size = 28 + rand() * 22;
+    let x = 50;
+    let y = 40;
+    for (let attempt = 0; attempt < 40; attempt += 1) {
+      x = 14 + rand() * 72;
+      y = 6 + rand() * 74;
+      const yW = y * ASPECT;
+      const clear = placed.every(
+        (p) => Math.hypot(x - p.x, yW - p.yW) >= (size / 2 + p.r) * 0.55,
+      );
+      if (clear) break;
+    }
+    placed.push({ x, yW: y * ASPECT, r: size / 2 });
+    blobs.push({ x, y, size, hue });
+  };
+  placeAccent(hues[3]);
+  placeAccent(hues[4]);
   return blobs;
 };
 
