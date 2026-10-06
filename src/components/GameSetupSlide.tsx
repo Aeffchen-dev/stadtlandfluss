@@ -423,7 +423,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
       <div
         key={cardKey}
         data-custom={customIndex !== null || undefined}
-        className="pointer-events-none absolute inset-y-0 flex items-center justify-center overflow-hidden text-center font-rauschen text-[25px] uppercase leading-none md:text-[30px]"
+        className="pointer-events-none absolute inset-y-0 flex items-center justify-center overflow-hidden text-center font-rauschen text-[20px] uppercase leading-none"
         lang="de"
         style={{
           left: slotInset,
@@ -717,7 +717,7 @@ export function GameSetupSlide({
           <img src={filterIcon} alt="" className="h-5 w-5 invert" />
         </Button>
         <h2 className="flex w-full flex-col items-start text-left leading-[0.8]" aria-label="Stadt Land Fluss">
-          <span style={{ rotate: '-3deg', translate: '-4px 0' }} className="font-rauschen text-[20px] uppercase [animation:slf-title-arrive_500ms_cubic-bezier(0.34,1.56,0.64,1)_both]">Stadt</span>
+          <span style={{ rotate: '-3deg', translate: '-4px 0' }} className="font-rauschen text-[16px] uppercase [animation:slf-title-arrive_500ms_cubic-bezier(0.34,1.56,0.64,1)_both]">Stadt</span>
           <span style={{ rotate: '0deg', translate: '30px 0', marginTop: '1px' }} className="relative z-10 font-stringer text-[20px] leading-none [animation:slf-title-arrive_500ms_cubic-bezier(0.34,1.56,0.64,1)_80ms_both]">L<svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-px inline-block align-middle" style={{ width: '0.72em', height: '0.72em', transform: `translateY(-0.06em) rotate(${smileyBase + smileyProgress * 360}deg)`, transition: smileyDragging ? 'none' : 'transform 250ms ease-out' }} aria-hidden="true">
             <circle cx="9" cy="9" r="9" fill="#FFFF33" />
             <circle cx="6" cy="7" r="1" fill="black" />
