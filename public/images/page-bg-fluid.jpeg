@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <script type="module">import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;</script>
+
+    <script type="module" src="/@vite/client"></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Comprehensive favicon setup for all browsers -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/Favicon.png?v=11">
+    <link rel="icon" type="image/png" sizes="16x16" href="/Favicon.png?v=11">
+    <link rel="shortcut icon" href="/Favicon.png?v=11">
+    <link rel="icon" href="/Favicon.png?v=11">
+    
+    <!-- Apple touch icons (iOS) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/Favicon.png?v=11">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/Favicon.png?v=11">
+    
+    <!-- Microsoft tiles (Windows) -->
+    <meta name="msapplication-TileImage" content="/Favicon.png?v=11">
+    <meta name="msapplication-TileColor" content="#000000">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <title>Stadt Land Fluss</title>
+    <meta name="description" content="Drei Kategorien, ein Buchstabe – was fällt dir ein? Spielt abwechselnd und entdeckt, welche Wörter der andere im Kopf hat." />
+    <meta name="author" content="Relationship by design" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nonmono.relationshipbydesign.de/" />
+    <meta property="og:title" content="Stadt Land Fluss" />
+    <meta property="og:description" content="Drei Kategorien, ein Buchstabe – was fällt dir ein? Spielt abwechselnd und entdeckt, welche Wörter der andere im Kopf hat." />
+    <meta property="og:image" content="https://nonmono.relationshipbydesign.de/social-share.jpg?v=10" />
+    <meta property="og:image:alt" content="Stadt Land Fluss" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/jpeg" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://nonmono.relationshipbydesign.de/" />
+    <meta name="twitter:title" content="Stadt Land Fluss" />
+    <meta name="twitter:description" content="Drei Kategorien, ein Buchstabe – was fällt dir ein? Spielt abwechselnd und entdeckt, welche Wörter der andere im Kopf hat." />
+    <meta name="twitter:image" content="https://nonmono.relationshipbydesign.de/social-share.jpg?v=10" />
+
+    <!-- WhatsApp -->
+    <meta property="og:site_name" content="Stadt Land Fluss" />
+    <meta property="og:locale" content="de_DE" />
+    
+    <!-- Additional meta for better sharing -->
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="canonical" href="https://nonmono.relationshipbydesign.de/" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&family=Schoolbell&display=swap" rel="stylesheet">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S44V7ET6KL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-S44V7ET6KL');
+    </script>
+  </head>
+
+  <body style="margin: 0; padding: 0; background: radial-gradient(60% 34% at 24% 12%, hsl(150 32% 12% / 0.85), transparent 70%), radial-gradient(55% 30% at 74% 46%, hsl(184 34% 13% / 0.8), transparent 70%), radial-gradient(70% 36% at 44% 92%, hsl(22 40% 14% / 0.8), transparent 70%), linear-gradient(160deg, hsl(160 14% 8%), hsl(180 12% 9%) 46%, hsl(335 14% 8%));">
+    <!-- SVG filter for irregular icon strokes -->
+    <svg width="0" height="0" style="position: absolute;">
+      <defs>
+        <filter id="roughen">
+          <feTurbulence baseFrequency="0.05" numOctaves="2" result="turbulence" seed="2"/>
+          <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+      </defs>
+    </svg>
+    
+    <div id="root"></div>
+    <script type="module" src="/src/entry.tsx"></script>
+  </body>
+</html>
