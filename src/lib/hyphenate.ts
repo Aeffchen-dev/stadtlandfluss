@@ -21,9 +21,10 @@ export function hyphenateGerman(word: string): string {
 
 /**
  * Splits a long word into exactly two lines at the grammatically correct
- * syllable boundary closest to the middle. The first half carries a
- * visible hyphen. Returns null for short words or words without break
- * points — callers then fall back to hyphenateGerman.
+ * syllable boundary closest to the middle. Returns null for short words
+ * or words without break points — callers then fall back to
+ * hyphenateGerman. The visible hyphen is rendered by the caller, not
+ * baked into the text, so it can be styled independently.
  */
 export function splitLongGerman(word: string, minLength = 10): [string, string] | null {
   if (word.length < minLength) return null;
@@ -42,5 +43,5 @@ export function splitLongGerman(word: string, minLength = 10): [string, string] 
   const first = parts.slice(0, bestIndex).join('');
   const second = parts.slice(bestIndex).join('');
   if (!first || !second) return null;
-  return [`${first}-`, second];
+  return [first, second];
 }
