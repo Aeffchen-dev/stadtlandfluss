@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 
 export type Lang = 'de' | 'en';
 
@@ -113,4 +113,58 @@ export function useLanguage() {
   const ctx = useContext(LangContext);
   if (!ctx) throw new Error('useLanguage must be used inside LanguageProvider');
   return ctx;
+}
+
+// Categories missing from the built-in dictionary are translated
+// automatically (free MyMemory service) and cached on the device.
+const AUTO_CACHE_KEY = 'slf-auto-translations';
+const readAutoCache = (): Record<string, string> => {
+  try { return JSON.parse(localStorage.getItem(AUTO_CACHE_KEY) || '{}'); } catch { return {}; }
+};
+
+async function autoTranslate(text: string): Promise<string | null> {
+  try {
+    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=de|en`;
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const data = await res.json();
+    const out: unknown = data?.responseData?.translatedText;
+    if (typeof out !== 'string' || !out.trim() || data?.quotaFinished) return null;
+    if (/MYMEMORY|QUERY LENGTH/i.test(out)) return null;
+    return out.trim().replace(/\b\p{Ll}/gu, (c) => c.toUpperCase());
+  } catch {
+    return null;
+  }
+}
+
+export function useTranslatedCategories(columns: string[][], lang: Lang): string[][] {
+  const [auto, setAuto] = useState<Record<string, string>>(readAutoCache);
+
+  useEffect(() => {
+    if (lang !== 'en') return;
+    const missing = Array.from(new Set(columns.flat().map((v) => v.trim())))
+      .filter((v) => v && !CATEGORY_EN[v] && !auto[v]);
+    if (missing.length === 0) return;
+    let cancelled = false;
+    (async () => {
+      const found: Record<string, string> = {};
+      for (const word of missing) {
+        const translated = await autoTranslate(word);
+        if (translated) found[word] = translated;
+      }
+      if (cancelled || Object.keys(found).length === 0) return;
+      setAuto((prev) => {
+        const next = { ...prev, ...found };
+        try { localStorage.setItem(AUTO_CACHE_KEY, JSON.stringify(next)); } catch { /* quota */ }
+        return next;
+      });
+    })();
+    return () => { cancelled = true; };
+  }, [columns, lang, auto]);
+
+  return useMemo(
+    () => columns.map((column) => column.map((item) =>
+      lang === 'en' ? CATEGORY_EN[item.trim()] ?? auto[item.trim()] ?? item : item)),
+    [columns, lang, auto],
+  );
 }
