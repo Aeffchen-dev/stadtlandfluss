@@ -557,7 +557,7 @@ export function QuizApp() {
         left: 0
       }}
     >
-      {/* Blurred, desaturated photo backdrop over the near-black base, with fine film grain. */}
+      {/* Photo backdrop blends as luminosity into the oxblood base, so it adds depth without fighting the hue. */}
       <div
         aria-hidden
         className="absolute inset-0"
@@ -574,13 +574,15 @@ export function QuizApp() {
           backgroundPosition: 'center',
           filter: 'blur(28px) saturate(1.05)',
           transform: 'scale(1.15)',
+          mixBlendMode: 'luminosity',
+          opacity: 0.45,
         }}
       />
       <div
         aria-hidden
         className="absolute inset-0"
         style={{
-          background: 'hsl(0 0% 0% / 0.36)',
+          background: 'hsl(0 0% 0% / 0.25)',
         }}
       />
       <div
