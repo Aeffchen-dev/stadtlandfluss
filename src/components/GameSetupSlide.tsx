@@ -291,11 +291,17 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
   const timeoutRef = useRef<number | null>(null);
   const [trackWidth, setTrackWidth] = useState(300);
   // Card travel distance. The card is drawn at 80% of its slot size (cards
-  // scaled down 20%); neighbours render at 90% of that (0.9 × 0.8 = 0.72
-  // half-width 0.36 × card width), so this spacing keeps their inner edge
-  // 28px inside the viewport and the 24px gap to the active card intact.
+  // scaled down 20%); neighbours render at 90% of that (0.9 × 0.8 = 0.72,
+  // half-width 0.36 × card width). Gap and peek are coupled through the
+  // slot inset, so the inset is derived per width: the gap is 36px and the
+  // side cards peek 40% less than with the previous 48px inset / 24px gap
+  // (peek was screenPad + 0.1 × trackWidth + 14.4px, now 60% of that).
   const CARD_SCALE = 0.8;
-  const spacing = (trackWidth / 2 - 48) * CARD_SCALE + 24 + 0.45 * CARD_SCALE * (trackWidth - 96);
+  const CARD_GAP = 36;
+  const screenPad = Math.max(0, (window.innerWidth - trackWidth) / 2);
+  const peekBefore = screenPad + 0.1 * trackWidth + 14.4;
+  const slotInset = Math.max(0, (0.6 * peekBefore - screenPad - 0.1 * trackWidth + CARD_GAP) / 0.8);
+  const spacing = (trackWidth / 2 - slotInset) * CARD_SCALE + CARD_GAP + 0.45 * CARD_SCALE * (trackWidth - 2 * slotInset);
 
   useEffect(() => {
     const measure = () => {
@@ -418,9 +424,11 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
       <div
         key={cardKey}
         data-custom={customIndex !== null || undefined}
-        className="pointer-events-none absolute inset-y-0 left-[48px] right-[48px] flex items-center justify-center overflow-hidden text-center font-rauschen text-[20px] uppercase leading-none md:text-[24px]"
+        className="pointer-events-none absolute inset-y-0 flex items-center justify-center overflow-hidden text-center font-rauschen text-[20px] uppercase leading-none md:text-[24px]"
         lang="de"
         style={{
+          left: slotInset,
+          right: slotInset,
           borderRadius: '16px',
           // Soft hyphens only: the words carry correct German break points
           // (see hyphenateGerman); the browser breaks them only when they
