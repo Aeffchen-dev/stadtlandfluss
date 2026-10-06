@@ -431,10 +431,10 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           wordBreak: 'normal',
           // Polished frosted glass card (reference look).
           color: 'hsl(0 0% 100%)',
-          background: 'linear-gradient(165deg, hsl(0 0% 0% / 0.010), hsl(0 0% 0% / 0.005) 45%, hsl(0 0% 0% / 0.002))',
+          background: 'linear-gradient(165deg, hsl(0 0% 100% / 0.13), hsl(0 0% 100% / 0.085) 45%, hsl(0 0% 100% / 0.05))',
           backdropFilter: 'blur(64px) saturate(1.6)',
           WebkitBackdropFilter: 'blur(64px) saturate(1.6)',
-          boxShadow: 'inset 0 1px 1px hsl(0 0% 100% / 0.16), inset 0 -1px 1px hsl(0 0% 100% / 0.06), 0 0 5px 5px hsl(0 0% 0% / 0.024)',
+          boxShadow: 'inset 0 1px 1px hsl(0 0% 100% / 0.28), inset 0 -1px 1px hsl(0 0% 100% / 0.10), 0 0 5px 5px hsl(0 0% 0% / 0.024)',
           transform: `translateX(${position * spacing + offset}px) scale(${scale}) rotate(${leanRotation}deg)`,
           opacity: 0.8,
           transition,
@@ -477,14 +477,14 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           style={{
             borderRadius: 'inherit',
             padding: '1px',
-            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.049), hsl(0 0% 100% / 0.0084) 38%, hsl(0 0% 100% / 0.0056) 62%, hsl(0 0% 100% / 0.0224))',
+            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.11), hsl(0 0% 100% / 0.02) 38%, hsl(0 0% 100% / 0.014) 62%, hsl(0 0% 100% / 0.05))',
             WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
             WebkitMaskComposite: 'xor',
             maskComposite: 'exclude',
           }}
         />
         {/* Soft specular sheen so the glass reads deeper. */}
-        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ borderRadius: 'inherit', background: 'radial-gradient(120% 60% at 30% 0%, hsl(0 0% 100% / 0.06), transparent 62%)' }} />
+        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ borderRadius: 'inherit', background: 'radial-gradient(120% 60% at 30% 0%, hsl(0 0% 100% / 0.11), transparent 62%)' }} />
         {/* Extra card grain: a dark speckle tinted to the family's own hue, so the texture reads colored instead of black. */}
         <div
           aria-hidden
