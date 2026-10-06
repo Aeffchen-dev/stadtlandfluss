@@ -580,7 +580,7 @@ export function QuizApp() {
         aria-hidden
         className="absolute inset-0"
         style={{
-          background: 'hsl(0 0% 0% / 0.12)',
+          background: 'hsl(0 0% 0% / 0.36)',
         }}
       />
       <div
