@@ -141,9 +141,8 @@ const makeCardBlobs = (seed: string, familyIndex: number): CardBlob[] => {
     placed.push({ x, yW: y * ASPECT, r: size / 2 });
     blobs.push({ x, y, size, hue });
   };
-  placeAccent(hues[3], familyIndex === 1 ? 1.35 : 1);
-  placeAccent(hues[4]);
-  placeAccent(hues[5]);
+  const accentScales = FAMILY_ACCENT_SCALES[familyIndex] ?? [];
+  [hues[3], hues[4], hues[5]].forEach((hue, i) => placeAccent(hue, accentScales[i]));
   return blobs;
 };
 
