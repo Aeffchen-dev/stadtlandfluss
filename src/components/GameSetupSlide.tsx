@@ -439,7 +439,6 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
     // unmounting and remounting all three — remounts repaint from scratch and
     // read as a flicker at the end of the slide transition.
     const cardKey = `${item}#${itemIndex}`;
-    if (position === 0) console.log('SLF render current', item, 'inactive:', inactiveCards.has(cardKey));
     const itemRotation = ((item.split('').reduce((hash, char) => ((hash * 31) + char.charCodeAt(0)) % 97, 7) % 9) - 4) / 2;
     const distanceFromCenter = Math.min(Math.abs(position * spacing + offset) / spacing, 1);
     // Active card fills the space between the two neighbour slivers (40px
@@ -465,7 +464,6 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
         className="pointer-events-auto absolute inset-y-0 flex items-center justify-center overflow-hidden text-center font-rauschen text-[22.5px] uppercase leading-none"
         lang="de"
         onClick={(event) => {
-          console.log('SLF card click', { dragMoved: dragMoved.current, customIndex, target: (event.target as HTMLElement).tagName });
           // Swipes end with a click event too — only treat a real tap as
           // the inactive-toggle. The custom input handles its own clicks.
           if (dragMoved.current || customIndex !== null && event.target instanceof HTMLInputElement) return;
