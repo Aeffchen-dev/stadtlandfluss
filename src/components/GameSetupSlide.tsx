@@ -117,21 +117,26 @@ const makeCardBlobs = (seed: string, familyIndex: number): CardBlob[] => {
     blobs.push({ x, y, size, hue: hues[i] });
   });
 
-  // The darker accent tone lands fully at random, retrying until its core
-  // clears every already-placed blob (no overlapping cores).
-  let x = 50;
-  let y = 40;
-  const size = 31 + rand() * 22;
-  for (let attempt = 0; attempt < 40; attempt += 1) {
-    x = 14 + rand() * 72;
-    y = 6 + rand() * 74;
-    const yW = y * ASPECT;
-    const clear = placed.every(
-      (p) => Math.hypot(x - p.x, yW - p.yW) >= (size / 2 + p.r) * 0.8,
-    );
-    if (clear) break;
-  }
-  blobs.push({ x, y, size, hue: hues[3] });
+  // The darker and lighter accent tones each land fully at random, retrying
+  // until their cores sit close to the other blobs — a bit of overlap is fine.
+  const placeAccent = (hue: string): void => {
+    const size = 28 + rand() * 22;
+    let x = 50;
+    let y = 40;
+    for (let attempt = 0; attempt < 40; attempt += 1) {
+      x = 14 + rand() * 72;
+      y = 6 + rand() * 74;
+      const yW = y * ASPECT;
+      const clear = placed.every(
+        (p) => Math.hypot(x - p.x, yW - p.yW) >= (size / 2 + p.r) * 0.55,
+      );
+      if (clear) break;
+    }
+    placed.push({ x, yW: y * ASPECT, r: size / 2 });
+    blobs.push({ x, y, size, hue });
+  };
+  placeAccent(hues[3]);
+  placeAccent(hues[4]);
   return blobs;
 };
 
