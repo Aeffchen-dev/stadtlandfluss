@@ -93,6 +93,7 @@ interface CardBlob {
   y: number; // % of card height
   size: number; // diameter, % of card width
   hue: string;
+  alphaScale?: number; // multiplies the family blob alpha
 }
 
 const makeCardBlobs = (seed: string, familyIndex: number): CardBlob[] => {
