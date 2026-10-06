@@ -72,14 +72,14 @@ const FAMILY_GRAINS = [
 const FAMILY_BLOB_HUES = [
   // Stadt: rosa / lila tones + darker plum + lighter rosa accents
   ['338 85% 74%', '318 65% 75%', '290 55% 72%', '300 50% 46%', '345 90% 84%'],
-  // Land: turquoise tones (one pushed to neon green) + lighter aqua + dark olive green accent
-  ['186 80% 62%', '135 95% 58%', '198 70% 64%', '182 70% 42%', '180 85% 80%', '75 45% 26%'],
+  // Land: light mint / pale aqua / light green tones + a lila accent (reference image palette)
+  ['170 65% 74%', '160 70% 72%', '185 75% 76%', '195 70% 72%', '300 60% 76%', '185 55% 62%'],
   // Fluss: dark lila & yellow alternating in the main lanes (yellow kept quiet), dark lila + deeper gold accents
   ['285 45% 55%', '48 75% 55%', '290 45% 52%', '282 40% 30%', '45 80% 58%', '48 65% 42%'],
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
 // progressively quieter (0.4 × 0.85, 0.4 × 0.75 for their core alpha).
-const FAMILY_BLOB_ALPHA = [0.47, 0.29, 0.26];
+const FAMILY_BLOB_ALPHA = [0.47, 0.34, 0.26];
 const BLOB_LANES: Array<[number, number]> = [[9, 17], [28, 38], [47, 57]]; // y-% of card height
 
 interface CardBlob {
