@@ -422,9 +422,11 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
       <div
         key={cardKey}
         data-custom={customIndex !== null || undefined}
-        className="pointer-events-none absolute inset-y-0 left-[48px] right-[48px] flex items-center justify-center overflow-hidden text-center font-rauschen text-[20px] uppercase leading-none md:text-[24px]"
+        className="pointer-events-none absolute inset-y-0 flex items-center justify-center overflow-hidden text-center font-rauschen text-[20px] uppercase leading-none md:text-[24px]"
         lang="de"
         style={{
+          left: slotInset,
+          right: slotInset,
           borderRadius: '16px',
           // Soft hyphens only: the words carry correct German break points
           // (see hyphenateGerman); the browser breaks them only when they
