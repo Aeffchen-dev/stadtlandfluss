@@ -80,11 +80,17 @@ const FAMILY_BLOB_HUES = [
 ];
 // Per-family scale factor for each of the three accent blobs (dark, light, extra).
 // Per-family accent tuning: size and alpha multiplier for each of the three
-// accent blobs (dark, light, extra).
+// accent blobs (dark, light, extra). FAMILY_MAIN_STYLES tunes the three main
+// lane blobs the same way.
 const FAMILY_ACCENT_STYLES: Array<Array<{ size?: number; alpha?: number }>> = [
-  [{}, {}, {}, {}],
-  [undefined, { alpha: 1.7 }, undefined, { size: 1.35, alpha: 1.5 }, undefined, { size: 5.7, alpha: 1.7 }], // Land: mint + juicy green more visible, blue-lila as a huge dark bg glow
-  [{}, { size: 0.6, alpha: 0.55 }, {}, {}], // Fluss: bright yellow bigger and quieter
+  [{}, {}, {}],
+  [{ size: 1.35, alpha: 1.5 }, {}, { size: 5.7, alpha: 1.7 }], // Land: juicy green larger + more visible, blue-lila as a huge dark bg glow
+  [{}, { size: 0.6, alpha: 0.55 }, {}], // Fluss: bright yellow bigger and quieter
+];
+const FAMILY_MAIN_STYLES: Array<Array<{ alpha?: number } | undefined>> = [
+  [undefined, undefined, undefined],
+  [undefined, { alpha: 1.7 }, undefined], // Land: mint glow more visible
+  [undefined, undefined, undefined],
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
 // progressively quieter (0.4 × 0.85, 0.4 × 0.75 for their core alpha).
