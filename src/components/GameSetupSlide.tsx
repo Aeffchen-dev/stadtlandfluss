@@ -738,9 +738,9 @@ export function GameSetupSlide({
         aria-label="Zufälligen Buchstaben wählen"
       >
         <span className="relative flex w-full items-center justify-center">
-          <span className="absolute left-2 top-1/2 -translate-y-1/2 font-stringer text-[14px]">Mit</span>
+          <span className="absolute left-2 top-1/2 -translate-y-1/2 font-stringer text-[14px]" style={{ opacity: 0.8 }}>Mit</span>
           <span className="font-rauschen text-[56px] uppercase leading-none">{displayLetter}</span>
-          <RefreshCw className="absolute right-2 top-1/2 -translate-y-1/2" style={{ width: 20, height: 20 }} />
+          <RefreshCw className="absolute right-2 top-1/2 -translate-y-1/2" style={{ width: 20, height: 20, opacity: 0.8 }} />
         </span>
       </Button>
     </div>
