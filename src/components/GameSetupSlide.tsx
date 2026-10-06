@@ -428,7 +428,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           background: 'linear-gradient(165deg, hsl(0 0% 0% / 0.010), hsl(0 0% 0% / 0.005) 45%, hsl(0 0% 0% / 0.002))',
           backdropFilter: 'blur(64px) saturate(1.6)',
           WebkitBackdropFilter: 'blur(64px) saturate(1.6)',
-          boxShadow: 'inset 0 1px 1px hsl(0 0% 100% / 0.16), inset 0 -1px 1px hsl(0 0% 100% / 0.06), 0 0 8px 8px hsl(0 0% 0% / 0.04)',
+          boxShadow: 'inset 0 1px 1px hsl(0 0% 100% / 0.16), inset 0 -1px 1px hsl(0 0% 100% / 0.06), 0 0 5px 5px hsl(0 0% 0% / 0.024)',
           transform: `translateX(${position * spacing + offset}px) scale(${scale}) rotate(${leanRotation}deg)`,
           opacity: 0.8,
           transition,
