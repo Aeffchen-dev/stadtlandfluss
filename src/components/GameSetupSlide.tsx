@@ -71,11 +71,11 @@ const FAMILY_GRAINS = [
 // lighter accent tone each land fully at random, allowed to overlap slightly.
 const FAMILY_BLOB_HUES = [
   // Stadt: rosa / lila tones + darker plum + lighter rosa accents
-  ['338 85% 74%', '318 65% 75%', '290 55% 72%', '300 50% 46%', '345 90% 84%'],
+  ['338 88% 78%', '318 75% 79%', '290 65% 76%', '300 50% 46%', '345 90% 84%'],
   // Land: muted greens with a juicy green (drawn larger) and a deep vivid blue
   ['178 85% 85%', '153 62% 47%', '150 62% 42%', '142 75% 50%', '180 85% 42%'],
   // Fluss: dark lila & vivid red-orange in the main lanes, deeper orange + soft bright yellow (larger, quiet) accents
-  ['285 62% 60%', '8 95% 58%', '281 66% 64%', '30 95% 52%', '55 82% 82%'],
+  ['285 70% 64%', '8 95% 62%', '281 72% 68%', '28 95% 58%', '55 82% 82%'],
 ];
 // Per-family scale factor for each of the three accent blobs (dark, light, extra).
 // Per-family accent tuning: size and alpha multiplier for each of the three
