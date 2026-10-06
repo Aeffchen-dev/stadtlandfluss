@@ -73,7 +73,7 @@ const FAMILY_BLOB_HUES = [
   // Stadt: rosa / lila tones + darker plum + lighter rosa accents
   ['338 85% 74%', '318 65% 75%', '290 55% 72%', '300 50% 46%', '345 90% 84%'],
   // Land: muted greens with a vivid green-leaning turquoise (drawn larger) and a deep vivid blue
-  ['178 85% 85%', '159 60% 48%', '150 62% 42%', '177 78% 55%', '187 85% 42%'],
+  ['178 85% 85%', '153 62% 47%', '150 62% 42%', '177 78% 55%', '187 85% 42%'],
   // Fluss: dark lila & vivid orange in the main lanes, deeper gold + super-vivid neon yellow (small) accents
   ['285 45% 55%', '25 95% 58%', '281 52% 60%', '48 65% 42%', '58 100% 58%'],
 ];
