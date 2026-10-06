@@ -716,7 +716,7 @@ export function GameSetupSlide({
         </Button>
         <h2 className="flex w-full flex-col items-start text-left leading-[0.8]" style={{ transform: 'scale(0.961)', transformOrigin: 'top left' }} aria-label="Stadt Land Fluss">
           <span style={{ rotate: '-3deg', translate: '-4px 0' }} className="font-rauschen text-[19px] uppercase [animation:slf-title-arrive_500ms_cubic-bezier(0.34,1.56,0.64,1)_both]">Stadt</span>
-          <span style={{ rotate: '0deg', translate: '30px 0', marginTop: '1px' }} className="relative z-10 font-stringer text-[19px] leading-none [animation:slf-title-arrive_500ms_cubic-bezier(0.34,1.56,0.64,1)_80ms_both]">L<svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-px inline-block align-middle" style={{ width: '0.72em', height: '0.72em', transform: `translateY(-0.06em) rotate(${smileyBase + smileyProgress * 360}deg)`, transition: smileyDragging ? 'none' : 'transform 250ms ease-out' }} aria-hidden="true">
+          <span style={{ rotate: '0deg', translate: '30px 0', marginTop: '1px' }} className="relative z-10 font-stringer text-[20.3px] leading-none [animation:slf-title-arrive_500ms_cubic-bezier(0.34,1.56,0.64,1)_80ms_both]">L<svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-px inline-block align-middle" style={{ width: '0.72em', height: '0.72em', transform: `translateY(-0.06em) rotate(${smileyBase + smileyProgress * 360}deg)`, transition: smileyDragging ? 'none' : 'transform 250ms ease-out' }} aria-hidden="true">
             <circle cx="9" cy="9" r="9" fill="#FFFF33" />
             <circle cx="6" cy="7" r="1" fill="black" />
             <circle cx="12" cy="7" r="1" fill="black" />
