@@ -574,9 +574,8 @@ export function QuizApp() {
           backgroundImage: `url(${pageBg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          filter: 'blur(28px) saturate(1.05) brightness(0.45)',
+          filter: 'blur(16px) saturate(1.05) brightness(0.75)',
           transform: 'scale(1.15)',
-          mixBlendMode: 'soft-light',
           opacity: 1,
         }}
       />
