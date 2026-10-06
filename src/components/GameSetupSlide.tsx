@@ -538,7 +538,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
               // Each text row gets its own slight rotation, seeded by the
               // category name (like the blobs), echoing the tilted title.
               const seed = item.trim().split('').reduce((hash, char) => ((hash * 31) + char.charCodeAt(0)) % 97, 7);
-              const rowPool = [-3, 1.5, 2.5, -1.5, 3, -2];
+              const rowPool = [-2.4, 1.2, 2, -1.2, 2.4, -1.6];
               const rows: { key: string; className: string; text: string }[] = [];
               words.forEach((word, wordIndex) => {
                 const fontClass = word === '&' || (words.length === 3 && wordIndex === 1) ? 'font-stringer' : 'font-rauschen';
