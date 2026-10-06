@@ -542,7 +542,8 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
                   <span className="pointer-events-none block" style={{ lineHeight: 1.1 }}>
                     {['Eigene', 'Kategorie'].map((word, wordIndex) => (
                       <span key={word} className="block" style={{ transform: `rotate(${rowPool[wordIndex % rowPool.length]}deg)` }}>
-                        <span style={{ opacity: 0.22 }}>{word}</span>
+                        {/* Placeholder ink: a dark take on the oxblood page background, lifted just enough to read as placeholder text. */}
+                        <span style={{ color: 'hsl(1 28% 42%)' }}>{word}</span>
                         {wordIndex === 1 && Math.abs(position) <= 1 && <span className="inline-block h-[0.9em] w-[2px] bg-current" style={{ animation: 'slf-caret-blink 1s step-end infinite' }} />}
                       </span>
                     ))}
@@ -568,7 +569,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
                   onFocus={() => setFocusedCustom(customIndex)}
                   onBlur={() => setFocusedCustom(null)}
                   onKeyDown={(event) => { if (event.key === 'Enter') (event.target as HTMLInputElement).blur(); }}
-                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} absolute inset-0 ${built || showFake ? 'opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:text-current placeholder:opacity-[0.22]`}
+                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} absolute inset-0 ${built || showFake ? 'opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:text-[hsl(1_28%_42%)]`}
                   style={{ caretColor: 'currentColor', fontSize: 'inherit', lineHeight: 'inherit', color: 'inherit' }}
                 />
               </span>
