@@ -569,7 +569,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
                   onFocus={() => setFocusedCustom(customIndex)}
                   onBlur={() => setFocusedCustom(null)}
                   onKeyDown={(event) => { if (event.key === 'Enter') (event.target as HTMLInputElement).blur(); }}
-                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} absolute inset-0 ${built || showFake ? 'opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:text-[hsl(0_0%_72%)]`}
+                  className={`${isCurrent ? 'pointer-events-auto' : 'pointer-events-none'} absolute inset-0 ${built || showFake ? 'opacity-0' : ''} w-full bg-transparent text-center font-rauschen uppercase outline-none placeholder:text-[hsl(0_0%_100%/0.7)]`}
                   style={{ caretColor: 'currentColor', fontSize: 'inherit', lineHeight: 'inherit', color: 'inherit' }}
                 />
               </span>
