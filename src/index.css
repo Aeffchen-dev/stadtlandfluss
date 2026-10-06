@@ -365,7 +365,9 @@ svg[class*="lucide"] {
 }
 @keyframes slf-card-in {
   from { opacity: 0; }
-  to { opacity: 1; }
+  /* Fill-mode 'both' holds this value forever — it must follow the card's
+     inactive dim (--slf-card-opacity), or it overrides the inline opacity. */
+  to { opacity: var(--slf-card-opacity, 1); }
 }
 
 @keyframes slf-title-arrive {
