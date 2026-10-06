@@ -79,7 +79,7 @@ All colors MUST be HSL.
     /* Page base: oxblood swatch (#432120), deepening slightly toward the bottom like the reference. */
     --quiz-page-background:
       linear-gradient(180deg, hsl(1 35% 19%), hsl(1 36% 16%) 55%, hsl(0 36% 12%));
-    --quiz-page-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.62'/%3E%3C/svg%3E");
+    --quiz-page-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.93 0 0 0 0 0.62 0 0 0 0 0.55 0.55 0.55 0.55 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.62'/%3E%3C/svg%3E");
     /* Card grain: same noise, tinted a cool turquoise so the glass speckle reads colored instead of grey. */
     --quiz-card-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.55 0 0 0 0 0.95 0 0 0 0 0.88 0.55 0.55 0.55 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.62'/%3E%3C/svg%3E");
     /* Three soft accent dots floating over the page grading: rosa, turquoise, neon green. */
