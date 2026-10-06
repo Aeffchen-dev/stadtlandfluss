@@ -74,8 +74,16 @@ const FAMILY_BLOB_HUES = [
   ['338 85% 74%', '318 65% 75%', '290 55% 72%', '300 50% 46%', '345 90% 84%'],
   // Land: muted greens with a vivid green-leaning turquoise (drawn larger) and a deep vivid blue
   ['178 85% 85%', '159 60% 48%', '150 62% 42%', '177 78% 55%', '187 85% 42%'],
-  // Fluss: dark lila & vivid orange in the main lanes, dark lila + vivid light yellow + deeper gold accents
-  ['285 45% 55%', '25 95% 58%', '281 52% 60%', '282 40% 30%', '52 95% 68%', '48 65% 42%'],
+  // Fluss: dark lila & vivid orange in the main lanes, deeper gold + super-vivid neon yellow (small) accents
+  ['285 45% 55%', '25 95% 58%', '281 52% 60%', '48 65% 42%', '58 100% 58%'],
+];
+// Per-family scale factor for each of the three accent blobs (dark, light, extra).
+// Per-family accent tuning: size and alpha multiplier for each of the three
+// accent blobs (dark, light, extra).
+const FAMILY_ACCENT_STYLES: Array<Array<{ size?: number; alpha?: number }>> = [
+  [{}, {}, {}],
+  [{ size: 1.35 }, {}, {}],
+  [{}, { size: 0.5, alpha: 2.4 }, {}], // Fluss: neon yellow small but super vivid
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
 // progressively quieter (0.4 × 0.85, 0.4 × 0.75 for their core alpha).
@@ -87,6 +95,7 @@ interface CardBlob {
   y: number; // % of card height
   size: number; // diameter, % of card width
   hue: string;
+  alphaScale?: number; // multiplies the family blob alpha
 }
 
 const makeCardBlobs = (seed: string, familyIndex: number): CardBlob[] => {
@@ -119,8 +128,9 @@ const makeCardBlobs = (seed: string, familyIndex: number): CardBlob[] => {
 
   // The darker and lighter accent tones each land fully at random, retrying
   // until their cores sit close to the other blobs — a bit of overlap is fine.
-  const placeAccent = (hue: string, sizeScale = 1): void => {
-    const size = (28 + rand() * 22) * sizeScale;
+  const placeAccent = (hue: string | undefined, style: { size?: number; alpha?: number } = {}): void => {
+    if (!hue) return;
+    const size = (28 + rand() * 22) * (style.size ?? 1);
     let x = 50;
     let y = 40;
     for (let attempt = 0; attempt < 40; attempt += 1) {
@@ -133,11 +143,10 @@ const makeCardBlobs = (seed: string, familyIndex: number): CardBlob[] => {
       if (clear) break;
     }
     placed.push({ x, yW: y * ASPECT, r: size / 2 });
-    blobs.push({ x, y, size, hue });
+    blobs.push({ x, y, size, hue, alphaScale: style.alpha });
   };
-  placeAccent(hues[3], familyIndex === 1 ? 1.35 : 1);
-  placeAccent(hues[4]);
-  placeAccent(hues[5]);
+  const accentStyles = FAMILY_ACCENT_STYLES[familyIndex] ?? [];
+  [hues[3], hues[4], hues[5]].forEach((hue, i) => placeAccent(hue, accentStyles[i]));
   return blobs;
 };
 
@@ -443,7 +452,11 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
               aspectRatio: '1',
               borderRadius: '50%',
               transform: 'translate(-50%, -50%)',
-              background: `radial-gradient(circle, hsl(${blob.hue} / ${(FAMILY_BLOB_ALPHA[familyIndex] ?? 0.4).toFixed(3)}), hsl(${blob.hue} / ${(FAMILY_BLOB_ALPHA[familyIndex] * 0.325).toFixed(3)}) 55%, transparent 75%)`,
+              background: (() => {
+                const base = FAMILY_BLOB_ALPHA[familyIndex] ?? 0.4;
+                const core = Math.min(base * (blob.alphaScale ?? 1), 1);
+                return `radial-gradient(circle, hsl(${blob.hue} / ${core.toFixed(3)}), hsl(${blob.hue} / ${(core * 0.325).toFixed(3)}) 55%, transparent 75%)`;
+              })(),
               filter: 'blur(12px)',
               mixBlendMode: 'screen',
             }}
