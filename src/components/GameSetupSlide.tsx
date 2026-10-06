@@ -160,9 +160,9 @@ const makeCardBlobs = (seed: string, familyIndex: number): CardBlob[] => {
 // Etched satin rim: a 1px inner border in each family's own hue, sitting just
 // inside the neutral white rim for a color-etched edge.
 const FAMILY_RIMS = [
-  'hsl(145 60% 60% / 0.14)',
-  'hsl(178 60% 60% / 0.14)',
-  'hsl(300 45% 60% / 0.14)',
+  'hsl(145 60% 60% / 0.1)',
+  'hsl(178 60% 60% / 0.1)',
+  'hsl(300 45% 60% / 0.1)',
 ];
 
 // Soft color bloom around the card edge in the family's own hue — the halo
@@ -486,7 +486,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
           style={{
             borderRadius: 'inherit',
             padding: '1px',
-            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.054), hsl(0 0% 100% / 0.0096) 38%, hsl(0 0% 100% / 0.0072) 62%, hsl(0 0% 100% / 0.024))',
+            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.04), hsl(0 0% 100% / 0.0072) 38%, hsl(0 0% 100% / 0.0054) 62%, hsl(0 0% 100% / 0.018))',
             WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
             WebkitMaskComposite: 'xor',
             maskComposite: 'exclude',
