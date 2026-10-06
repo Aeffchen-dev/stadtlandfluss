@@ -63,13 +63,20 @@ const FAMILY_GRAINS = [
   makeGrain(30, 23, 48), // dark plum
 ];
 
-// Gradient blobs at the top of each card: the same rosa / turquoise / neon
-// green accents that float over the page, pooled as soft round glows. Each
+// Gradient blobs at the top of each card, tinted to each slider's own color
+// story: rosa/lila (Stadt), turquoise (Land), lime & grasgrün (Fluss). Each
 // card seeds its own PRNG from the category name, so sizes and positions are
 // random per card but stable across re-renders. The blobs sit in three
 // stacked lanes near the top and hug the horizontal center, so their cores
 // never overlap each other.
-const BLOB_HUES = ['336 90% 72%', '172 85% 60%', '96 95% 62%']; // rosa, turquoise, neon green
+const FAMILY_BLOB_HUES = [
+  // Stadt: rosa / lila tones
+  ['338 85% 74%', '318 65% 75%', '290 55% 72%'],
+  // Land: turquoise tones
+  ['186 80% 62%', '174 80% 62%', '198 70% 64%'],
+  // Fluss: lime / grasgrün tones
+  ['92 80% 62%', '108 62% 55%', '125 55% 55%'],
+];
 const BLOB_LANES: Array<[number, number]> = [[9, 17], [28, 38], [47, 57]]; // y-% of card height
 
 interface CardBlob {
@@ -79,7 +86,7 @@ interface CardBlob {
   hue: string;
 }
 
-const makeCardBlobs = (seed: string): CardBlob[] => {
+const makeCardBlobs = (seed: string, familyIndex: number): CardBlob[] => {
   let h = 2166136261;
   for (let i = 0; i < seed.length; i += 1) {
     h ^= seed.charCodeAt(i);
@@ -91,11 +98,12 @@ const makeCardBlobs = (seed: string): CardBlob[] => {
     h ^= h >>> 16;
     return (h >>> 0) / 4294967296;
   };
+  const hues = FAMILY_BLOB_HUES[familyIndex] ?? FAMILY_BLOB_HUES[0];
   return BLOB_LANES.map(([yMin, yMax], i) => ({
     x: 50 + (rand() - 0.5) * 26, // mostly centered
     y: yMin + rand() * (yMax - yMin),
     size: 18 + rand() * 12, // diameter, % of card width
-    hue: BLOB_HUES[i],
+    hue: hues[i],
   }));
 };
 
@@ -372,7 +380,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           wordBreak: 'normal',
           // Polished frosted glass card (reference look).
           color: 'hsl(0 0% 100% / 0.95)',
-          background: 'linear-gradient(165deg, hsl(0 0% 100% / 0.028), hsl(0 0% 100% / 0.013) 45%, hsl(0 0% 100% / 0.006))',
+          background: 'linear-gradient(165deg, hsl(0 0% 100% / 0.02), hsl(0 0% 100% / 0.009) 45%, hsl(0 0% 100% / 0.004))',
           backdropFilter: 'blur(48px) saturate(1.6)',
           WebkitBackdropFilter: 'blur(48px) saturate(1.6)',
           boxShadow: 'inset 0 1px 1px hsl(0 0% 100% / 0.22), inset 0 -1px 1px hsl(0 0% 100% / 0.04), 0 0 8px 8px hsl(0 0% 0% / 0.04)',
@@ -384,10 +392,11 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
         }}
         aria-hidden={!isCurrent}
       >
-        {/* Gradient blobs: soft rosa / turquoise / neon-green glow pools
-            huddled near the top of the card, random per category (seeded by
-            name), kept mostly centered and non-overlapping. */}
-        {makeCardBlobs(item).map((blob, blobIndex) => (
+        {/* Gradient blobs: each slider's own color story (rosa/lila,
+            turquoise, lime/grasgrün) pooled as soft, subtle round glows near
+            the top of the card, random per category (seeded by name), kept
+            mostly centered and non-overlapping. */}
+        {makeCardBlobs(item, familyIndex).map((blob, blobIndex) => (
           <div
             key={blobIndex}
             aria-hidden
@@ -399,7 +408,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
               aspectRatio: '1',
               borderRadius: '50%',
               transform: 'translate(-50%, -50%)',
-              background: `radial-gradient(circle, hsl(${blob.hue} / 0.30), hsl(${blob.hue} / 0.10) 55%, transparent 75%)`,
+              background: `radial-gradient(circle, hsl(${blob.hue} / 0.22), hsl(${blob.hue} / 0.07) 55%, transparent 75%)`,
               filter: 'blur(10px)',
               mixBlendMode: 'screen',
             }}
@@ -412,7 +421,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           style={{
             borderRadius: 'inherit',
             padding: '1px',
-            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.33), hsl(0 0% 100% / 0.05) 38%, hsl(0 0% 100% / 0.025) 62%, hsl(0 0% 100% / 0.14))',
+            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.23), hsl(0 0% 100% / 0.035) 38%, hsl(0 0% 100% / 0.018) 62%, hsl(0 0% 100% / 0.1))',
             WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
             WebkitMaskComposite: 'xor',
             maskComposite: 'exclude',
