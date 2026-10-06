@@ -307,6 +307,17 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
   const dragMoved = useRef(false);
   const [offset, setOffset] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  // Cards dimmed by a click (inactive state, 70% opacity), keyed by card
+  // identity so the dimmed state survives carousel rotation swaps.
+  const [inactiveCards, setInactiveCards] = useState<Set<string>>(() => new Set());
+  const toggleCardActive = (key: string) => {
+    setInactiveCards((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  };
   // The idle hint nudge plays exactly once, on load; after the first slide
   // change it must never come back (removing + re-adding the animation style
   // re-triggers it after every change).
