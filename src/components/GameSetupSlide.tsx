@@ -337,11 +337,10 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           wordBreak: 'normal',
           // Polished frosted glass card (reference look).
           color: 'hsl(0 0% 100% / 0.95)',
-          background: 'linear-gradient(165deg, hsl(0 0% 100% / 0.20), hsl(0 0% 100% / 0.09) 45%, hsl(0 0% 100% / 0.05))',
-          backdropFilter: 'blur(24px) saturate(1.5) brightness(1.06)',
-          WebkitBackdropFilter: 'blur(24px) saturate(1.5) brightness(1.06)',
-          border: '1px solid hsl(0 0% 100% / 0.32)',
-          boxShadow: 'inset 0 1px 1px hsl(0 0% 100% / 0.28), inset 0 -1px 1px hsl(0 0% 100% / 0.05), 0 24px 48px -24px hsl(0 0% 0% / 0.5)',
+          background: 'linear-gradient(165deg, hsl(0 0% 100% / 0.10), hsl(0 0% 100% / 0.045) 45%, hsl(0 0% 100% / 0.025))',
+          backdropFilter: 'blur(48px) saturate(1.6)',
+          WebkitBackdropFilter: 'blur(48px) saturate(1.6)',
+          boxShadow: 'inset 0 1px 1px hsl(0 0% 100% / 0.22), inset 0 -1px 1px hsl(0 0% 100% / 0.04), 0 24px 48px -24px hsl(0 0% 0% / 0.5)',
           transform: `translateX(${position * spacing + offset}px) scale(${scale}) rotate(${leanRotation}deg)`,
           opacity: 1,
           transition,
@@ -350,8 +349,21 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
         }}
         aria-hidden={!isCurrent}
       >
+        {/* Gradient glass rim: a 1px beveled edge that runs bright along the top-left and relaxes toward the bottom-right. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            borderRadius: 'inherit',
+            padding: '1px',
+            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.65), hsl(0 0% 100% / 0.10) 38%, hsl(0 0% 100% / 0.05) 62%, hsl(0 0% 100% / 0.28))',
+            WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
+            WebkitMaskComposite: 'xor',
+            maskComposite: 'exclude',
+          }}
+        />
         {/* Soft specular sheen so the glass reads deeper. */}
-        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ borderRadius: 'inherit', background: 'radial-gradient(120% 60% at 30% 0%, hsl(0 0% 100% / 0.16), transparent 62%)' }} />
+        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ borderRadius: 'inherit', background: 'radial-gradient(120% 60% at 30% 0%, hsl(0 0% 100% / 0.10), transparent 62%)' }} />
         {customIndex !== null
           ? (() => {
             const value = customs[customIndex] ?? '';
