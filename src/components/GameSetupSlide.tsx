@@ -396,9 +396,10 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
         aria-hidden={!isCurrent}
       >
         {/* Gradient blobs: each slider's own color story (rosa/lila,
-            turquoise, lime/grasgrün) pooled as soft, subtle round glows near
-            the top of the card, random per category (seeded by name), kept
-            mostly centered and non-overlapping. */}
+            turquoise, lime/grasgrün, plus one darker accent tone) pooled as
+            soft, subtle round glows near the top of the card, random per
+            category (seeded by name), kept mostly centered and
+            non-overlapping. Strength scales with the slider family. */}
         {makeCardBlobs(item, familyIndex).map((blob, blobIndex) => (
           <div
             key={blobIndex}
@@ -411,7 +412,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
               aspectRatio: '1',
               borderRadius: '50%',
               transform: 'translate(-50%, -50%)',
-              background: `radial-gradient(circle, hsl(${blob.hue} / 0.4), hsl(${blob.hue} / 0.13) 55%, transparent 75%)`,
+              background: `radial-gradient(circle, hsl(${blob.hue} / ${(FAMILY_BLOB_ALPHA[familyIndex] ?? 0.4).toFixed(3)}), hsl(${blob.hue} / ${(FAMILY_BLOB_ALPHA[familyIndex] * 0.325).toFixed(3)}) 55%, transparent 75%)`,
               filter: 'blur(12px)',
               mixBlendMode: 'screen',
             }}
