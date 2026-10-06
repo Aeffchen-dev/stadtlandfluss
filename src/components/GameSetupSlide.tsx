@@ -74,8 +74,8 @@ const FAMILY_BLOB_HUES = [
   ['338 85% 74%', '318 65% 75%', '290 55% 72%', '300 50% 46%', '345 90% 84%'],
   // Land: muted greens with a vivid green-leaning turquoise (drawn larger) and a deep vivid blue
   ['178 85% 85%', '153 62% 47%', '150 62% 42%', '177 78% 55%', '187 85% 42%'],
-  // Fluss: dark lila & vivid orange in the main lanes, deeper gold + super-vivid neon yellow (small) accents
-  ['285 45% 55%', '25 95% 58%', '281 52% 60%', '38 72% 44%', '55 55% 80%'],
+  // Fluss: dark lila & vivid orange-red in the main lanes, deeper gold + super-vivid neon yellow (small) accents
+  ['285 45% 55%', '18 95% 58%', '281 52% 60%', '38 72% 44%', '55 68% 80%'],
 ];
 // Per-family scale factor for each of the three accent blobs (dark, light, extra).
 // Per-family accent tuning: size and alpha multiplier for each of the three
