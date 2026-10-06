@@ -708,19 +708,51 @@ export function GameSetupSlide({
   useEffect(() => {
     const controller = new AbortController();
 
-    const loadCategories = async () => {
+    const CACHE_KEY = 'slf-categories-cache';
+    let hasCache = false;
+    try {
+      const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+      if (Array.isArray(cached) && cached.length === 3 && cached.every((c) => Array.isArray(c) && c.length > 0)) {
+        setColumns(cached);
+        hasCache = true;
+      }
+    } catch { /* ignore broken cache */ }
+
+    const fetchOnce = async () => {
+      const attempt = new AbortController();
+      const onAbort = () => attempt.abort();
+      controller.signal.addEventListener('abort', onAbort);
+      const timeout = window.setTimeout(() => attempt.abort(), 10000);
       try {
-        const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/export?format=csv&sheet=${SHEET_NAME}`;
-        const response = await fetch(url, { cache: 'no-cache', signal: controller.signal });
+        const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/export?format=csv&sheet=${SHEET_NAME}&t=${Date.now()}`;
+        const response = await fetch(url, { cache: 'no-store', signal: attempt.signal });
         if (!response.ok) throw new Error(`Category sheet returned ${response.status}`);
         const rows = parseCsv(await response.text());
-        setColumns([0, 1, 2].map((column) => rows.map((row) => row[column]?.trim()).filter(Boolean)));
-      } catch (error) {
-        if (error instanceof DOMException && error.name === 'AbortError') return;
-        console.error('Could not load Stadt Land Fluss categories:', error);
-        // Fall back to built-in categories so the sliders never stay empty.
-        setColumns(FALLBACK_COLUMNS);
+        const cols = [0, 1, 2].map((column) => rows.map((row) => row[column]?.trim()).filter(Boolean) as string[]);
+        if (cols.some((c) => c.length === 0)) throw new Error('Category sheet returned empty columns');
+        return cols;
+      } finally {
+        window.clearTimeout(timeout);
+        controller.signal.removeEventListener('abort', onAbort);
       }
+    };
+
+    const loadCategories = async () => {
+      // Up to 3 attempts with backoff; Google's export sometimes fails transiently.
+      for (let attempt = 0; attempt < 3; attempt++) {
+        try {
+          const cols = await fetchOnce();
+          setColumns(cols);
+          try { localStorage.setItem(CACHE_KEY, JSON.stringify(cols)); } catch { /* quota */ }
+          return;
+        } catch (error) {
+          if (controller.signal.aborted) break;
+          console.error('Could not load Stadt Land Fluss categories:', error);
+          await new Promise((r) => setTimeout(r, 800 * 2 ** attempt));
+        }
+      }
+      // Fall back so the sliders never stay empty.
+      if (!hasCache) setColumns(FALLBACK_COLUMNS);
     };
 
     loadCategories();
