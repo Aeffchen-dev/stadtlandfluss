@@ -75,7 +75,7 @@ const FAMILY_BLOB_HUES = [
   // Land: turquoise tones (one pushed to neon green) + darker turquoise + lighter aqua + dark turquoise accents
   ['186 80% 62%', '135 95% 58%', '198 70% 64%', '182 70% 42%', '180 85% 80%', '192 60% 26%'],
   // Fluss: terracotta & yellow alternating in the main lanes, dark terracotta + gold + light yellow accents
-  ['14 72% 58%', '48 90% 60%', '16 70% 62%', '10 62% 36%', '48 95% 76%', '54 100% 86%'],
+  ['6 75% 58%', '48 90% 60%', '8 72% 60%', '4 65% 34%', '48 95% 76%', '55 100% 90%'],
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
 // progressively quieter (0.4 × 0.85, 0.4 × 0.75 for their core alpha).
