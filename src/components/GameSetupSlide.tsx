@@ -302,6 +302,9 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
     });
   };
   const startX = useRef<number | null>(null);
+  // True once a drag actually moved the track; a mouseup/touchend after real
+  // movement still fires a click event, which must not count as a card click.
+  const dragMoved = useRef(false);
   const [offset, setOffset] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   // The idle hint nudge plays exactly once, on load; after the first slide
