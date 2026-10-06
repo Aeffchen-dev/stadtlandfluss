@@ -538,14 +538,14 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
               // category name (like the blobs), echoing the tilted title.
               const seed = item.trim().split('').reduce((hash, char) => ((hash * 31) + char.charCodeAt(0)) % 97, 7);
               const rowPool = [-1.2, 0.6, 1, -0.6, 1.2, -0.8];
-              const rows: { key: string; className: string; text: string }[] = [];
+              const rows: { key: string; className: string; text: string; hyphen?: boolean }[] = [];
               words.forEach((word, wordIndex) => {
                 const fontClass = word === '&' || (words.length === 3 && wordIndex === 1) ? 'font-stringer' : 'font-rauschen';
                 // Multi-word items already span 2-3 lines, so only break
                 // noticeably longer words here than on single-line cards.
                 const halves = splitLongGerman(word, 14);
                 if (halves) {
-                  rows.push({ key: `${wordIndex}-a`, className: fontClass, text: halves[0] });
+                  rows.push({ key: `${wordIndex}-a`, className: fontClass, text: halves[0], hyphen: true });
                   rows.push({ key: `${wordIndex}-b`, className: fontClass, text: halves[1] });
                 } else {
                   rows.push({ key: String(wordIndex), className: fontClass, text: hyphenateGerman(word) });
@@ -554,7 +554,10 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
               return (
                 <span className="block px-6" style={{ minWidth: 0, maxWidth: '100%', overflowWrap: 'break-word', transform: `rotate(${itemRotation}deg)` }}>
                   {rows.map((row, rowIndex) => (
-                    <span key={row.key} className={`block ${row.className}`} style={{ transform: `rotate(${rowPool[(seed + rowIndex) % rowPool.length]}deg)` }}>{row.text}</span>
+                    <span key={row.key} className={`block ${row.className}`} style={{ transform: `rotate(${rowPool[(seed + rowIndex) % rowPool.length]}deg)` }}>
+                      {row.text}
+                      {row.hyphen && <span style={{ opacity: 0.35 }}>-</span>}
+                    </span>
                   ))}
                 </span>
               );
