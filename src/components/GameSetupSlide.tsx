@@ -87,7 +87,7 @@ const FAMILY_ACCENT_STYLES: Array<Array<{ size?: number; alpha?: number }>> = [
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
 // progressively quieter (0.4 × 0.85, 0.4 × 0.75 for their core alpha).
-const FAMILY_BLOB_ALPHA = [0.47, 0.24, 0.26];
+const FAMILY_BLOB_ALPHA = [0.47, 0.17, 0.31];
 const BLOB_LANES: Array<[number, number]> = [[9, 17], [28, 38], [47, 57]]; // y-% of card height
 
 interface CardBlob {
