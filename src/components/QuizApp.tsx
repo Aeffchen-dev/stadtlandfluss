@@ -603,7 +603,7 @@ export function QuizApp() {
           backgroundImage: 'var(--quiz-page-grain)',
           backgroundSize: '150px 150px',
           mixBlendMode: 'soft-light',
-          opacity: 0.18,
+          opacity: 0.24,
         }}
       />
       {/* Main Quiz Container with multi-slide carousel */}
@@ -731,7 +731,7 @@ export function QuizApp() {
           backgroundImage: 'var(--quiz-page-grain)',
           backgroundSize: '150px 150px',
           mixBlendMode: 'soft-light',
-          opacity: 0.28,
+          opacity: 0.34,
         }}
       />
 
