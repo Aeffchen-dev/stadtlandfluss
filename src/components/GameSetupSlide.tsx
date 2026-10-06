@@ -102,7 +102,7 @@ const makeCardBlobs = (seed: string, familyIndex: number): CardBlob[] => {
   return BLOB_LANES.map(([yMin, yMax], i) => ({
     x: 50 + (rand() - 0.5) * 26, // mostly centered
     y: yMin + rand() * (yMax - yMin),
-    size: 18 + rand() * 12, // diameter, % of card width
+    size: 26 + rand() * 18, // diameter, % of card width
     hue: hues[i],
   }));
 };
@@ -408,8 +408,8 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
               aspectRatio: '1',
               borderRadius: '50%',
               transform: 'translate(-50%, -50%)',
-              background: `radial-gradient(circle, hsl(${blob.hue} / 0.22), hsl(${blob.hue} / 0.07) 55%, transparent 75%)`,
-              filter: 'blur(10px)',
+              background: `radial-gradient(circle, hsl(${blob.hue} / 0.4), hsl(${blob.hue} / 0.13) 55%, transparent 75%)`,
+              filter: 'blur(12px)',
               mixBlendMode: 'screen',
             }}
           />
@@ -421,7 +421,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           style={{
             borderRadius: 'inherit',
             padding: '1px',
-            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.38), hsl(0 0% 100% / 0.06) 38%, hsl(0 0% 100% / 0.03) 62%, hsl(0 0% 100% / 0.16))',
+            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.33), hsl(0 0% 100% / 0.05) 38%, hsl(0 0% 100% / 0.025) 62%, hsl(0 0% 100% / 0.14))',
             WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
             WebkitMaskComposite: 'xor',
             maskComposite: 'exclude',
