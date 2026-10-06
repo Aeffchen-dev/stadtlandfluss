@@ -72,8 +72,8 @@ const FAMILY_GRAINS = [
 const FAMILY_BLOB_HUES = [
   // Stadt: rosa / lila tones + darker plum + lighter rosa accents
   ['338 85% 74%', '318 65% 75%', '290 55% 72%', '300 50% 46%', '345 90% 84%'],
-  // Land: light mint / neon green with turquoise tones and a cool blue-green lila
-  ['170 65% 74%', '135 90% 58%', '150 85% 42%', '192 60% 45%', '200 60% 52%', '185 55% 62%'],
+  // Land: light mint / neon green with turquoise tones (one leaning green) and a cool blue-green lila
+  ['170 65% 74%', '135 90% 58%', '150 85% 42%', '172 62% 45%', '200 60% 52%', '185 55% 62%'],
   // Fluss: dark lila & yellow alternating in the main lanes (yellow kept quiet), dark lila + deeper gold accents
   ['285 45% 55%', '48 75% 55%', '290 45% 52%', '282 40% 30%', '45 80% 58%', '48 65% 42%'],
 ];
