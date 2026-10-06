@@ -64,23 +64,23 @@ const FAMILY_GRAINS = [
 ];
 
 // Gradient blobs at the top of each card, tinted to each slider's own color
-// story: rosa/lila (Stadt), turquoise (Land), lime & grasgrün (Fluss). Each
+// story: rosa/lila (Stadt), turquoise (Land), red & yellow (Fluss). Each
 // card seeds its own PRNG from the category name, so sizes and positions are
-// random per card but stable across re-renders. The blobs sit in three
-// stacked lanes near the top and hug the horizontal center, so their cores
-// never overlap each other.
+// random per card but stable across re-renders. The main blobs sit in three
+// stacked lanes near the top and hug the horizontal center; the darker accent
+// tone lands fully at random, keeping its core clear of the other blobs.
 const FAMILY_BLOB_HUES = [
   // Stadt: rosa / lila tones + one darker plum accent
   ['338 85% 74%', '318 65% 75%', '290 55% 72%', '300 50% 46%'],
   // Land: turquoise tones + one darker turquoise accent
   ['186 80% 62%', '174 80% 62%', '198 70% 64%', '182 70% 42%'],
-  // Fluss: lime / grasgrün tones + one darker olive accent
-  ['92 80% 62%', '108 62% 55%', '125 55% 55%', '76 50% 40%'],
+  // Fluss: red / yellow tones + one darker mustard accent
+  ['0 85% 64%', '48 90% 60%', '20 85% 62%', '42 75% 42%'],
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
 // progressively quieter (0.4 × 0.85, 0.4 × 0.75 for their core alpha).
-const FAMILY_BLOB_ALPHA = [0.55, 0.34, 0.3];
-const BLOB_LANES: Array<[number, number]> = [[9, 17], [28, 38], [47, 57], [62, 72]]; // y-% of card height
+const FAMILY_BLOB_ALPHA = [0.47, 0.29, 0.26];
+const BLOB_LANES: Array<[number, number]> = [[9, 17], [28, 38], [47, 57]]; // y-% of card height
 
 interface CardBlob {
   x: number; // % of card width
@@ -102,12 +102,37 @@ const makeCardBlobs = (seed: string, familyIndex: number): CardBlob[] => {
     return (h >>> 0) / 4294967296;
   };
   const hues = FAMILY_BLOB_HUES[familyIndex] ?? FAMILY_BLOB_HUES[0];
-  return BLOB_LANES.map(([yMin, yMax], i) => ({
-    x: 50 + (rand() - 0.5) * 26, // mostly centered
-    y: yMin + rand() * (yMax - yMin),
-    size: 31 + rand() * 22, // diameter, % of card width
-    hue: hues[i],
-  }));
+  // Card is ~133px tall and ~281px wide: convert y-% of height to width-%
+  // units so overlap distances can be compared in one space.
+  const ASPECT = 0.48;
+  const placed: Array<{ x: number; yW: number; r: number }> = [];
+  const blobs: CardBlob[] = [];
+
+  // Main color blobs stay in their lanes near the top, mostly centered.
+  BLOB_LANES.forEach(([yMin, yMax], i) => {
+    const x = 50 + (rand() - 0.5) * 26;
+    const y = yMin + rand() * (yMax - yMin);
+    const size = 31 + rand() * 22;
+    placed.push({ x, yW: y * ASPECT, r: size / 2 });
+    blobs.push({ x, y, size, hue: hues[i] });
+  });
+
+  // The darker accent tone lands fully at random, retrying until its core
+  // clears every already-placed blob (no overlapping cores).
+  let x = 50;
+  let y = 40;
+  const size = 31 + rand() * 22;
+  for (let attempt = 0; attempt < 40; attempt += 1) {
+    x = 14 + rand() * 72;
+    y = 6 + rand() * 74;
+    const yW = y * ASPECT;
+    const clear = placed.every(
+      (p) => Math.hypot(x - p.x, yW - p.yW) >= (size / 2 + p.r) * 0.8,
+    );
+    if (clear) break;
+  }
+  blobs.push({ x, y, size, hue: hues[3] });
+  return blobs;
 };
 
 // Etched satin rim: a 1px inner border in each family's own hue, sitting just
@@ -396,7 +421,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
         aria-hidden={!isCurrent}
       >
         {/* Gradient blobs: each slider's own color story (rosa/lila,
-            turquoise, lime/grasgrün, plus one darker accent tone) pooled as
+            turquoise, red/yellow, plus one darker accent tone) pooled as
             soft, subtle round glows near the top of the card, random per
             category (seeded by name), kept mostly centered and
             non-overlapping. Strength scales with the slider family. */}
