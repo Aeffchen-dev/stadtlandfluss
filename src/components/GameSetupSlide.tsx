@@ -64,15 +64,22 @@ const FAMILY_GRAINS = [
 ];
 
 // Gradient blobs at the top of each card: the same rosa / turquoise / neon
-// green accents that float over the page, pooled as soft color glows. Each
+// green accents that float over the page, pooled as soft round glows. Each
 // card seeds its own PRNG from the category name, so sizes and positions are
-// random per card but stable across re-renders. The three blobs live in
-// separate vertical bands near the top and hug the horizontal center, so
-// they never overlap each other.
-const BLOB_COLORS = ['336 90% 72%', '172 85% 60%', '96 95% 62%']; // rosa, turquoise, neon green (H S L)
-const BLOB_BANDS: Array<[number, number]> = [[14, 24], [36, 46], [58, 66]];
+// random per card but stable across re-renders. The blobs sit in three
+// stacked lanes near the top and hug the horizontal center, so their cores
+// never overlap each other.
+const BLOB_HUES = ['336 90% 72%', '172 85% 60%', '96 95% 62%']; // rosa, turquoise, neon green
+const BLOB_LANES: Array<[number, number]> = [[9, 17], [28, 38], [47, 57]]; // y-% of card height
 
-const makeCardBlobs = (seed: string) => {
+interface CardBlob {
+  x: number; // % of card width
+  y: number; // % of card height
+  size: number; // diameter, % of card width
+  hue: string;
+}
+
+const makeCardBlobs = (seed: string): CardBlob[] => {
   let h = 2166136261;
   for (let i = 0; i < seed.length; i += 1) {
     h ^= seed.charCodeAt(i);
@@ -84,15 +91,12 @@ const makeCardBlobs = (seed: string) => {
     h ^= h >>> 16;
     return (h >>> 0) / 4294967296;
   };
-  return BLOB_BANDS
-    .map(([yMin, yMax], i) => {
-      const rx = 16 + rand() * 14; // horizontal radius, % of the blob layer width
-      const ry = 6 + rand() * 4; // vertical radius, % of the blob layer height
-      const x = 50 + (rand() - 0.5) * 28; // mostly centered
-      const y = yMin + rand() * (yMax - yMin);
-      return `radial-gradient(ellipse ${rx.toFixed(1)}% ${ry.toFixed(1)}% at ${x.toFixed(1)}% ${y.toFixed(1)}%, hsl(${BLOB_COLORS[i]} / 0.20), transparent 72%)`;
-    })
-    .join(', ');
+  return BLOB_LANES.map(([yMin, yMax], i) => ({
+    x: 50 + (rand() - 0.5) * 26, // mostly centered
+    y: yMin + rand() * (yMax - yMin),
+    size: 18 + rand() * 12, // diameter, % of card width
+    hue: BLOB_HUES[i],
+  }));
 };
 
 // Etched satin rim: a 1px inner border in each family's own hue, sitting just
