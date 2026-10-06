@@ -695,7 +695,7 @@ export function GameSetupSlide({
 
   return (
     <div
-      className="mx-auto flex h-[calc(100%-8px)] max-h-[calc(100%-8px)] w-full max-w-[500px] select-none flex-col gap-8"
+      className="mx-auto flex h-[calc(100%-8px)] max-h-[calc(100%-8px)] w-full max-w-[500px] select-none flex-col gap-9"
       style={{ touchAction: 'none' }}
     >
       <div className="relative flex shrink-0 flex-col items-center gap-[10px] overflow-visible rounded-[8px] px-2 pt-2 pb-2 text-quiz-setup-ink">
@@ -727,8 +727,8 @@ export function GameSetupSlide({
       </div>
       <div className="flex min-h-0 flex-1 flex-col gap-0">
         <CategorySlider items={columns[0]} familyIndex={0} label="Stadt" hint="next" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
-        <CategorySlider style={{ marginTop: '-8px' }} items={columns[1]} familyIndex={1} label="Land" hint="prev" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
-        <CategorySlider style={{ marginTop: '-8px' }} items={columns[2]} familyIndex={2} label="Fluss" hint="next" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
+        <CategorySlider items={columns[1]} familyIndex={1} label="Land" hint="prev" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
+        <CategorySlider items={columns[2]} familyIndex={2} label="Fluss" hint="next" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
       </div>
       <Button
         type="button"
