@@ -298,7 +298,8 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
   // (peek was 0.1 × trackWidth + 14.4px, now 60% of that).
   const CARD_SCALE = 0.8;
   const CARD_GAP = 36;
-  const slotInset = Math.max(0, (0.06 * trackWidth + 8.64 + CARD_GAP - 0.1 * trackWidth) / (0.8 * 2) * 2 / 2);
+  const slotInset = Math.max(0, (44.64 - 0.04 * trackWidth) / 0.8);
+  const spacing = (trackWidth / 2 - slotInset) * CARD_SCALE + CARD_GAP + 0.45 * CARD_SCALE * (trackWidth - 2 * slotInset);
 
   useEffect(() => {
     const measure = () => {
