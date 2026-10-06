@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { House, Map as MapIcon, RefreshCw, Waves } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import filterIcon from '@/assets/filter-icon.png';
@@ -709,6 +709,11 @@ export function GameSetupSlide({
   onOpenInfo,
 }: GameSetupSlideProps) {
   const [columns, setColumns] = useState<string[][]>([[], [], []]);
+  const { t, lang } = useLanguage();
+  const translatedColumns = useMemo(
+    () => columns.map((column) => column.map((item) => translateCategory(item, lang))),
+    [columns, lang],
+  );
   const [displayLetter, setDisplayLetter] = useState(() => pickWeightedLetter());
   // Smiley rotation is driven directly by the category drag: a full
   // card-width drag equals one full turn; committed turns are absorbed
