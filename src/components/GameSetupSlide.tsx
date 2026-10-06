@@ -734,7 +734,7 @@ export function GameSetupSlide({
         type="button"
         variant="ghost"
         onClick={isRolling ? undefined : rollLetter}
-        className="relative h-auto shrink-0 rounded-[8px] bg-transparent px-2 pt-3 pb-3 text-quiz-setup-ink [-webkit-tap-highlight-color:transparent] hover:bg-transparent hover:text-quiz-setup-ink focus-visible:ring-0 focus-visible:ring-offset-0"
+        className="relative h-auto shrink-0 rounded-[8px] bg-transparent px-2 pt-1 pb-3 text-quiz-setup-ink [-webkit-tap-highlight-color:transparent] hover:bg-transparent hover:text-quiz-setup-ink focus-visible:ring-0 focus-visible:ring-offset-0"
         aria-label="Zufälligen Buchstaben wählen"
       >
         <span className="relative flex w-full items-center justify-center">
