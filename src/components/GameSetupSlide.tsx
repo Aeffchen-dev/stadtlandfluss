@@ -373,12 +373,15 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
   const beginDrag = (clientX: number) => {
     if (isAnimating) return;
     startX.current = clientX;
+    dragMoved.current = false;
     setOffset(0);
   };
 
   const moveDrag = (clientX: number) => {
     if (startX.current === null || isAnimating) return;
-    setOffset(clientX - startX.current);
+    const next = clientX - startX.current;
+    if (next !== 0) dragMoved.current = true;
+    setOffset(next);
   };
 
   const commitChange = (direction: number) => {
