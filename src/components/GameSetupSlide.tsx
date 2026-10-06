@@ -416,7 +416,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           background: 'linear-gradient(165deg, hsl(0 0% 0% / 0.028), hsl(0 0% 0% / 0.013) 45%, hsl(0 0% 0% / 0.006))',
           backdropFilter: 'blur(48px) saturate(1.6)',
           WebkitBackdropFilter: 'blur(48px) saturate(1.6)',
-          boxShadow: 'inset 0 1px 1px hsl(0 0% 0% / 0.26), inset 0 -1px 1px hsl(0 0% 0% / 0.06), 0 0 8px 8px hsl(0 0% 0% / 0.04)',
+          boxShadow: 'inset 0 1px 1px hsl(0 0% 100% / 0.16), inset 0 -1px 1px hsl(0 0% 100% / 0.06), 0 0 8px 8px hsl(0 0% 0% / 0.04)',
           transform: `translateX(${position * spacing + offset}px) scale(${scale}) rotate(${leanRotation}deg)`,
           opacity: 1,
           transition,
@@ -462,7 +462,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           }}
         />
         {/* Soft specular sheen so the glass reads deeper. */}
-        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ borderRadius: 'inherit', background: 'radial-gradient(120% 60% at 30% 0%, hsl(0 0% 0% / 0.09), transparent 62%)' }} />
+        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ borderRadius: 'inherit', background: 'radial-gradient(120% 60% at 30% 0%, hsl(0 0% 100% / 0.06), transparent 62%)' }} />
         {/* Extra card grain: a faint texture pass, kept subtle so the surface reads as clean glass. */}
         <div
           aria-hidden
