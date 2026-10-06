@@ -12,9 +12,20 @@ export function InfoModal({ open, onOpenChange }: InfoModalProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogPortal>
         <DialogOverlay className="bg-background" />
-        <DialogContent className="flex h-[100svh] w-screen max-w-none flex-col overflow-hidden border-0 bg-background p-2 text-foreground data-[state=closed]:animate-none data-[state=open]:animate-none [&>button]:hidden">
+        <DialogContent className="relative flex h-[100svh] w-screen max-w-none flex-col overflow-hidden border-0 p-2 text-foreground data-[state=closed]:animate-none data-[state=open]:animate-none [&>button]:hidden" style={{ background: 'hsl(30 5% 12%)' }}>
+          {/* Grain layer over the near-black modal background */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              backgroundImage: 'var(--quiz-page-grain)',
+              backgroundSize: '150px 150px',
+              mixBlendMode: 'soft-light',
+              opacity: 0.9,
+            }}
+          />
           <DialogDescription className="sr-only">Beschreibung des Spiels</DialogDescription>
-          <div className="flex shrink-0 items-center justify-between p-0 pb-0 pt-0">
+          <div className="relative flex shrink-0 items-center justify-between p-0 pb-0 pt-0">
             <DialogHeader className="p-0">
               <DialogTitle className="m-0 font-rauschen text-base font-semibold uppercase leading-[41px] text-foreground">
                 So funktioniert’s
@@ -31,7 +42,7 @@ export function InfoModal({ open, onOpenChange }: InfoModalProps) {
               <img src={closeIcon} alt="" className="h-6 w-6 invert" />
             </Button>
           </div>
-          <div className="flex flex-1 flex-col justify-center overflow-y-auto">
+          <div className="relative flex flex-1 flex-col justify-center overflow-y-auto">
             <div className="mx-auto w-full max-w-xl space-y-4 font-stringer text-base leading-relaxed text-foreground">
               <p>
                 Drei Kategorien, ein Buchstabe – was fällt dir ein? Spielt abwechselnd und
