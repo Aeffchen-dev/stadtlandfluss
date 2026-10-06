@@ -556,7 +556,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
                   {rows.map((row, rowIndex) => (
                     <span key={row.key} className={`block ${row.className}`} style={{ transform: `rotate(${rowPool[(seed + rowIndex) % rowPool.length]}deg)` }}>
                       {row.text}
-                      {row.hyphen && <span style={{ opacity: 1, fontWeight: 300 }}>-</span>}
+                      {row.hyphen && <span style={{ opacity: 1, fontWeight: 400, fontFamily: "'Geist', sans-serif" }}>-</span>}
                     </span>
                   ))}
                 </span>
