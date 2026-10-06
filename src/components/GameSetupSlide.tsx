@@ -424,7 +424,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
       <div
         key={cardKey}
         data-custom={customIndex !== null || undefined}
-        className="pointer-events-none absolute inset-y-0 flex items-center justify-center overflow-hidden text-center font-rauschen text-[20px] uppercase leading-none md:text-[24px]"
+        className="pointer-events-none absolute inset-y-0 flex items-center justify-center overflow-hidden text-center font-rauschen text-[20px] uppercase leading-[0.9] md:text-[24px]"
         lang="de"
         style={{
           left: slotInset,
@@ -534,38 +534,32 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
               </span>
             );
           })()
-          : words.length > 1
-          ? (
-            <span className="block px-6" style={{ minWidth: 0, maxWidth: '100%', overflowWrap: 'break-word', transform: `rotate(${itemRotation}deg)` }}>
-              {words.flatMap((word, wordIndex) => {
+          : (() => {
+              // Each text row gets its own slight rotation, seeded by the
+              // category name (like the blobs), echoing the tilted title.
+              const seed = item.trim().split('').reduce((hash, char) => ((hash * 31) + char.charCodeAt(0)) % 97, 7);
+              const rowPool = [-2.4, 1.2, 2, -1.2, 2.4, -1.6];
+              const rows: { key: string; className: string; text: string }[] = [];
+              words.forEach((word, wordIndex) => {
                 const fontClass = word === '&' || (words.length === 3 && wordIndex === 1) ? 'font-stringer' : 'font-rauschen';
                 // Multi-word items already span 2-3 lines, so only break
                 // noticeably longer words here than on single-line cards.
                 const halves = splitLongGerman(word, 14);
                 if (halves) {
-                  return [
-                    <span key={`${wordIndex}-a`} className={`block ${fontClass}`}>{halves[0]}</span>,
-                    <span key={`${wordIndex}-b`} className={`block ${fontClass}`}>{halves[1]}</span>,
-                  ];
+                  rows.push({ key: `${wordIndex}-a`, className: fontClass, text: halves[0] });
+                  rows.push({ key: `${wordIndex}-b`, className: fontClass, text: halves[1] });
+                } else {
+                  rows.push({ key: String(wordIndex), className: fontClass, text: hyphenateGerman(word) });
                 }
-                return [<span key={wordIndex} className={`block ${fontClass}`}>{hyphenateGerman(word)}</span>];
-              })}
-            </span>
-          )
-          : (() => {
-            const halves = splitLongGerman(item.trim().replace(/,$/, ''));
-            if (halves) {
+              });
               return (
                 <span className="block px-6" style={{ minWidth: 0, maxWidth: '100%', overflowWrap: 'break-word', transform: `rotate(${itemRotation}deg)` }}>
-                  <span className="block">{halves[0]}</span>
-                  <span className="block">{halves[1]}</span>
+                  {rows.map((row, rowIndex) => (
+                    <span key={row.key} className={`block ${row.className}`} style={{ transform: `rotate(${rowPool[(seed + rowIndex) % rowPool.length]}deg)` }}>{row.text}</span>
+                  ))}
                 </span>
               );
-            }
-            return (
-              <span className="block px-6" style={{ minWidth: 0, maxWidth: '100%', overflowWrap: 'break-word', transform: `rotate(${itemRotation}deg)` }}>{hyphenateGerman(item.trim().replace(/,$/, ''))}</span>
-            );
-          })()}
+            })()}
       </div>
     );
   };
