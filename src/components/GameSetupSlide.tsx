@@ -541,7 +541,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
                 {showFake && (
                   <span className="pointer-events-none flex items-center justify-center">
                     <span style={{ opacity: 0.22, borderBottom: '1.5px dashed currentColor', paddingBottom: '2px' }}>Eigene Kategorie</span>
-                    <span className="ml-1 inline-block h-[0.9em] w-[2px] bg-current" style={{ animation: 'slf-caret-blink 1s step-end infinite' }} />
+                    {Math.abs(position) <= 1 && <span className="ml-1 inline-block h-[0.9em] w-[2px] bg-current" style={{ animation: 'slf-caret-blink 1s step-end infinite' }} />}
                   </span>
                 )}
                 {built && (
