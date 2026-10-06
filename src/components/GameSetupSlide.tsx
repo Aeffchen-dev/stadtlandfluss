@@ -7,6 +7,22 @@ import { hyphenateGerman, splitLongGerman } from '@/lib/hyphenate';
 const SPREADSHEET_ID = '1zuaMoA4jYBJGKa17xaarqBohnkRUijitywLKiHNERmM';
 const SHEET_NAME = 'Tabellenblatt1';
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+// How often each letter is drawn: letters with many German words come up
+// often, hard letters (Q, X, Y, C, J…) only rarely.
+const LETTER_WEIGHTS: Record<string, number> = {
+  A: 8, B: 9, C: 1, D: 7, E: 6, F: 7, G: 8, H: 8, I: 3, J: 1.5, K: 9, L: 7, M: 9,
+  N: 5, O: 3, P: 6, Q: 0.3, R: 7, S: 10, T: 7, U: 2, V: 3, W: 7, X: 0.2, Y: 0.2, Z: 3,
+};
+const pickWeightedLetter = (exclude?: string) => {
+  const pool = ALPHABET.filter((l) => l !== exclude);
+  const total = pool.reduce((sum, l) => sum + LETTER_WEIGHTS[l], 0);
+  let r = Math.random() * total;
+  for (const l of pool) {
+    r -= LETTER_WEIGHTS[l];
+    if (r <= 0) return l;
+  }
+  return pool[pool.length - 1];
+};
 
 // Used only if the Google Sheet cannot be reached, so the sliders never
 // stay stuck on the loading placeholders.
@@ -690,7 +706,7 @@ export function GameSetupSlide({
   onOpenInfo,
 }: GameSetupSlideProps) {
   const [columns, setColumns] = useState<string[][]>([[], [], []]);
-  const [displayLetter, setDisplayLetter] = useState(() => ALPHABET[Math.floor(Math.random() * ALPHABET.length)]);
+  const [displayLetter, setDisplayLetter] = useState(() => pickWeightedLetter());
   // Smiley rotation is driven directly by the category drag: a full
   // card-width drag equals one full turn; committed turns are absorbed
   // into the base so the rotation never snaps back after a slide change.
@@ -769,7 +785,7 @@ export function GameSetupSlide({
   const rollLetter = () => {
     if (isRolling) return;
     setIsRolling(true);
-    const finalLetter = ALPHABET[Math.floor(Math.random() * ALPHABET.length)];
+    const finalLetter = pickWeightedLetter(displayLetter);
     // Long, decelerating browse: starts fast, eases out over ~2s while
     // flicking through ~25 letters, never repeating the previous one.
     let delay = 25;
