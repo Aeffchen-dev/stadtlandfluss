@@ -563,7 +563,7 @@ export function QuizApp() {
         className="absolute inset-0"
         style={{
           background: 'var(--quiz-page-background)',
-          opacity: 0.5,
+          opacity: 0.65,
         }}
       />
       {/* Photo backdrop blends as soft-light into the oxblood base — texture without crushing it to black. */}
@@ -587,14 +587,6 @@ export function QuizApp() {
           background: 'hsl(0 0% 0% / 0.25)',
         }}
       />
-      {/* Three soft accent dots — rosa, turquoise, neon green — floating over the grading. */}
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          background: 'var(--quiz-page-dots)',
-        }}
-      />
       <div
         aria-hidden
         className="absolute inset-0"
@@ -602,7 +594,7 @@ export function QuizApp() {
           backgroundImage: 'var(--quiz-page-grain)',
           backgroundSize: '150px 150px',
           mixBlendMode: 'soft-light',
-          opacity: 0.32,
+          opacity: 0.18,
         }}
       />
       {/* Main Quiz Container with multi-slide carousel */}
