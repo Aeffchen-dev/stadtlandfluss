@@ -424,7 +424,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
       <div
         key={cardKey}
         data-custom={customIndex !== null || undefined}
-        className="pointer-events-none absolute inset-y-0 flex items-center justify-center overflow-hidden text-center font-rauschen text-[20px] uppercase leading-[0.9] md:text-[24px]"
+        className="pointer-events-none absolute inset-y-0 flex items-center justify-center overflow-hidden text-center font-rauschen text-[20px] uppercase leading-none md:text-[24px]"
         lang="de"
         style={{
           left: slotInset,
@@ -538,7 +538,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
               // Each text row gets its own slight rotation, seeded by the
               // category name (like the blobs), echoing the tilted title.
               const seed = item.trim().split('').reduce((hash, char) => ((hash * 31) + char.charCodeAt(0)) % 97, 7);
-              const rowPool = [-2.4, 1.2, 2, -1.2, 2.4, -1.6];
+              const rowPool = [-1.2, 0.6, 1, -0.6, 1.2, -0.8];
               const rows: { key: string; className: string; text: string }[] = [];
               words.forEach((word, wordIndex) => {
                 const fontClass = word === '&' || (words.length === 3 && wordIndex === 1) ? 'font-stringer' : 'font-rauschen';
