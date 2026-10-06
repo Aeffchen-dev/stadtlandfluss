@@ -283,10 +283,10 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
   const timeoutRef = useRef<number | null>(null);
   const [trackWidth, setTrackWidth] = useState(300);
   // Card travel distance. Neighbour cards render at 90% scale (half-width
-  // 0.45 × card width); this spacing places their inner edge exactly 40px
-  // inside the viewport (a 40px sliver peeks in), 36px away from the active
+  // 0.45 × card width); this spacing places their inner edge exactly 28px
+  // inside the viewport (a 28px sliver peeks in), 24px away from the active
   // card — the same gap as the vertical spacing between the three sliders.
-  const spacing = (trackWidth / 2 - 48) + 36 + 0.45 * (trackWidth - 96);
+  const spacing = (trackWidth / 2 - 48) + 24 + 0.45 * (trackWidth - 96);
 
   useEffect(() => {
     const measure = () => {
