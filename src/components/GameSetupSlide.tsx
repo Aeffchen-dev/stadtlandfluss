@@ -541,9 +541,10 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
               const rows: { key: string; className: string; text: string; hyphen?: boolean }[] = [];
               words.forEach((word, wordIndex) => {
                 const fontClass = word === '&' || (words.length === 3 && wordIndex === 1) ? 'font-stringer' : 'font-rauschen';
-                // Multi-word items already span 2-3 lines, so only break
-                // noticeably longer words here than on single-line cards.
-                const halves = splitLongGerman(word, 14);
+                // Single-word items sit on one line, so long words like
+                // "Männername" must break earlier; multi-word items already
+                // span 2-3 lines, so only noticeably longer words break here.
+                const halves = splitLongGerman(word, words.length === 1 ? 9 : 14);
                 if (halves) {
                   rows.push({ key: `${wordIndex}-a`, className: fontClass, text: halves[0], hyphen: true });
                   rows.push({ key: `${wordIndex}-b`, className: fontClass, text: halves[1] });
