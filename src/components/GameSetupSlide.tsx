@@ -128,9 +128,9 @@ const makeCardBlobs = (seed: string, familyIndex: number): CardBlob[] => {
 
   // The darker and lighter accent tones each land fully at random, retrying
   // until their cores sit close to the other blobs — a bit of overlap is fine.
-  const placeAccent = (hue: string | undefined, sizeScale = 1): void => {
+  const placeAccent = (hue: string | undefined, style: { size?: number; alpha?: number } = {}): void => {
     if (!hue) return;
-    const size = (28 + rand() * 22) * sizeScale;
+    const size = (28 + rand() * 22) * (style.size ?? 1);
     let x = 50;
     let y = 40;
     for (let attempt = 0; attempt < 40; attempt += 1) {
