@@ -494,7 +494,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
           transition,
           animation: [hintAnimation, 'slf-card-in 450ms ease-out both'].filter(Boolean).join(', '),
           zIndex: isCurrent ? 2 : 1,
-        }}
+        } as React.CSSProperties}
         aria-hidden={!isCurrent}
       >
         {/* Gradient blobs: each slider's own color story (rosa/lila,
