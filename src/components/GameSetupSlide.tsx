@@ -380,7 +380,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           wordBreak: 'normal',
           // Polished frosted glass card (reference look).
           color: 'hsl(0 0% 100% / 0.95)',
-          background: 'linear-gradient(165deg, hsl(0 0% 100% / 0.036), hsl(0 0% 100% / 0.016) 45%, hsl(0 0% 100% / 0.007))',
+          background: 'linear-gradient(165deg, hsl(0 0% 100% / 0.021), hsl(0 0% 100% / 0.009) 45%, hsl(0 0% 100% / 0.004))',
           backdropFilter: 'blur(48px) saturate(1.6)',
           WebkitBackdropFilter: 'blur(48px) saturate(1.6)',
           boxShadow: 'inset 0 1px 1px hsl(0 0% 100% / 0.22), inset 0 -1px 1px hsl(0 0% 100% / 0.04), 0 0 8px 8px hsl(0 0% 0% / 0.04)',
@@ -421,7 +421,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           style={{
             borderRadius: 'inherit',
             padding: '1px',
-            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.23), hsl(0 0% 100% / 0.035) 38%, hsl(0 0% 100% / 0.018) 62%, hsl(0 0% 100% / 0.1))',
+            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.38), hsl(0 0% 100% / 0.06) 38%, hsl(0 0% 100% / 0.03) 62%, hsl(0 0% 100% / 0.16))',
             WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
             WebkitMaskComposite: 'xor',
             maskComposite: 'exclude',
