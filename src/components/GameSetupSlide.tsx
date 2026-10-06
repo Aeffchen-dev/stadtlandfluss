@@ -364,6 +364,18 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
         />
         {/* Soft specular sheen so the glass reads deeper. */}
         <div aria-hidden className="pointer-events-none absolute inset-0" style={{ borderRadius: 'inherit', background: 'radial-gradient(120% 60% at 30% 0%, hsl(0 0% 100% / 0.10), transparent 62%)' }} />
+        {/* Extra card grain: a coarser, stronger noise pass than the page film, so the glass surface itself reads grainy. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            borderRadius: 'inherit',
+            backgroundImage: 'var(--quiz-page-grain)',
+            backgroundSize: '90px 90px',
+            mixBlendMode: 'overlay',
+            opacity: 0.5,
+          }}
+        />
         {customIndex !== null
           ? (() => {
             const value = customs[customIndex] ?? '';
