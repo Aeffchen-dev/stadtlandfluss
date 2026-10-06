@@ -270,12 +270,14 @@ const buildCardRows = (text: string): { rows: { key: string; className: string; 
   const rows: { key: string; className: string; text: string; hyphen?: boolean }[] = [];
   words.forEach((word, wordIndex) => {
     const fontClass = word === '&' || (words.length === 3 && wordIndex === 1) ? 'font-stringer' : 'font-rauschen';
-    const halves = splitLongGerman(word, words.length === 1 ? 9 : 14);
+    const halves = splitLongGerman(word, words.length === 1 ? 10 : 14);
     if (halves) {
       rows.push({ key: `${wordIndex}-a`, className: fontClass, text: halves[0], hyphen: true });
       rows.push({ key: `${wordIndex}-b`, className: fontClass, text: halves[1] });
     } else {
-      rows.push({ key: String(wordIndex), className: fontClass, text: hyphenateGerman(word) });
+      // Short words ("Literatur", "Beruf") stay unbroken — soft hyphens there
+      // only cause ugly mid-word breaks on the narrow card.
+      rows.push({ key: String(wordIndex), className: fontClass, text: word.length >= 10 ? hyphenateGerman(word) : word });
     }
   });
   return { rows, seed };
