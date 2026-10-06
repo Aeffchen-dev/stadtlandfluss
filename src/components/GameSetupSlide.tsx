@@ -73,8 +73,8 @@ const FAMILY_BLOB_HUES = [
   // Stadt: rosa / lila tones + darker plum + lighter rosa accents
   ['338 88% 78%', '318 75% 79%', '290 48% 73%', '300 50% 46%', '345 90% 84%'],
   // Land: muted greens with a juicy green (drawn larger), a deep vivid blue
-  // and a dark red-lila accent
-  ['178 85% 85%', '151 88% 58%', '150 62% 42%', '142 88% 55%', '178 95% 50%', '320 55% 35%'],
+  // and a dark blue-lila accent
+  ['178 85% 85%', '151 88% 58%', '150 62% 42%', '142 88% 55%', '178 95% 50%', '250 62% 48%'],
   // Fluss: dark lila & vivid red-orange in the main lanes, deeper orange + soft bright yellow (larger, quiet) accents
   ['285 52% 76%', '8 95% 62%', '281 72% 68%', '28 100% 72%', '55 92% 85%'],
 ];
@@ -83,12 +83,12 @@ const FAMILY_BLOB_HUES = [
 // accent blobs (dark, light, extra).
 const FAMILY_ACCENT_STYLES: Array<Array<{ size?: number; alpha?: number }>> = [
   [{}, {}, {}, {}],
-  [{ size: 1.35 }, {}, { size: 1.9, alpha: 1.7 }], // Land: juicy green larger, dark red-lila as a big bg glow
+  [{ size: 1.35 }, {}, { size: 1.9, alpha: 1.7 }], // Land: juicy green larger, blue-lila as a big bg glow
   [{}, { size: 0.6, alpha: 0.55 }, {}, {}], // Fluss: bright yellow bigger and quieter
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
 // progressively quieter (0.4 × 0.85, 0.4 × 0.75 for their core alpha).
-const FAMILY_BLOB_ALPHA = [0.47, 0.17, 0.31];
+const FAMILY_BLOB_ALPHA = [0.47, 0.22, 0.31];
 const BLOB_LANES: Array<[number, number]> = [[9, 17], [28, 38], [47, 57]]; // y-% of card height
 
 interface CardBlob {
