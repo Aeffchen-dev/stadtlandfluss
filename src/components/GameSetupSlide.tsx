@@ -727,8 +727,8 @@ export function GameSetupSlide({
       </div>
       <div className="flex min-h-0 flex-1 flex-col gap-0">
         <CategorySlider items={columns[0]} familyIndex={0} label="Stadt" hint="next" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
-        <CategorySlider style={{ marginTop: '-8px' }} items={columns[1]} familyIndex={1} label="Land" hint="prev" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
-        <CategorySlider style={{ marginTop: '-8px' }} items={columns[2]} familyIndex={2} label="Fluss" hint="next" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
+        <CategorySlider items={columns[1]} familyIndex={1} label="Land" hint="prev" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
+        <CategorySlider items={columns[2]} familyIndex={2} label="Fluss" hint="next" onRotateDrag={handleRotateDrag} onRotateCommit={handleRotateCommit} />
       </div>
       <Button
         type="button"
