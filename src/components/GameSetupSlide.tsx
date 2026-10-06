@@ -335,13 +335,13 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           WebkitHyphens: 'manual',
           overflowWrap: 'break-word',
           wordBreak: 'normal',
-          // Clean frosted glass card with thin light rim (reference look).
+          // Polished frosted glass card (reference look).
           color: 'hsl(0 0% 100% / 0.95)',
-          background: 'linear-gradient(180deg, hsl(0 0% 100% / 0.14), hsl(0 0% 100% / 0.06))',
-          backdropFilter: 'blur(16px) saturate(1.2)',
-          WebkitBackdropFilter: 'blur(16px) saturate(1.2)',
-          border: '1px solid hsl(0 0% 100% / 0.28)',
-          boxShadow: 'inset 0 1px 0 hsl(0 0% 100% / 0.18), 0 8px 24px -12px hsl(0 0% 0% / 0.25)',
+          background: 'linear-gradient(165deg, hsl(0 0% 100% / 0.20), hsl(0 0% 100% / 0.09) 45%, hsl(0 0% 100% / 0.05))',
+          backdropFilter: 'blur(24px) saturate(1.5) brightness(1.06)',
+          WebkitBackdropFilter: 'blur(24px) saturate(1.5) brightness(1.06)',
+          border: '1px solid hsl(0 0% 100% / 0.32)',
+          boxShadow: 'inset 0 1px 1px hsl(0 0% 100% / 0.28), inset 0 -1px 1px hsl(0 0% 100% / 0.05), 0 24px 48px -24px hsl(0 0% 0% / 0.5)',
           transform: `translateX(${position * spacing + offset}px) scale(${scale}) rotate(${leanRotation}deg)`,
           opacity: 1,
           transition,
@@ -350,15 +350,8 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
         }}
         aria-hidden={!isCurrent}
       >
-        {/* Thin crosshair guide lines and circle, like the reference cards. */}
-        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ borderRadius: 'inherit' }}>
-          <div className="absolute inset-y-0 left-1/2 w-px" style={{ background: 'hsl(0 0% 100% / 0.12)' }} />
-          <div className="absolute inset-x-0 top-1/2 h-px" style={{ background: 'hsl(0 0% 100% / 0.12)' }} />
-          <div className="absolute left-1/2 top-1/2 aspect-square w-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ border: '1px solid hsl(0 0% 100% / 0.14)' }} />
-          <span className="absolute left-3 top-3 font-stringer text-[11px] normal-case" style={{ opacity: 0.8 }}>
-            {`0-${(itemIndex % 9) + 1}`}
-          </span>
-        </div>
+        {/* Soft specular sheen so the glass reads deeper. */}
+        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ borderRadius: 'inherit', background: 'radial-gradient(120% 60% at 30% 0%, hsl(0 0% 100% / 0.16), transparent 62%)' }} />
         {customIndex !== null
           ? (() => {
             const value = customs[customIndex] ?? '';
