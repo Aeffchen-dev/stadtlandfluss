@@ -70,8 +70,8 @@ const FAMILY_GRAINS = [
 // stacked lanes near the top and hug the horizontal center; a darker and a
 // lighter accent tone each land fully at random, allowed to overlap slightly.
 const FAMILY_BLOB_HUES = [
-  // Stadt: rosa / lila tones + darker plum + lighter rosa accents
-  ['338 85% 74%', '318 65% 75%', '290 55% 72%', '300 50% 46%', '345 90% 84%'],
+  // Stadt: dark turquoise / lila tones + darker plum + lighter rosa accents
+  ['186 60% 50%', '318 65% 75%', '290 55% 56%', '300 50% 46%', '345 90% 84%'],
   // Land: light mint / pale aqua / light green tones + a lila accent (reference image palette)
   ['170 65% 74%', '135 90% 58%', '185 65% 58%', '195 70% 72%', '285 55% 74%', '185 55% 62%'],
   // Fluss: dark lila & yellow alternating in the main lanes (yellow kept quiet), dark lila + deeper gold accents
