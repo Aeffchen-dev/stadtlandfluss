@@ -503,7 +503,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
             backgroundImage: FAMILY_GRAINS[familyIndex] ?? FAMILY_GRAINS[0],
             backgroundSize: '90px 90px',
             mixBlendMode: 'overlay',
-            opacity: 0.44,
+            opacity: 0.53,
           }}
         />
         {customIndex !== null
