@@ -143,10 +143,10 @@ const makeCardBlobs = (seed: string, familyIndex: number): CardBlob[] => {
       if (clear) break;
     }
     placed.push({ x, yW: y * ASPECT, r: size / 2 });
-    blobs.push({ x, y, size, hue });
+    blobs.push({ x, y, size, hue, alphaScale: style.alpha });
   };
-  const accentScales = FAMILY_ACCENT_SCALES[familyIndex] ?? [];
-  [hues[3], hues[4], hues[5]].forEach((hue, i) => placeAccent(hue, accentScales[i]));
+  const accentStyles = FAMILY_ACCENT_STYLES[familyIndex] ?? [];
+  [hues[3], hues[4], hues[5]].forEach((hue, i) => placeAccent(hue, accentStyles[i]));
   return blobs;
 };
 
