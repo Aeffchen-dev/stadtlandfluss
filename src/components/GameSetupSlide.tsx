@@ -424,7 +424,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
       <div
         key={cardKey}
         data-custom={customIndex !== null || undefined}
-        className="pointer-events-none absolute inset-y-0 flex items-center justify-center overflow-hidden text-center font-rauschen text-[20px] uppercase leading-none md:text-[24px]"
+        className="pointer-events-none absolute inset-y-0 flex items-center justify-center overflow-hidden text-center font-rauschen text-[20px] uppercase leading-[0.8] md:text-[24px]"
         lang="de"
         style={{
           left: slotInset,
