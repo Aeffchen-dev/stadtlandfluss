@@ -78,10 +78,12 @@ const FAMILY_BLOB_HUES = [
   ['285 45% 55%', '25 95% 58%', '281 52% 60%', '48 65% 42%', '58 100% 58%'],
 ];
 // Per-family scale factor for each of the three accent blobs (dark, light, extra).
-const FAMILY_ACCENT_SCALES: Array<number[]> = [
-  [1, 1, 1],
-  [1.35, 1, 1],
-  [1, 0.5, 1], // Fluss: neon yellow accent drawn small
+// Per-family accent tuning: size and alpha multiplier for each of the three
+// accent blobs (dark, light, extra).
+const FAMILY_ACCENT_STYLES: Array<Array<{ size?: number; alpha?: number }>> = [
+  [{}, {}, {}],
+  [{ size: 1.35 }, {}, {}],
+  [{}, { size: 0.5, alpha: 2.4 }, {}], // Fluss: neon yellow small but super vivid
 ];
 // Per-slider blob strength: the first slider reads strongest, the others sit
 // progressively quieter (0.4 × 0.85, 0.4 × 0.75 for their core alpha).
