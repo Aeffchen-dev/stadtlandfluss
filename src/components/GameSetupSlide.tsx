@@ -64,11 +64,11 @@ const FAMILY_GRAINS = [
 ];
 
 // Gradient blobs at the top of each card, tinted to each slider's own color
-// story: rosa/lila (Stadt), turquoise (Land), lime & grasgrün (Fluss). Each
+// story: rosa/lila (Stadt), turquoise (Land), red & yellow (Fluss). Each
 // card seeds its own PRNG from the category name, so sizes and positions are
-// random per card but stable across re-renders. The blobs sit in three
-// stacked lanes near the top and hug the horizontal center, so their cores
-// never overlap each other.
+// random per card but stable across re-renders. The main blobs sit in three
+// stacked lanes near the top and hug the horizontal center; the darker accent
+// tone lands fully at random, keeping its core clear of the other blobs.
 const FAMILY_BLOB_HUES = [
   // Stadt: rosa / lila tones + one darker plum accent
   ['338 85% 74%', '318 65% 75%', '290 55% 72%', '300 50% 46%'],
