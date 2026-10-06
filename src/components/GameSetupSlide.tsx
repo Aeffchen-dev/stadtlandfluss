@@ -429,7 +429,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           WebkitBackdropFilter: 'blur(64px) saturate(1.6)',
           boxShadow: 'inset 0 1px 1px hsl(0 0% 100% / 0.16), inset 0 -1px 1px hsl(0 0% 100% / 0.06), 0 0 8px 8px hsl(0 0% 0% / 0.04)',
           transform: `translateX(${position * spacing + offset}px) scale(${scale}) rotate(${leanRotation}deg)`,
-          opacity: 1,
+          opacity: 0.8,
           transition,
           animation: [hintAnimation, 'slf-card-in 450ms ease-out both'].filter(Boolean).join(', '),
           zIndex: isCurrent ? 2 : 1,
