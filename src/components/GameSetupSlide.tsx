@@ -302,8 +302,25 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
     });
   };
   const startX = useRef<number | null>(null);
+  // True once a drag actually moved the track; a mouseup/touchend after real
+  // movement still fires a click event, which must not count as a card click.
+  const dragMoved = useRef(false);
+  // True while the press that produced the current click started on a custom
+  // card's input (typing intent) — such clicks must not toggle the card.
+  const pressOnInput = useRef(false);
   const [offset, setOffset] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  // Cards dimmed by a click (inactive state, 70% opacity), keyed by card
+  // identity so the dimmed state survives carousel rotation swaps.
+  const [inactiveCards, setInactiveCards] = useState<Set<string>>(() => new Set());
+  const toggleCardActive = (key: string) => {
+    setInactiveCards((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  };
   // The idle hint nudge plays exactly once, on load; after the first slide
   // change it must never come back (removing + re-adding the animation style
   // re-triggers it after every change).
@@ -370,12 +387,15 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
   const beginDrag = (clientX: number) => {
     if (isAnimating) return;
     startX.current = clientX;
+    dragMoved.current = false;
     setOffset(0);
   };
 
   const moveDrag = (clientX: number) => {
     if (startX.current === null || isAnimating) return;
-    setOffset(clientX - startX.current);
+    const next = clientX - startX.current;
+    if (next !== 0) dragMoved.current = true;
+    setOffset(next);
   };
 
   const commitChange = (direction: number) => {
@@ -444,8 +464,21 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
       <div
         key={cardKey}
         data-custom={customIndex !== null || undefined}
-        className="pointer-events-none absolute inset-y-0 flex items-center justify-center overflow-hidden text-center font-rauschen text-[22.5px] uppercase leading-none"
+        className="pointer-events-auto absolute inset-y-0 flex items-center justify-center overflow-hidden text-center font-rauschen text-[22.5px] uppercase leading-none"
         lang="de"
+        onMouseDown={(event) => {
+          // Tapping the custom input collapses the placeholder block, so the
+          // mouseup (and the click) lands on the card itself — remember the
+          // press origin so an input tap never toggles the inactive state.
+          pressOnInput.current = event.target instanceof HTMLInputElement;
+        }}
+        onClick={(event) => {
+          // Swipes end with a click event too — only treat a real tap as
+          // the inactive-toggle. The custom input handles its own clicks.
+          if (dragMoved.current || pressOnInput.current) return;
+          event.stopPropagation();
+          toggleCardActive(cardKey);
+        }}
         style={{
           left: slotInset,
           right: slotInset,
@@ -465,11 +498,12 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
           WebkitBackdropFilter: 'blur(64px) saturate(1.6)',
           boxShadow: 'inset 0 1px 1px hsl(0 0% 100% / 0.38), inset 0 -1px 1px hsl(0 0% 100% / 0.14), 0 0 5px 5px hsl(0 0% 0% / 0.024)',
           transform: `translateX(${position * spacing + offset}px) scale(${scale}) rotate(${leanRotation}deg)`,
-          opacity: 1,
+          '--slf-card-opacity': inactiveCards.has(cardKey) ? 0.7 : 1,
+          opacity: 'var(--slf-card-opacity, 1)',
           transition,
           animation: [hintAnimation, 'slf-card-in 450ms ease-out both'].filter(Boolean).join(', '),
           zIndex: isCurrent ? 2 : 1,
-        }}
+        } as React.CSSProperties}
         aria-hidden={!isCurrent}
       >
         {/* Gradient blobs: each slider's own color story (rosa/lila,
