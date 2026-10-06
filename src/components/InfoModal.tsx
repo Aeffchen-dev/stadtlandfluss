@@ -11,7 +11,7 @@ export function InfoModal({ open, onOpenChange }: InfoModalProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogPortal>
-        <DialogOverlay style={{ background: 'hsl(30 5% 12%)' }} />
+        <DialogOverlay />
         <DialogContent className="relative flex h-[100svh] w-screen max-w-none flex-col overflow-hidden border-0 p-2 text-foreground data-[state=closed]:animate-none data-[state=open]:animate-none [&>button]:hidden" style={{ background: 'hsl(30 5% 12%)' }}>
           {/* Grain layer over the near-black modal background */}
           <div
