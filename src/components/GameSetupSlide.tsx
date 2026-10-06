@@ -440,7 +440,6 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
     const hintAnimation = hint && !hintDone.current && !isAnimating && startX.current === null
       ? `${hint === 'next' ? 'slf-hint-next' : 'slf-hint-prev'} 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 2s 1`
       : undefined;
-    const words = item.trim().split(/(?:,\s*|\s+)/).filter(Boolean);
     return (
       <div
         key={cardKey}
@@ -558,22 +557,8 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, on
           : (() => {
               // Each text row gets its own slight rotation, seeded by the
               // category name (like the blobs), echoing the tilted title.
-              const seed = item.trim().split('').reduce((hash, char) => ((hash * 31) + char.charCodeAt(0)) % 97, 7);
+              const { rows, seed } = buildCardRows(item);
               const rowPool = [-1.2, 0.6, 1, -0.6, 1.2, -0.8];
-              const rows: { key: string; className: string; text: string; hyphen?: boolean }[] = [];
-              words.forEach((word, wordIndex) => {
-                const fontClass = word === '&' || (words.length === 3 && wordIndex === 1) ? 'font-stringer' : 'font-rauschen';
-                // Single-word items sit on one line, so long words like
-                // "Männername" must break earlier; multi-word items already
-                // span 2-3 lines, so only noticeably longer words break here.
-                const halves = splitLongGerman(word, words.length === 1 ? 9 : 14);
-                if (halves) {
-                  rows.push({ key: `${wordIndex}-a`, className: fontClass, text: halves[0], hyphen: true });
-                  rows.push({ key: `${wordIndex}-b`, className: fontClass, text: halves[1] });
-                } else {
-                  rows.push({ key: String(wordIndex), className: fontClass, text: hyphenateGerman(word) });
-                }
-              });
               return (
                 <span className="block px-6" style={{ minWidth: 0, maxWidth: '100%', overflowWrap: 'break-word', transform: `rotate(${itemRotation}deg)` }}>
                   {rows.map((row, rowIndex) => (
