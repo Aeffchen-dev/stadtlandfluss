@@ -719,10 +719,13 @@ export function GameSetupSlide({
     } catch { /* ignore broken cache */ }
 
     const fetchOnce = async () => {
-      const timeout = window.setTimeout(() => controller.abort(), 10000);
+      const attempt = new AbortController();
+      const onAbort = () => attempt.abort();
+      controller.signal.addEventListener('abort', onAbort);
+      const timeout = window.setTimeout(() => attempt.abort(), 10000);
       try {
         const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/export?format=csv&sheet=${SHEET_NAME}&t=${Date.now()}`;
-        const response = await fetch(url, { cache: 'no-store', signal: controller.signal });
+        const response = await fetch(url, { cache: 'no-store', signal: attempt.signal });
         if (!response.ok) throw new Error(`Category sheet returned ${response.status}`);
         const rows = parseCsv(await response.text());
         const cols = [0, 1, 2].map((column) => rows.map((row) => row[column]?.trim()).filter(Boolean) as string[]);
@@ -730,6 +733,7 @@ export function GameSetupSlide({
         return cols;
       } finally {
         window.clearTimeout(timeout);
+        controller.signal.removeEventListener('abort', onAbort);
       }
     };
 
