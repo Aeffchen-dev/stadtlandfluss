@@ -572,6 +572,18 @@ export function QuizApp() {
           opacity: 0.6,
         }}
       />
+      {/* Fade the bottom edge into black so Safari's toolbar (which samples the page edge) tints black. */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 pointer-events-none"
+        style={{
+          height: '72px',
+          background: 'linear-gradient(to bottom, hsl(0 0% 0% / 0) 0%, hsl(0 0% 0% / 0.85) 70%, hsl(0 0% 0%) 100%)',
+        }}
+      />
+      {/* Solid black edge strips — Safari 26 reads fixed edge elements for its bar tint. */}
+      <div aria-hidden className="pointer-events-none" style={{ position: 'fixed', left: 0, right: 0, top: 0, height: '2px', background: 'hsl(0 0% 0%)', zIndex: 60 }} />
+      <div aria-hidden className="pointer-events-none" style={{ position: 'fixed', left: 0, right: 0, bottom: 0, height: '2px', background: 'hsl(0 0% 0%)', zIndex: 60 }} />
       {/* Main Quiz Container with multi-slide carousel */}
       <div className="flex-1 flex flex-col px-2 py-2 gap-3" style={{ minHeight: 0, overflow: 'visible' }}>
         <div className="flex-1 flex items-stretch justify-center min-h-0 relative" style={{ overflow: 'visible' }}>
