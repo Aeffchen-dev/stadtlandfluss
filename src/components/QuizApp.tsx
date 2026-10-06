@@ -563,7 +563,7 @@ export function QuizApp() {
         className="absolute inset-0"
         style={{
           background: 'var(--quiz-page-background)',
-          opacity: 0.85,
+          opacity: 0.6,
         }}
       />
       {/* Photo backdrop blends as soft-light into the oxblood base — texture without crushing it to black. */}
