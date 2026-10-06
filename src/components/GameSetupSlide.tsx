@@ -469,7 +469,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
           style={{
             borderRadius: 'inherit',
             padding: '1px',
-            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.28), hsl(0 0% 100% / 0.05) 38%, hsl(0 0% 100% / 0.03) 62%, hsl(0 0% 100% / 0.13))',
+            background: 'linear-gradient(155deg, hsl(0 0% 100% / 0.14), hsl(0 0% 100% / 0.025) 38%, hsl(0 0% 100% / 0.015) 62%, hsl(0 0% 100% / 0.065))',
             WebkitMask: 'linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)',
             WebkitMaskComposite: 'xor',
             maskComposite: 'exclude',
