@@ -584,7 +584,7 @@ export function QuizApp() {
         aria-hidden
         className="absolute inset-0"
         style={{
-          background: 'hsl(0 0% 0% / 0.25)',
+          background: 'hsl(0 0% 0% / 0.40)',
         }}
       />
       {/* Vignette — darker toward the edges, clear in the middle. */}
