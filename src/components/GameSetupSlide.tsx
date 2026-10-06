@@ -259,6 +259,28 @@ const parseCsv = (text: string): string[][] => {
 
 const CUSTOM_PREFIX = '\u0000custom:';
 
+/** Shared card text layout: one row per word, long German words broken with
+ *  a visible hyphen. Single-word texts break earlier (from 9 letters, e.g.
+ *  "Männername") because they would otherwise sit on one overflowing line;
+ *  multi-word texts already span 2-3 lines, so only noticeably longer words
+ *  break there (from 14 letters). */
+const buildCardRows = (text: string): { rows: { key: string; className: string; text: string; hyphen?: boolean }[]; seed: number } => {
+  const words = text.trim().split(/(?:,\s*|\s+)/).filter(Boolean);
+  const seed = text.trim().split('').reduce((hash, char) => ((hash * 31) + char.charCodeAt(0)) % 97, 7);
+  const rows: { key: string; className: string; text: string; hyphen?: boolean }[] = [];
+  words.forEach((word, wordIndex) => {
+    const fontClass = word === '&' || (words.length === 3 && wordIndex === 1) ? 'font-stringer' : 'font-rauschen';
+    const halves = splitLongGerman(word, words.length === 1 ? 9 : 14);
+    if (halves) {
+      rows.push({ key: `${wordIndex}-a`, className: fontClass, text: halves[0], hyphen: true });
+      rows.push({ key: `${wordIndex}-b`, className: fontClass, text: halves[1] });
+    } else {
+      rows.push({ key: String(wordIndex), className: fontClass, text: hyphenateGerman(word) });
+    }
+  });
+  return { rows, seed };
+};
+
 function CategorySlider({ items: sheetItems, familyIndex, label, hint, style, onRotateDrag, onRotateCommit }: CategorySliderProps) {
   const storageKey = `slf-slide-${familyIndex}`;
   const [index, setIndex] = useState(() => {
