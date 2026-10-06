@@ -410,7 +410,7 @@ function CategorySlider({ items: sheetItems, familyIndex, label, hint, onRotateD
     // Idle micro animation: nudge the current card toward the swipeable
     // direction; the neighbouring cards follow with a smaller nudge.
     const hintAnimation = hint && !hintDone.current && !isAnimating && startX.current === null
-      ? `${hint === 'next' ? (isCurrent ? 'slf-hint-next' : 'slf-hint-next-side') : (isCurrent ? 'slf-hint-prev' : 'slf-hint-prev-side')} 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 2s 1`
+      ? `${hint === 'next' ? 'slf-hint-next' : 'slf-hint-prev'} 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 2s 1`
       : undefined;
     const words = item.trim().split(/(?:,\s*|\s+)/).filter(Boolean);
     return (
