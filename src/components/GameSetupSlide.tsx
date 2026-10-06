@@ -74,7 +74,7 @@ const FAMILY_BLOB_HUES = [
   ['338 95% 84%', '318 75% 79%', '298 42% 70%', '300 50% 46%', '345 90% 84%'],
   // Land: muted green-blues with a juicy green (drawn larger), a deep vivid blue
   // and a dark green-blue lila accent
-  ['178 85% 85%', '160 85% 55%', '158 60% 42%', '150 85% 52%', '178 95% 50%', '215 68% 46%'],
+  ['178 85% 85%', '158 100% 62%', '158 60% 42%', '150 85% 52%', '178 95% 50%', '215 68% 46%'],
   // Fluss: dark lila & vivid red-orange in the main lanes, deeper orange + soft bright yellow (larger, quiet) accents
   ['285 52% 76%', '8 95% 62%', '281 72% 68%', '28 100% 72%', '55 92% 85%'],
 ];
